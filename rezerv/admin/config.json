@@ -1,0 +1,414 @@
+{
+  "version": 1,
+  "elements": {
+    "rezerv-card": {
+      "text": "",
+      "styles": {
+        "width": "363px",
+        "height": "495px",
+        "borderRadius": "16px",
+        "paddingTop": "20px",
+        "paddingBottom": "18px",
+        "paddingLeft": "18px",
+        "paddingRight": "18px"
+      }
+    },
+    "rezerv-title": {
+      "text": "Резерв ID",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "450",
+        "letterSpacing": "-0.01em",
+        "lineHeight": "1.12",
+        "translateX": "-2px",
+        "translateY": "-5px"
+      }
+    },
+    "rezerv-emblem": {
+      "text": "",
+      "styles": {
+        "width": "70px",
+        "translateX": "25px",
+        "height": "50px",
+        "translateY": "-18px"
+      }
+    },
+    "rezerv-emblem-wrap": {
+      "text": "",
+      "styles": {}
+    },
+    "rezerv-photo": {
+      "text": "",
+      "styles": {
+        "width": "185px",
+        "maxWidth": "165px",
+        "height": "222px",
+        "translateX": "-4px"
+      }
+    },
+    "rezerv-row": {
+      "text": "",
+      "styles": {
+        "gap": "16px"
+      }
+    },
+    "rezerv-card-body": {
+      "text": "",
+      "styles": {
+        "marginBottom": "16px"
+      }
+    },
+    "rezerv-birth-label": {
+      "text": "Дата народження",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.3",
+        "color": "#6B6B6B",
+        "translateX": "-6px",
+        "translateY": "-49px"
+      }
+    },
+    "rezerv-birth-value": {
+      "text": "30.01.2001",
+      "styles": {
+        "fontSize": "17px",
+        "fontWeight": "600",
+        "lineHeight": "1.25",
+        "translateY": "-45px",
+        "translateX": "-6px"
+      }
+    },
+    "rezerv-deferral-label": {
+      "text": "Відстрочка до:",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.3",
+        "color": "#6B6B6B",
+        "translateY": "-44px",
+        "translateX": "-6px"
+      }
+    },
+    "rezerv-deferral-value": {
+      "text": "завершення мобілізації",
+      "styles": {
+        "fontSize": "17px",
+        "fontWeight": "600",
+        "lineHeight": "1.25",
+        "translateY": "-41px",
+        "translateX": "-6px"
+      }
+    },
+    "rezerv-ticker": {
+      "text": "<span class=\"id-ticker-part\">Документ оновлено о 06:56 | 13.06.2026 • </span>",
+      "styles": {
+        "fontSize": "12px",
+        "fontWeight": "700",
+        "letterSpacing": "0.01em",
+        "lineHeight": "1",
+        "translateX": "1px",
+        "translateY": "46px"
+      }
+    },
+    "rezerv-ticker-wrap": {
+      "text": "",
+      "styles": {
+        "marginTop": "28px",
+        "marginBottom": "0px"
+      }
+    },
+    "rezerv-status-label": {
+      "text": "Військовозобов'язаний",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.3",
+        "color": "#6B6B6B",
+        "translateY": "7px"
+      }
+    },
+    "rezerv-name-1": {
+      "text": "Бондарев",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "500",
+        "lineHeight": "1.15",
+        "letterSpacing": "-0.01em",
+        "paddingTop": "8px"
+      }
+    },
+    "rezerv-name-2": {
+      "text": "Іоанн",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "500",
+        "lineHeight": "1.15",
+        "letterSpacing": "-0.01em"
+      }
+    },
+    "rezerv-name-3": {
+      "text": "Олександрович",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "500",
+        "lineHeight": "1.15",
+        "letterSpacing": "-0.01em"
+      }
+    },
+    "rezerv-name-group": {
+      "text": "",
+      "styles": {
+        "gap": "2px",
+        "marginTop": "4px"
+      }
+    },
+    "rezerv-fields": {
+      "text": "",
+      "styles": {
+        "gap": "20px",
+        "translateX": "-1px",
+        "translateY": "-2px"
+      }
+    },
+    "rezerv-field-birth": {
+      "text": "",
+      "styles": {
+        "gap": "2px"
+      }
+    },
+    "rezerv-field-deferral": {
+      "text": "",
+      "styles": {
+        "gap": "2px"
+      }
+    },
+    "rezerv-footer": {
+      "text": "",
+      "styles": {
+        "paddingTop": "18px"
+      }
+    },
+    "rezerv-notify-text": {
+      "text": "Сповіщення",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-services-title": {
+      "text": "Сервіси",
+      "styles": {
+        "fontSize": "28px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.02em"
+      }
+    },
+    "rezerv-svc-1": {
+      "text": "Виправити дані онлайн",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-2": {
+      "text": "Електронна черга в ТЦК та СП",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-3": {
+      "text": "Запит на відстрочку",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-4": {
+      "text": "Направлення на ВЛК",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-5": {
+      "text": "Розширені дані з реєстру",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-6": {
+      "text": "Стати на облік",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-7": {
+      "text": "Уточнити контактні дані",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-svc-8": {
+      "text": "Штрафи",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-vac-title": {
+      "text": "Вакансії в Силах оборони України",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "700",
+        "lineHeight": "1.2"
+      }
+    },
+    "rezerv-vac-card-title": {
+      "text": "На вас чекають",
+      "styles": {
+        "fontSize": "20px",
+        "fontWeight": "700"
+      }
+    },
+    "rezerv-vac-more": {
+      "text": "+206",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600"
+      }
+    },
+    "rezerv-vac-cta": {
+      "text": "Змінити перебіг подій",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "600"
+      }
+    },
+    "rezerv-vac-tab-1": {
+      "text": "IT-вертикаль",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-vac-tab-2": {
+      "text": "Нові контракти",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600"
+      }
+    },
+    "rezerv-vac-tab-3": {
+      "text": "Для вас",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-vac-tab-4": {
+      "text": "Всі",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-menu-title": {
+      "text": "Меню",
+      "styles": {
+        "fontSize": "28px",
+        "fontWeight": "700"
+      }
+    },
+    "rezerv-menu-version": {
+      "text": "Версія 2.3.1",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#8A8A8A"
+      }
+    },
+    "rezerv-menu-1": {
+      "text": "Активні сесії",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-menu-2": {
+      "text": "Налаштування",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-menu-3": {
+      "text": "Питання та відповіді",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-menu-4": {
+      "text": "Служба підтримки",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-menu-5": {
+      "text": "Копіювати номер пристрою",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-menu-6": {
+      "text": "Сканувати документ",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-logout": {
+      "text": "Вийти",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "600"
+      }
+    },
+    "rezerv-privacy": {
+      "text": "Повідомлення про обробку персональних даних",
+      "styles": {
+        "fontSize": "12px",
+        "fontWeight": "400"
+      }
+    },
+    "rezerv-sheet-1": {
+      "text": "Переглянути документ",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-sheet-2": {
+      "text": "Завантажити PDF",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+    "rezerv-sheet-3": {
+      "text": "Оновити документ",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    }
+  },
+  "updatedAt": "2026-06-20T15:50:58.868Z"
+}

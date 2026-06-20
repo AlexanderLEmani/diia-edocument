@@ -1,0 +1,20 @@
+{
+  "name": "diia-edocument",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "build": "node scripts/build-static.js",
+    "generate-rezerv-icons": "swift scripts/generate-rezerv-icons.swift .",
+    "generate-config": "node scripts/generate-config.js",
+    "generate-video": "node scripts/generate-video.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "^1.61.0"
+  }
+}

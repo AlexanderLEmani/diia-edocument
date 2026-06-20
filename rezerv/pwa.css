@@ -1,0 +1,66 @@
+.pwa-install-banner {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 10000;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(20, 24, 30, 0.94);
+  color: #f2f4f7;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.pwa-install-banner.is-hidden {
+  display: none;
+}
+
+body:has(.bottom-nav) .pwa-install-banner {
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 8px);
+}
+
+.pwa-install-banner p {
+  margin: 0;
+  flex: 1;
+}
+
+.pwa-install-dismiss {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+html.standalone-mode .admin-link,
+html.standalone-mode .pwa-install-banner {
+  display: none !important;
+}
+
+html.standalone-mode .bottom-nav {
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+html.standalone-mode .screen {
+  height: var(--app-height, 100dvh);
+  min-height: var(--app-height, 100dvh);
+}
+
+html.standalone-mode .frame,
+html.standalone-mode .frame--info {
+  height: var(--app-height, 100dvh);
+  max-height: var(--app-height, 100dvh);
+  min-height: 0;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адмінка — Резерв+</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-app">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <h1>Резерв+ Адмінка</h1>
+        <p>Редагування текстів і стилів</p>
+      </div>
+
+      <nav class="admin-nav" id="pageNav"></nav>
+
+      <div class="admin-sidebar-actions">
+        <a href="../" class="admin-btn admin-btn--ghost" style="text-align:center;text-decoration:none;display:block;margin-bottom:8px;">← До застосунку</a>
+        <a href="../secret.html" class="admin-btn admin-btn--ghost" style="text-align:center;text-decoration:none;display:block;margin-bottom:8px;">Профіль (ФІО)</a>
+        <button type="button" class="admin-btn admin-btn--ghost" id="btnReloadPreview">Оновити превʼю</button>
+      </div>
+    </aside>
+
+    <div class="admin-workspace">
+      <main class="admin-main">
+        <header class="admin-header">
+          <div>
+            <h2 id="pageTitle">—</h2>
+            <p class="admin-meta" id="saveStatus">Завантаження…</p>
+          </div>
+          <div class="admin-header-actions">
+            <button type="button" class="admin-btn admin-btn--ghost" id="btnResetPage">Скинути сторінку</button>
+            <button type="button" class="admin-btn admin-btn--ghost" id="btnResetAll">Скинути все</button>
+          </div>
+        </header>
+
+        <div class="admin-items" id="itemsList"></div>
+
+        <section class="admin-export">
+          <h3>Експорт / Імпорт</h3>
+          <p class="admin-hint">
+            Натисніть <strong>Зберегти дані</strong>, щоб зафіксувати зміни в браузері.
+            Щоб я (AI) побачив налаштування — завантажте JSON у <code>admin/config.json</code>
+            або вставте JSON у чат.
+          </p>
+          <div class="admin-export-actions">
+            <button type="button" class="admin-btn" id="btnCopy">Скопіювати JSON</button>
+            <button type="button" class="admin-btn" id="btnDownload">Завантажити config.json</button>
+            <label class="admin-btn admin-btn--ghost admin-file-label">
+              Імпорт JSON
+              <input type="file" id="importFile" accept="application/json,.json" hidden>
+            </label>
+          </div>
+          <textarea class="admin-json" id="jsonPreview" readonly spellcheck="false"></textarea>
+        </section>
+      </main>
+
+      <aside class="admin-preview">
+        <div class="admin-preview-header">
+          <div class="admin-preview-header-row">
+            <div>
+              <h3>Попередній перегляд</h3>
+              <p id="previewLabel">—</p>
+            </div>
+            <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" id="btnFullscreen">На весь екран</button>
+          </div>
+        </div>
+        <div class="admin-preview-frame-wrap">
+          <div class="admin-phone">
+            <iframe id="previewFrame" title="Попередній перегляд"></iframe>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="admin-fullscreen" id="fullscreenModal" hidden>
+    <div class="admin-fullscreen-toolbar">
+      <div class="admin-fullscreen-toolbar-main">
+        <strong id="fullscreenLabel">Резерв ID</strong>
+        <p id="fullscreenHint">Редагуйте зліва · тягни картку · оранжеві ручки — розмір</p>
+      </div>
+      <div class="admin-fullscreen-mode" role="tablist" aria-label="Режим повноекранного перегляду">
+        <button type="button" class="admin-fullscreen-mode-btn active" id="btnFsModePreview" data-mode="preview" role="tab" aria-selected="true">Превʼю</button>
+        <button type="button" class="admin-fullscreen-mode-btn" id="btnFsModeDiff" data-mode="diff" role="tab" aria-selected="false">Порівняння</button>
+      </div>
+      <div class="admin-fullscreen-actions">
+        <nav class="admin-fullscreen-pages" id="fullscreenPageNav" aria-label="Сторінки превʼю"></nav>
+        <button type="button" class="admin-btn" id="btnCloseFullscreen">Закрити</button>
+      </div>
+    </div>
+    <div class="admin-fullscreen-body">
+      <aside class="admin-fullscreen-sidebar">
+        <div class="admin-fullscreen-sidebar-head">
+          <h3>Налаштування</h3>
+          <p id="fullscreenSidebarMeta">—</p>
+        </div>
+        <div class="admin-fullscreen-items" id="fullscreenItemsList"></div>
+      </aside>
+      <div class="admin-fullscreen-main">
+        <div class="admin-fullscreen-panel admin-fullscreen-panel--preview is-active" id="fullscreenPreviewPanel">
+          <div class="admin-fullscreen-stage">
+            <div class="admin-fullscreen-phone" id="fullscreenPhone">
+              <iframe id="fullscreenFrame" title="Повноекранне превʼю"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="admin-fullscreen-panel admin-fullscreen-panel--diff" id="fullscreenDiffPanel" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-savebar">
+    <p class="admin-savebar-status" id="dirtyStatus">Немає незбережених змін</p>
+    <div class="admin-savebar-actions">
+      <button type="button" class="admin-btn admin-btn--ghost" id="btnUndo" disabled>Скасувати</button>
+      <button type="button" class="admin-btn admin-btn--save" id="btnSave" disabled>Зберегти дані</button>
+    </div>
+  </div>
+
+  <div class="admin-toast" id="toast" hidden></div>
+
+  <link rel="stylesheet" href="screenshot-diff.css">
+  <script src="core.js"></script>
+  <script src="screenshot-diff.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

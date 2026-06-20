@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Дія">
+  <title>Повна інформація — Дія</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="info.css">
+  <link rel="stylesheet" href="pwa.css">
+</head>
+<body class="info-body">
+  <div class="screen">
+    <div class="frame frame--info">
+      <div class="info-sheet">
+        <div class="info-handle" aria-hidden="true"></div>
+
+        <div class="info-scroll">
+          <h1 class="info-title" data-ed="info-title">єДокумент</h1>
+
+          <div class="info-ticker-wrap doc-ticker-wrap" data-ed="info-ticker-wrap">
+            <div class="doc-ticker">
+              <span data-ed="info-ticker">документ діє під час воєнного стану та 30 днів після його завершення або скасування. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася. &nbsp;&nbsp;&nbsp; документ діє під час воєнного стану та 30 днів після його завершення або скасування. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася.</span>
+            </div>
+          </div>
+
+          <section class="info-card" data-ed="info-card-1">
+            <h2 class="info-name" data-ed="info-name">ГЕРА СЕРГІЙ<br>СТЕПАНОВИЧ</h2>
+            <p class="info-name-latin" data-ed="info-name-latin">Hera Serhii</p>
+
+            <div class="info-row" data-ed="info-row-photo">
+              <div class="info-photo" data-ed="info-photo" aria-hidden="true"></div>
+              <div class="info-field info-field--birth">
+                <span class="label" data-ed="info-birth-label">Дата народження:</span>
+                <span class="label-en" data-ed="info-birth-label-en">Date of birth</span>
+                <span class="value" data-ed="info-birth-value">17.08.1999</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="info-card" data-ed="info-card-2">
+            <div class="info-split-row" data-ed="info-sex-row">
+              <div class="info-split-col">
+                <span class="label" data-ed="info-sex-label">Стать:</span>
+                <span class="label-en" data-ed="info-sex-label-en">Sex</span>
+              </div>
+              <div class="info-split-col info-split-col--end">
+                <span class="value value--inline" data-ed="info-sex-value-uk">Ч</span>
+                <span class="label-en" data-ed="info-sex-value-en">M</span>
+              </div>
+            </div>
+
+            <div class="info-split-row info-split-row--center" data-ed="info-rnokpp-row">
+              <span class="label" data-ed="info-rnokpp-label">РНОКПП (ІПН):</span>
+              <div class="info-rnokpp-right">
+                <span class="value value--inline" data-ed="info-rnokpp-value">2847193056</span>
+                <button class="copy-btn" type="button" aria-label="Копіювати">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M6 16V6a2 2 0 012-2h10" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="info-field info-field--doc" data-ed="info-doc-field">
+              <span class="label" data-ed="info-doc-label">Документ, що посвідчує особу:</span>
+              <span class="value" data-ed="info-doc-value1">Паспорт громадянина України</span>
+              <span class="value value--doc-num" data-ed="info-doc-value2">002847391</span>
+            </div>
+          </section>
+
+          <section class="info-card" data-ed="info-card-3">
+            <div class="info-field info-field--address" data-ed="info-address-field">
+              <span class="label" data-ed="info-address-label">Місце проживання зазначене в банку:</span>
+              <span class="value value-multiline" data-ed="info-address-value">UA, обл. Київська, м. Борщагівка, вул. Садова, буд. 14,</span>
+            </div>
+          </section>
+
+          <section class="info-card info-card-qr" data-ed="info-card-qr">
+            <div class="info-qr-wrap">
+              <img class="info-qr" data-ed="info-qr" src="assets/qr.png" alt="QR-код">
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <a href="/" class="info-back" aria-label="Назад" data-nav="index">
+        <svg width="10" height="18" viewBox="0 0 10 18" fill="none">
+          <path d="M8 2L2 9l6 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <script src="pwa.js"></script>
+  <script src="admin/core.js"></script>
+  <script src="admin/profile.js"></script>
+  <script src="admin/apply-config.js"></script>
+  <script src="admin/preview-drag.js"></script>
+  <script src="info.js"></script>
+</body>
+</html>

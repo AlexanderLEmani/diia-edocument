@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/info", "destination": "/info.html" },
+    { "source": "/secret", "destination": "/secret.html" },
+    { "source": "/rezerv", "destination": "/rezerv/index.html" },
+    { "source": "/rezerv/secret", "destination": "/rezerv/secret.html" },
+    { "source": "/rezerv/admin/admin", "destination": "/rezerv/admin/admin.html" },
+    { "source": "/admin/admin", "destination": "/admin/admin.html" }
+  ]
+}

@@ -1,0 +1,10 @@
+node_modules/
+.venv/
+.vercel
+.DS_Store
+dist/
+video/.tmp/
+*.tar
+Video.mp4
+diia-edocument/
+screenshot-diff/.git/

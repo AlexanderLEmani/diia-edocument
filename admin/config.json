@@ -1,0 +1,679 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-19T12:51:22.013Z",
+  "elements": {
+    "edoc-title": {
+      "text": "єДокумент",
+      "styles": {
+        "fontSize": "24px",
+        "fontWeight": "600",
+        "letterSpacing": "0.01em",
+        "lineHeight": "1.12",
+        "paddingTop": "30px",
+        "paddingBottom": "24px",
+        "translateX": "-1px",
+        "translateY": "-1px"
+      }
+    },
+    "edoc-birth-line1": {
+      "text": "Дата",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.44"
+      }
+    },
+    "edoc-birth-line2": {
+      "text": "народження:",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.44"
+      }
+    },
+    "edoc-birth-value": {
+      "text": "17.08.1999",
+      "styles": {
+        "fontSize": "13px",
+        "fontWeight": "400",
+        "letterSpacing": "0.048em",
+        "lineHeight": "1.44",
+        "translateY": "2px"
+      }
+    },
+    "edoc-rnokpp-label": {
+      "text": "РНОКПП:",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.44",
+        "translateX": "1px",
+        "translateY": "-7px"
+      }
+    },
+    "edoc-rnokpp-value": {
+      "text": "2847193056",
+      "styles": {
+        "fontSize": "13px",
+        "fontWeight": "400",
+        "letterSpacing": "0.048em",
+        "lineHeight": "1.44",
+        "translateY": "-4px"
+      }
+    },
+    "edoc-photo": {
+      "text": "",
+      "styles": {
+        "width": "50%",
+        "maxWidth": "158px",
+        "height": "195px"
+      }
+    },
+    "edoc-fields": {
+      "text": "",
+      "styles": {
+        "gap": "28px",
+        "paddingTop": "2px"
+      }
+    },
+    "edoc-field-birth": {
+      "text": "",
+      "styles": {
+        "gap": "0px"
+      }
+    },
+    "edoc-ticker": {
+      "text": "документ діє під час воєнного стану та 30 днів після його завершення або скасування. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася. &nbsp;&nbsp;&nbsp; документ діє під час воєнного стану та 30 днів після його завершення або скасування. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася.",
+      "styles": {
+        "fontSize": "11.5px",
+        "fontWeight": "500",
+        "letterSpacing": "0.02em",
+        "lineHeight": "1"
+      }
+    },
+    "edoc-ticker-wrap": {
+      "text": "",
+      "styles": {
+        "marginTop": "20px"
+      }
+    },
+    "edoc-name-1": {
+      "text": "ГЕРА",
+      "styles": {
+        "fontSize": "19px",
+        "fontWeight": "520",
+        "letterSpacing": "0.05em",
+        "lineHeight": "0.3",
+        "translateX": "-9px"
+      }
+    },
+    "edoc-name-2": {
+      "text": "СЕРГІЙ",
+      "styles": {
+        "fontSize": "19px",
+        "fontWeight": "600",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.1",
+        "translateX": "-9px",
+        "translateY": "1px"
+      }
+    },
+    "edoc-name-3": {
+      "text": "СТЕПАНОВИЧ",
+      "styles": {
+        "fontSize": "19px",
+        "fontWeight": "600",
+        "letterSpacing": "0.05em",
+        "lineHeight": "0.3",
+        "translateX": "-8px",
+        "translateY": "1px"
+      }
+    },
+    "edoc-name-group": {
+      "text": "",
+      "styles": {
+        "gap": "10px"
+      }
+    },
+    "edoc-footer": {
+      "text": "",
+      "styles": {
+        "paddingTop": "28px",
+        "paddingBottom": "32px"
+      }
+    },
+    "tax-title": {
+      "text": "Картка платника<br>податків",
+      "styles": {
+        "fontSize": "24px",
+        "fontWeight": "500",
+        "letterSpacing": "0.01em",
+        "lineHeight": "1.15",
+        "paddingTop": "30px",
+        "paddingBottom": "9px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-subtitle": {
+      "text": "РНОКПП",
+      "styles": {
+        "fontSize": "20px",
+        "fontWeight": "50",
+        "letterSpacing": "-0.01em",
+        "lineHeight": "1.15",
+        "translateY": "5px",
+        "paddingBottom": "15px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-name-1": {
+      "text": "Гера",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "440",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.4",
+        "translateY": "3px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-name-2": {
+      "text": "Сергій",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "440",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.4",
+        "translateY": "-7px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-name-3": {
+      "text": "Степанович",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "440",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.4",
+        "translateY": "-16px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-name-group": {
+      "text": "",
+      "styles": {
+        "gap": "10px",
+        "translateY": "7px",
+        "translateX": "-3px"
+      }
+    },
+    "tax-birth-line1": {
+      "text": "Дата",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "450",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.4",
+        "translateY": "-1px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-birth-line2": {
+      "text": "народження:",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "450",
+        "letterSpacing": "0.05em",
+        "lineHeight": "1.4",
+        "translateX": "37px",
+        "translateY": "-20px"
+      }
+    },
+    "tax-birth-value": {
+      "text": "17.08.1999",
+      "styles": {
+        "fontSize": "13px",
+        "fontWeight": "400",
+        "letterSpacing": "0.048em",
+        "lineHeight": "1.4",
+        "translateY": "-14px",
+        "translateX": "-6px"
+      }
+    },
+    "tax-field-birth": {
+      "text": "",
+      "styles": {
+        "gap": "0px",
+        "paddingTop": "10px"
+      }
+    },
+    "tax-id-num": {
+      "text": "2847193056",
+      "styles": {
+        "fontSize": "32px",
+        "fontWeight": "500",
+        "letterSpacing": "-0.03em",
+        "translateX": "-11px"
+      }
+    },
+    "tax-ticker": {
+      "text": "Документ оновлено сьогодні • Перевірено",
+      "styles": {
+        "fontSize": "11.5px",
+        "fontWeight": "500",
+        "letterSpacing": "0.02em",
+        "lineHeight": "1"
+      }
+    },
+    "ghost-passport-title": {
+      "text": "Закордонний паспорт",
+      "styles": {
+        "fontSize": "24px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.03em",
+        "lineHeight": "1.15"
+      }
+    },
+    "ghost-passport-name": {
+      "text": "Гера Сергій Степанович",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "ghost-license-title": {
+      "text": "Посвідчення водія",
+      "styles": {
+        "fontSize": "24px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.03em",
+        "lineHeight": "1.15"
+      }
+    },
+    "ghost-license-name": {
+      "text": "Гера Сергій Степанович",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "ghost-student-title": {
+      "text": "Студентський квиток",
+      "styles": {
+        "fontSize": "24px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.03em",
+        "lineHeight": "1.15"
+      }
+    },
+    "ghost-student-name": {
+      "text": "Гера Сергій Степанович",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-greeting": {
+      "text": "Привіт, Сергій 👋",
+      "styles": {
+        "fontSize": "30px",
+        "fontWeight": "500",
+        "letterSpacing": "0.015em",
+        "lineHeight": "1.1"
+      }
+    },
+    "feed-credit-label": {
+      "text": "Кредитна історія",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-credit-text": {
+      "text": "З'явився запис про новий кредит на ваше ім'я",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-nezl-title": {
+      "text": "Незламність",
+      "styles": {
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.1"
+      }
+    },
+    "feed-nezl-text": {
+      "text": "Карта укриттів, Power Banking та інші сервіси для вашої безпеки.",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-drones-title": {
+      "text": "ЛІНІЯ ДРОНІВ",
+      "styles": {
+        "fontSize": "26px",
+        "fontWeight": "700",
+        "letterSpacing": "0.06em",
+        "lineHeight": "1.1"
+      }
+    },
+    "feed-drones-sub": {
+      "text": "Змінити хід подій",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500",
+        "lineHeight": "1.25"
+      }
+    },
+    "feed-cashback-value": {
+      "text": "250.19 грн",
+      "styles": {
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.03em",
+        "lineHeight": "1.1"
+      }
+    },
+    "feed-cashback-desc": {
+      "text": "Накопичено кешбеку за червень",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-whatsnew-date": {
+      "text": "18 червня, 12:00",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-whatsnew-text": {
+      "text": "Сервіс для тестування онлайн-розлучення",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "1.4"
+      }
+    },
+    "feed-services-title": {
+      "text": "Популярні послуги",
+      "styles": {
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "1.1"
+      }
+    },
+    "info-title": {
+      "text": "єДокумент",
+      "styles": {
+        "fontSize": "28px",
+        "letterSpacing": "-0.03em",
+        "paddingTop": "8px",
+        "paddingBottom": "12px",
+        "fontWeight": "500"
+      }
+    },
+    "info-ticker-wrap": {
+      "text": "",
+      "styles": {
+        "height": "36px"
+      }
+    },
+    "info-ticker": {
+      "text": "документ діє під час воєнного стану та 30 днів після його завершення або скасування. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася. &nbsp;&nbsp;&nbsp; документ діє під час воєнного стану та 30 днів після його завершення або скасування. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася.",
+      "styles": {
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "letterSpacing": "0.02em",
+        "lineHeight": "1"
+      }
+    },
+    "info-card-1": {
+      "text": "",
+      "styles": {
+        "paddingTop": "18px",
+        "paddingBottom": "18px",
+        "marginTop": "10px",
+        "paddingLeft": "18px",
+        "paddingRight": "18px",
+        "borderRadius": "20px"
+      }
+    },
+    "info-name": {
+      "text": "ГЕРА СЕРГІЙ<br>СТЕПАНОВИЧ",
+      "styles": {
+        "fontSize": "20px",
+        "lineHeight": "1.25",
+        "marginBottom": "4px",
+        "letterSpacing": "0.03em",
+        "fontWeight": "600"
+      }
+    },
+    "info-name-latin": {
+      "text": "Hera Serhii",
+      "styles": {
+        "fontSize": "18px",
+        "fontWeight": "500",
+        "letterSpacing": "-0.02em",
+        "color": "#636366",
+        "marginBottom": "20px"
+      }
+    },
+    "info-row-photo": {
+      "text": "",
+      "styles": {
+        "gap": "14px"
+      }
+    },
+    "info-photo": {
+      "text": "",
+      "styles": {
+        "width": "42%",
+        "height": "180px",
+        "borderRadius": "14px"
+      }
+    },
+    "info-birth-label": {
+      "text": "Дата  народження:",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "1.35",
+        "paddingBottom": "4px"
+      }
+    },
+    "info-birth-label-en": {
+      "text": "Date of birth",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "color": "#8e8e93",
+        "lineHeight": "1.35",
+        "paddingBottom": "2px"
+      }
+    },
+    "info-birth-value": {
+      "text": "17.08.1999",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "1.35",
+        "marginTop": "2px"
+      }
+    },
+    "info-card-2": {
+      "text": "",
+      "styles": {
+        "paddingTop": "16px",
+        "paddingBottom": "16px",
+        "paddingLeft": "18px",
+        "paddingRight": "18px",
+        "marginTop": "10px",
+        "borderRadius": "20px"
+      }
+    },
+    "info-sex-row": {
+      "text": "",
+      "styles": {
+        "marginBottom": "16px"
+      }
+    },
+    "info-sex-label": {
+      "text": "Стать:",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "6800",
+        "lineHeight": "1.35"
+      }
+    },
+    "info-sex-label-en": {
+      "text": "Sex",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "400",
+        "color": "#8e8e93",
+        "lineHeight": "1.35"
+      }
+    },
+    "info-sex-value-uk": {
+      "text": "Ч",
+      "styles": {
+        "fontSize": "17px",
+        "fontWeight": "600",
+        "lineHeight": "1.35",
+        "marginTop": "2px",
+        "translateX": "-130px",
+        "translateY": "-1px"
+      }
+    },
+    "info-sex-value-en": {
+      "text": "M",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#8e8e93",
+        "lineHeight": "1.3",
+        "translateX": "-130px",
+        "translateY": "3px"
+      }
+    },
+    "info-rnokpp-row": {
+      "text": "",
+      "styles": {
+        "marginBottom": "16px"
+      }
+    },
+    "info-rnokpp-label": {
+      "text": "РНОКПП (ІПН):",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "1.35"
+      }
+    },
+    "info-rnokpp-value": {
+      "text": "2847193056",
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "lineHeight": "1.35",
+        "marginTop": "2px",
+        "translateX": "-25px"
+      }
+    },
+    "info-doc-field": {
+      "text": "",
+      "styles": {
+        "gap": "0px"
+      }
+    },
+    "info-doc-label": {
+      "text": "Документ, що посвідчує особу:",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "1.35"
+      }
+    },
+    "info-doc-value1": {
+      "text": "Паспорт громадянина України",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "1.35",
+        "marginTop": "2px"
+      }
+    },
+    "info-doc-value2": {
+      "text": "002847391",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "1.35",
+        "marginTop": "2px"
+      }
+    },
+    "info-card-3": {
+      "text": "",
+      "styles": {
+        "paddingTop": "16px",
+        "paddingBottom": "16px",
+        "paddingLeft": "18px",
+        "paddingRight": "18px",
+        "marginTop": "10px",
+        "borderRadius": "20px"
+      }
+    },
+    "info-address-label": {
+      "text": "Місце проживання зазначене в банку:",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "400",
+        "lineHeight": "1.35"
+      }
+    },
+    "info-address-value": {
+      "text": "UA, обл. Київська, м. Борщагівка, вул. Садова, буд. 14,",
+      "styles": {
+        "fontSize": "17px",
+        "fontWeight": "500",
+        "lineHeight": "1.4",
+        "marginTop": "2px"
+      }
+    },
+    "info-card-qr": {
+      "text": "",
+      "styles": {
+        "paddingTop": "28px",
+        "paddingBottom": "36px",
+        "paddingLeft": "20px",
+        "paddingRight": "20px",
+        "marginTop": "10px",
+        "borderRadius": "20px"
+      }
+    },
+    "info-qr": {
+      "text": "",
+      "styles": {
+        "width": "300px",
+        "height": "300px"
+      }
+    }
+  }
+}
