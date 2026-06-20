@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var PIN_CODE = '0606';
+  var PIN_CODE = '142536';
   var STORAGE_KEY = 'rezerv-unlocked';
   var THEME_DEFAULT = '#E5E2D3';
   var THEME_SPLASH = '#262422';
@@ -98,10 +98,10 @@
   }
 
   function pushDigit(digit) {
-    if (entered.length >= 4) return;
+    if (entered.length >= PIN_CODE.length) return;
     entered += digit;
     updateDots();
-    if (entered.length === 4) {
+    if (entered.length === PIN_CODE.length) {
       if (entered === PIN_CODE) unlock();
       else pinError();
     }
