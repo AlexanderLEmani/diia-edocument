@@ -1,4 +1,6 @@
-const CACHE = 'rezerv-v32';
+const CACHE = 'rezerv-v33';
+const SW_VERSION = '33';
+
 const ASSETS = [
   './',
   './index.html',
@@ -29,8 +31,55 @@ const ASSETS = [
   './admin/config.json',
 ];
 
+const NETWORK_FIRST = [
+  '/index.html',
+  '/auth.js',
+  '/sw.js',
+  '/app.js',
+  '/pwa.js',
+];
+
 function isAdminRequest(url) {
   return url.pathname.indexOf('/admin/') !== -1;
+}
+
+function isNetworkFirst(url) {
+  if (isAdminRequest(url)) return true;
+  var path = url.pathname;
+  if (path.endsWith('/rezerv') || path.endsWith('/rezerv/')) return true;
+  return NETWORK_FIRST.some(function (suffix) {
+    return path.endsWith(suffix);
+  });
+}
+
+function networkFirst(request) {
+  return fetch(request).then(function (response) {
+    if (response && response.status === 200 && response.type === 'basic') {
+      var clone = response.clone();
+      caches.open(CACHE).then(function (cache) {
+        cache.put(request, clone);
+      });
+    }
+    return response;
+  }).catch(function () {
+    return caches.match(request);
+  });
+}
+
+function cacheFirst(request) {
+  return caches.match(request).then(function (cached) {
+    if (cached) return cached;
+    return fetch(request).then(function (response) {
+      if (!response || response.status !== 200 || response.type !== 'basic') return response;
+      var clone = response.clone();
+      caches.open(CACHE).then(function (cache) {
+        cache.put(request, clone);
+      });
+      return response;
+    }).catch(function () {
+      return cached;
+    });
+  });
 }
 
 self.addEventListener('install', (event) => {
@@ -52,28 +101,16 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
-  if (isAdminRequest(url)) {
-    event.respondWith(
-      fetch(event.request).then((response) => {
-        if (response && response.status === 200 && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => caches.match(event.request))
-    );
+  if (isNetworkFirst(url)) {
+    event.respondWith(networkFirst(event.request));
     return;
   }
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        if (!response || response.status !== 200 || response.type !== 'basic') return response;
-        const clone = response.clone();
-        caches.open(CACHE).then((cache) => cache.put(event.request, clone));
-        return response;
-      }).catch(() => cached);
-    })
-  );
+  event.respondWith(cacheFirst(event.request));
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });

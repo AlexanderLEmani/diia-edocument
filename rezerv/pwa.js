@@ -23,7 +23,29 @@
     || window.navigator.standalone === true;
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(BASE + 'sw.js').catch(function () { /* ignore */ });
+    var swUrl = BASE + 'sw.js?v=' + encodeURIComponent('33');
+    navigator.serviceWorker.register(swUrl).then(function (registration) {
+      registration.update();
+      if (registration.waiting) {
+        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+      registration.addEventListener('updatefound', function () {
+        var worker = registration.installing;
+        if (!worker) return;
+        worker.addEventListener('statechange', function () {
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+            worker.postMessage({ type: 'SKIP_WAITING' });
+          }
+        });
+      });
+    }).catch(function () { /* ignore */ });
+
+    var reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (reloaded) return;
+      reloaded = true;
+      window.location.reload();
+    });
   }
 
   if (isStandalone) {
