@@ -2,7 +2,8 @@
   'use strict';
 
   var PIN_CODE = '142536';
-  var STORAGE_KEY = 'rezerv-unlocked';
+  var STORAGE_KEY = 'rezerv-unlocked-' + PIN_CODE;
+  var LEGACY_STORAGE_KEYS = ['rezerv-unlocked'];
   var THEME_DEFAULT = '#E5E2D3';
   var THEME_SPLASH = '#262422';
 
@@ -27,6 +28,9 @@
 
   function isUnlocked() {
     try {
+      LEGACY_STORAGE_KEYS.forEach(function (key) {
+        sessionStorage.removeItem(key);
+      });
       return sessionStorage.getItem(STORAGE_KEY) === '1';
     } catch (err) {
       return false;

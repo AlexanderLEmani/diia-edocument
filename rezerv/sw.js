@@ -1,4 +1,4 @@
-const CACHE = 'rezerv-v31';
+const CACHE = 'rezerv-v32';
 const ASSETS = [
   './',
   './index.html',
