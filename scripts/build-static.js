@@ -11,15 +11,19 @@ const FILES = [
   'info.html',
   'secret.html',
   'app.js',
+  'auth.js',
   'info.js',
   'pwa.js',
   'sw.js',
   'secret.js',
   'styles.css',
+  'auth.css',
   'info.css',
   'pwa.css',
   'secret.css',
   'manifest.webmanifest',
+  'apple-touch-icon.png',
+  'apple-touch-icon-precomposed.png',
 ];
 
 const DIRS = ['admin', 'assets', 'rezerv', 'screenshot-diff'];
