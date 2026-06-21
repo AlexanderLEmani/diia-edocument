@@ -894,6 +894,12 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   align-items: center;
   height: 100%;
   white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+}
+
+.doc-ticker-track.is-ready {
+  animation: idTickerScroll var(--ticker-duration, 5s) linear infinite;
 }
 
 .doc-ticker .id-ticker-part {

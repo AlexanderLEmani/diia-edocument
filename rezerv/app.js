@@ -176,6 +176,9 @@
       requestAnimationFrame(function () {
         docSheet.style.transform = '';
         docSheetOverlay.classList.add('is-open');
+        if (window.RezervTicker && typeof window.RezervTicker.init === 'function') {
+          window.RezervTicker.init();
+        }
       });
     });
   }
