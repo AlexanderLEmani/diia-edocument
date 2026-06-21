@@ -36,18 +36,32 @@
     document.documentElement.classList.add('preview-mode');
     window.addEventListener('message', handlePreviewMessage);
 
+    var openDocSheet = params.get('docsheet') === '1';
+
     function signalReady() {
       window.parent.postMessage({ type: 'admin-preview-ready' }, '*');
+    }
+
+    function maybeOpenDocSheet() {
+      if (!openDocSheet) return;
+      var overlay = document.getElementById('docSheetOverlay');
+      var sheet = document.getElementById('docSheet');
+      if (!overlay || !sheet) return;
+      overlay.removeAttribute('hidden');
+      document.body.classList.add('doc-sheet-open');
+      requestAnimationFrame(function () {
+        overlay.classList.add('is-open');
+      });
     }
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function () {
         signalReady();
-        boot();
+        boot().then(maybeOpenDocSheet);
       });
     } else {
       signalReady();
-      boot();
+      boot().then(maybeOpenDocSheet);
     }
   } else if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { boot(); });

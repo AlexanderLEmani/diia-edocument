@@ -909,15 +909,35 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   margin-bottom: 12px;
 }
 
+.doc-names {
+  margin-bottom: 10px;
+}
+
+.doc-name-line {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.doc-status-lbl {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #6B6B6B;
+}
+
 .doc-person {
   display: flex;
-  gap: 14px;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .doc-photo {
-  width: 88px;
-  height: 108px;
-  border-radius: 8px;
+  width: 130px;
+  min-height: 170px;
+  border-radius: 10px;
   background: #f0f0f0 center / cover no-repeat;
   flex-shrink: 0;
 }
@@ -926,9 +946,12 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   background-color: #ddd;
 }
 
-.doc-person-text {
+.doc-fields-col {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .doc-name {
@@ -945,8 +968,8 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 }
 
 .doc-field {
-  margin-bottom: 8px;
-  font-size: 14px;
+  margin-bottom: 0;
+  font-size: 15px;
   line-height: 1.35;
 }
 
@@ -957,16 +980,18 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 .doc-field--stack {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .doc-label {
   color: #6B6B6B;
-  margin-right: 4px;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .doc-value {
   color: #000;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -1006,6 +1031,12 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 
 body.doc-sheet-open .bottom-nav {
   z-index: 120;
+}
+
+body.doc-sheet-open .notify-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
 }
 
 /* ── Bottom nav ── */

@@ -472,6 +472,78 @@
         "fontSize": "16px",
         "fontWeight": "500"
       }
+    },
+    "rezerv-doc-name1": {
+      "text": "Бондарев",
+      "styles": { "fontSize": "22px", "fontWeight": "500", "lineHeight": "1.18", "letterSpacing": "-0.01em" }
+    },
+    "rezerv-doc-name2": {
+      "text": "Іоанн",
+      "styles": { "fontSize": "22px", "fontWeight": "500", "lineHeight": "1.18", "letterSpacing": "-0.01em" }
+    },
+    "rezerv-doc-name3": {
+      "text": "Олександрович",
+      "styles": { "fontSize": "22px", "fontWeight": "500", "lineHeight": "1.18", "letterSpacing": "-0.01em" }
+    },
+    "rezerv-doc-status": {
+      "text": "Військовозобов'язаний",
+      "styles": { "fontSize": "15px", "fontWeight": "400", "color": "#6B6B6B" }
+    },
+    "rezerv-doc-photo": {
+      "text": "",
+      "styles": { "width": "130px" }
+    },
+    "rezerv-doc-birth-lbl": {
+      "text": "Дата народження:",
+      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+    },
+    "rezerv-doc-birth": {
+      "text": "30.01.2001",
+      "styles": { "fontSize": "16px", "fontWeight": "500" }
+    },
+    "rezerv-doc-rnokpp-lbl": {
+      "text": "РНОКПП:",
+      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+    },
+    "rezerv-doc-rnokpp": {
+      "text": "3638805490",
+      "styles": { "fontSize": "16px", "fontWeight": "500" }
+    },
+    "rezerv-doc-tcc": {
+      "text": "Шевченківський районний у місті Дніпро ТЦК та СП",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-rank": {
+      "text": "Солдат",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-vos": {
+      "text": "999097",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-note": {
+      "text": "Потребує проходження базової загальновійськової підготовки, Солдат резерву",
+      "styles": { "fontSize": "14px", "fontWeight": "400" }
+    },
+    "rezerv-doc-registry": {
+      "text": "030220241429041800006",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-phone": {
+      "text": "+380 96 663 5523",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-email": {
+      "text": "sayonaraboy965123@gmail.com",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-address": {
+      "text": "Україна, Дніпропетровська область, м Дніпро, ЗАПОРІЗЬКЕ ШОСЕ, б. 38, кв. 226",
+      "styles": { "fontSize": "15px", "fontWeight": "500" }
+    },
+    "rezerv-doc-updated": {
+      "text": "Дата останнього уточнення даних: 20.05.2024",
+      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
     }
   },
   "updatedAt": "2026-06-21T10:37:48.317Z"

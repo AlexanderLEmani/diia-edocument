@@ -128,6 +128,10 @@
     if (first) setField('rezerv-name-2', titleCase(first));
     if (pat) setField('rezerv-name-3', titleCase(pat));
 
+    if (last) setField('rezerv-doc-name1', titleCase(last));
+    if (first) setField('rezerv-doc-name2', titleCase(first));
+    if (pat) setField('rezerv-doc-name3', titleCase(pat));
+
     if (profile.birthDate) {
       setField('rezerv-birth-value', profile.birthDate);
       setField('rezerv-doc-birth', profile.birthDate);
@@ -141,11 +145,13 @@
   }
 
   function syncDocNameFromCard() {
-    var parts = ['rezerv-name-1', 'rezerv-name-2', 'rezerv-name-3'].map(function (id) {
+    var ids = ['rezerv-name-1', 'rezerv-name-2', 'rezerv-name-3'];
+    var docIds = ['rezerv-doc-name1', 'rezerv-doc-name2', 'rezerv-doc-name3'];
+    ids.forEach(function (id, i) {
       var el = document.querySelector('[data-ed="' + id + '"]');
-      return el ? el.textContent.trim() : '';
-    }).filter(Boolean);
-    if (parts.length) setField('rezerv-doc-name', parts.join(' '));
+      var text = el ? el.textContent.trim() : '';
+      if (text) setField(docIds[i], text);
+    });
   }
 
   function patchConfig(config) {

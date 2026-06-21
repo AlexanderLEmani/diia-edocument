@@ -156,6 +156,15 @@
     return 'rezerv-id';
   }
 
+  function pageIdFromPreviewPath(path) {
+    var url = new URL(path, 'http://x');
+    if (url.searchParams.get('docsheet') === '1') return 'rezerv-doc';
+    if (url.hash === '#services') return 'rezerv-services';
+    if (url.hash === '#vacancies') return 'rezerv-vacancies';
+    if (url.hash === '#menu') return 'rezerv-menu';
+    return 'rezerv-id';
+  }
+
   function syncPageFromFrame(frame) {
     if (!frame || !frame.contentWindow) return;
     try {

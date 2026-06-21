@@ -36,6 +36,7 @@
     { id: 'rezerv-vacancies', label: 'Вакансії', previewPath: '/rezerv/?preview=1#vacancies' },
     { id: 'rezerv-menu', label: 'Меню', previewPath: '/rezerv/?preview=1#menu' },
     { id: 'rezerv-nav', label: 'Навігація', previewPath: '/rezerv/?preview=1' },
+    { id: 'rezerv-doc', label: 'Документ', previewPath: '/rezerv/?preview=1&docsheet=1' },
   ];
 
   function item(id, page, label, opts) {
@@ -305,6 +306,83 @@
     item('rezerv-sheet-1', 'rezerv-id', 'Шит — Переглянути', { defaultText: 'Переглянути документ', defaultStyles: { fontSize: '16px', fontWeight: '500' } }),
     item('rezerv-sheet-2', 'rezerv-id', 'Шит — PDF', { defaultText: 'Завантажити PDF', defaultStyles: { fontSize: '16px', fontWeight: '500' } }),
     item('rezerv-sheet-3', 'rezerv-id', 'Шит — Оновити', { defaultText: 'Оновити документ', defaultStyles: { fontSize: '16px', fontWeight: '500' } }),
+
+    // ── Документ ──
+    item('rezerv-doc-name1', 'rezerv-doc', 'Прізвище', {
+      defaultText: 'Бондарев',
+      defaultStyles: { fontSize: '22px', fontWeight: '500', lineHeight: '1.18', letterSpacing: '-0.01em' },
+    }),
+    item('rezerv-doc-name2', 'rezerv-doc', "Ім'я", {
+      defaultText: 'Іоанн',
+      defaultStyles: { fontSize: '22px', fontWeight: '500', lineHeight: '1.18', letterSpacing: '-0.01em' },
+    }),
+    item('rezerv-doc-name3', 'rezerv-doc', 'По батькові', {
+      defaultText: 'Олександрович',
+      defaultStyles: { fontSize: '22px', fontWeight: '500', lineHeight: '1.18', letterSpacing: '-0.01em' },
+    }),
+    item('rezerv-doc-status', 'rezerv-doc', 'Статус', {
+      defaultText: "Військовозобов'язаний",
+      defaultStyles: { fontSize: '15px', fontWeight: '400', color: '#6B6B6B' },
+    }),
+    item('rezerv-doc-photo', 'rezerv-doc', 'Фото', {
+      text: false,
+      resizable: true,
+      resizeMin: { width: 60, height: 80 },
+      defaultStyles: { width: '130px' },
+      styles: ['width', 'height', 'borderRadius', 'translateX', 'translateY'],
+    }),
+    item('rezerv-doc-birth-lbl', 'rezerv-doc', 'Підпис «Дата народження»', {
+      defaultText: 'Дата народження:',
+      defaultStyles: { fontSize: '14px', fontWeight: '400', color: '#6B6B6B' },
+    }),
+    item('rezerv-doc-birth', 'rezerv-doc', 'Дата народження — значення', {
+      defaultText: '30.01.2001',
+      defaultStyles: { fontSize: '16px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-rnokpp-lbl', 'rezerv-doc', 'Підпис «РНОКПП»', {
+      defaultText: 'РНОКПП:',
+      defaultStyles: { fontSize: '14px', fontWeight: '400', color: '#6B6B6B' },
+    }),
+    item('rezerv-doc-rnokpp', 'rezerv-doc', 'РНОКПП — значення', {
+      defaultText: '3638805490',
+      defaultStyles: { fontSize: '16px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-tcc', 'rezerv-doc', 'ТЦК та СП', {
+      defaultText: 'Шевченківський районний у місті Дніпро ТЦК та СП',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-rank', 'rezerv-doc', 'Звання', {
+      defaultText: 'Солдат',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-vos', 'rezerv-doc', 'ВОС', {
+      defaultText: '999097',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-note', 'rezerv-doc', 'Примітка', {
+      defaultText: 'Потребує проходження базової загальновійськової підготовки, Солдат резерву',
+      defaultStyles: { fontSize: '14px', fontWeight: '400' },
+    }),
+    item('rezerv-doc-registry', 'rezerv-doc', 'Номер Оберіг', {
+      defaultText: '030220241429041800006',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-phone', 'rezerv-doc', 'Телефон', {
+      defaultText: '+380 96 663 5523',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-email', 'rezerv-doc', 'Email', {
+      defaultText: 'sayonaraboy965123@gmail.com',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-address', 'rezerv-doc', 'Адреса', {
+      defaultText: 'Україна, Дніпропетровська область, м Дніпро, ЗАПОРІЗЬКЕ ШОСЕ, б. 38, кв. 226',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-updated', 'rezerv-doc', 'Дата уточнення', {
+      defaultText: 'Дата останнього уточнення даних: 20.05.2024',
+      defaultStyles: { fontSize: '14px', fontWeight: '400', color: '#6B6B6B' },
+    }),
   ];
 
   function schemaById() {
