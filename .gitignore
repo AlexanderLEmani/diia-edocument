@@ -6,5 +6,5 @@ dist/
 video/.tmp/
 *.tar
 Video.mp4
-diia-edocument/
+scripts/.keys/
 screenshot-diff/.git/

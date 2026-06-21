@@ -21,46 +21,11 @@
 </head>
 <body class="auth-locked">
   <div class="auth-gate" id="authGate">
-    <div class="auth-splash" id="authSplash" aria-hidden="false">
+    <div class="auth-loading" id="authLoading" aria-hidden="false">
       <img class="auth-splash-image" src="assets/splash-screen.png" alt="">
-    </div>
-
-    <div class="auth-pin" id="authPin" hidden>
-      <div class="auth-pin-layer">
-        <h1 class="auth-pin-title">Код для входу</h1>
-        <div class="auth-dots" id="authDots" aria-hidden="true">
-          <span class="auth-dot"></span>
-          <span class="auth-dot"></span>
-          <span class="auth-dot"></span>
-          <span class="auth-dot"></span>
-        </div>
-        <div class="auth-keypad" id="authKeypad">
-          <button type="button" class="auth-key" data-key="1">1</button>
-          <button type="button" class="auth-key" data-key="2">2</button>
-          <button type="button" class="auth-key" data-key="3">3</button>
-          <button type="button" class="auth-key" data-key="4">4</button>
-          <button type="button" class="auth-key" data-key="5">5</button>
-          <button type="button" class="auth-key" data-key="6">6</button>
-          <button type="button" class="auth-key" data-key="7">7</button>
-          <button type="button" class="auth-key" data-key="8">8</button>
-          <button type="button" class="auth-key" data-key="9">9</button>
-          <button type="button" class="auth-key auth-key--ghost" data-key="face" aria-label="Face ID">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="4.5" y="4.5" width="15" height="15" rx="3" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="9.5" cy="11" r="1" fill="currentColor"/>
-              <circle cx="14.5" cy="11" r="1" fill="currentColor"/>
-              <path d="M9 15.2c.8.8 1.7 1.2 3 1.2s2.2-.4 3-1.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <button type="button" class="auth-key" data-key="0">0</button>
-          <button type="button" class="auth-key auth-key--ghost" data-key="back" aria-label="Стерти">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9 7.5H18.5V16.5H9L5.5 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M13.5 10.5L15.5 12L13.5 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-        <p class="auth-forgot">Не пам'ятаю код для входу</p>
+      <div class="auth-loading-overlay">
+        <div class="auth-spinner" aria-hidden="true"></div>
+        <p class="auth-loading-text">Завантаження даних...</p>
       </div>
     </div>
   </div>
@@ -376,7 +341,7 @@
   </div>
 
   <script src="pwa.js?v=33"></script>
-  <script src="auth.js?v=34"></script>
+  <script src="auth.js?v=36"></script>
   <script src="admin/core.js"></script>
   <script src="admin/profile.js"></script>
   <script src="ticker.js"></script>
