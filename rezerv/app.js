@@ -63,23 +63,60 @@
   });
 
   var cardFlip = document.getElementById('idCardFlip');
+  var cardFlipInner = document.getElementById('idCardFlipInner');
   var cardFlipped = false;
+  var flipBusy = false;
 
-  function flipCard(toBack) {
-    cardFlipped = toBack;
-    if (cardFlip) cardFlip.classList.toggle('is-flipped', toBack);
+  function flipToBack() {
+    if (flipBusy || cardFlipped || !cardFlipInner) return;
+    cardFlipped = true;
+    cardFlipInner.style.transition = '';
+    cardFlipInner.style.transform = '';
+    if (cardFlip) cardFlip.classList.add('is-flipped');
+  }
+
+  function flipToFront() {
+    if (flipBusy || !cardFlipped || !cardFlipInner) return;
+    flipBusy = true;
+
+    cardFlipInner.style.transform = 'rotateY(360deg)';
+
+    function finishFlip() {
+      cardFlipInner.removeEventListener('transitionend', onTransitionEnd);
+      clearTimeout(flipFallback);
+      cardFlipInner.style.transition = 'none';
+      cardFlipInner.style.transform = 'rotateY(0deg)';
+      if (cardFlip) cardFlip.classList.remove('is-flipped');
+      cardFlipped = false;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          cardFlipInner.style.transition = '';
+          cardFlipInner.style.transform = '';
+          flipBusy = false;
+        });
+      });
+    }
+
+    function onTransitionEnd(e) {
+      if (e.target !== cardFlipInner || e.propertyName !== 'transform') return;
+      finishFlip();
+    }
+
+    var flipFallback = setTimeout(finishFlip, 700);
+    cardFlipInner.addEventListener('transitionend', onTransitionEnd);
   }
 
   if (cardFlip) {
     cardFlip.addEventListener('click', function (e) {
+      if (flipBusy) return;
       if (e.target.closest('#openSheet') || e.target.closest('.id-fab')) return;
 
       if (cardFlipped) {
-        flipCard(false);
+        flipToFront();
         return;
       }
 
-      flipCard(true);
+      flipToBack();
     });
   }
 

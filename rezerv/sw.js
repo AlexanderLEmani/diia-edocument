@@ -1,4 +1,4 @@
-const CACHE = 'rezerv-v36';
+const CACHE = 'rezerv-v37';
 const SW_VERSION = '33';
 
 const ASSETS = [
