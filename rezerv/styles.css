@@ -623,6 +623,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 
 .vac-grid {
   margin-bottom: 24px;
+  background: #fff;
 }
 
 .vac-grid-image {
@@ -632,6 +633,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   user-select: none;
   -webkit-user-drag: none;
   object-fit: contain;
+  background: #fff;
 }
 
 .vac-cta {
