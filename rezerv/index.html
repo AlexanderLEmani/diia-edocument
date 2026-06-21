@@ -84,59 +84,74 @@
           </div>
 
           <div class="id-card-stage">
-          <article class="id-card" id="idCard" data-ed="rezerv-card">
-            <header class="id-card-header">
-              <h1 class="id-card-title" id="idCardTitle" data-ed="rezerv-title">Резерв ID</h1>
-              <div class="id-card-emblem" data-ed="rezerv-emblem-wrap" aria-hidden="true">
-                <div class="id-card-emblem-img" data-ed="rezerv-emblem">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" aria-hidden="true">
-                    <path d="M 100 100 L 300 100 C 300 240, 270 330, 200 370 C 130 330, 100 240, 100 100 Z" fill="#000000"/>
-                    <path d="M 135 135 L 155 135 L 155 270 L 182 270 L 182 155 C 182 135, 185 120, 200 110 C 215 120, 218 135, 218 155 L 218 270 L 245 270 L 245 135 L 265 135 L 265 290 L 218 290 L 200 322 L 182 290 L 135 290 Z" fill="#E4E2D5"/>
-                  </svg>
-                </div>
-              </div>
-            </header>
+          <div class="id-card-flip" id="idCardFlip">
+            <div class="id-card-flip-inner" id="idCardFlipInner">
 
-            <div class="id-card-body" data-ed="rezerv-card-body">
-              <div class="id-card-row" data-ed="rezerv-row">
-                <div class="id-photo" data-ed="rezerv-photo" aria-hidden="true"></div>
-                <div class="id-card-fields" data-ed="rezerv-fields">
-                  <div class="id-field" data-ed="rezerv-field-birth">
-                    <span class="id-label" data-ed="rezerv-birth-label">Дата народження</span>
-                    <span class="id-value" data-ed="rezerv-birth-value">30.01.2001</span>
+              <!-- ── Лицевая сторона ── -->
+              <article class="id-card id-card-front" id="idCard" data-ed="rezerv-card">
+                <header class="id-card-header">
+                  <h1 class="id-card-title" id="idCardTitle" data-ed="rezerv-title">Резерв ID</h1>
+                  <div class="id-card-emblem" data-ed="rezerv-emblem-wrap" aria-hidden="true">
+                    <div class="id-card-emblem-img" data-ed="rezerv-emblem">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" aria-hidden="true">
+                        <path d="M 100 100 L 300 100 C 300 240, 270 330, 200 370 C 130 330, 100 240, 100 100 Z" fill="#000000"/>
+                        <path d="M 135 135 L 155 135 L 155 270 L 182 270 L 182 155 C 182 135, 185 120, 200 110 C 215 120, 218 135, 218 155 L 218 270 L 245 270 L 245 135 L 265 135 L 265 290 L 218 290 L 200 322 L 182 290 L 135 290 Z" fill="#E4E2D5"/>
+                      </svg>
+                    </div>
                   </div>
-                  <div class="id-field" data-ed="rezerv-field-deferral">
-                    <span class="id-label" data-ed="rezerv-deferral-label">Відстрочка до:</span>
-                    <span class="id-value" data-ed="rezerv-deferral-value">завершення мобілізації</span>
+                </header>
+
+                <div class="id-card-body" data-ed="rezerv-card-body">
+                  <div class="id-card-row" data-ed="rezerv-row">
+                    <div class="id-photo" data-ed="rezerv-photo" aria-hidden="true"></div>
+                    <div class="id-card-fields" data-ed="rezerv-fields">
+                      <div class="id-field" data-ed="rezerv-field-birth">
+                        <span class="id-label" data-ed="rezerv-birth-label">Дата народження</span>
+                        <span class="id-value" data-ed="rezerv-birth-value">30.01.2001</span>
+                      </div>
+                      <div class="id-field" data-ed="rezerv-field-deferral">
+                        <span class="id-label" data-ed="rezerv-deferral-label">Відстрочка до:</span>
+                        <span class="id-value" data-ed="rezerv-deferral-value">завершення мобілізації</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div class="id-card-bottom">
-              <div class="id-ticker-wrap" data-ed="rezerv-ticker-wrap">
-                <div class="id-ticker-track" data-ed="rezerv-ticker">
-                  <span class="id-ticker-part">Документ оновлено о 06:56 | 13.06.2026 • </span>
+                <div class="id-card-bottom">
+                  <div class="id-ticker-wrap" data-ed="rezerv-ticker-wrap">
+                    <div class="id-ticker-track" data-ed="rezerv-ticker">
+                      <span class="id-ticker-part">Документ оновлено о 06:56 | 13.06.2026 • </span>
+                    </div>
+                  </div>
+
+                  <footer class="id-card-footer" data-ed="rezerv-footer">
+                    <div class="id-status-block">
+                      <span class="id-label" data-ed="rezerv-status-label">Військовозобов'язаний</span>
+                      <div class="id-name-group" data-ed="rezerv-name-group">
+                        <span class="id-name-line" data-ed="rezerv-name-1">Бондарев</span>
+                        <span class="id-name-line" data-ed="rezerv-name-2">Іоанн</span>
+                        <span class="id-name-line" data-ed="rezerv-name-3">Олександрович</span>
+                      </div>
+                    </div>
+                    <button type="button" class="id-fab" id="openSheet" aria-label="Меню документа">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                      </svg>
+                    </button>
+                  </footer>
+                </div>
+              </article>
+
+              <!-- ── Оборотная сторона (QR) ── -->
+              <div class="id-card id-card-back" id="idCardBack">
+                <div class="id-card-back-inner">
+                  <p class="id-qr-label">QR-код дійсний до 20 червня 2027</p>
+                  <img class="id-qr-image" src="assets/qr.svg" alt="QR-код" draggable="false">
                 </div>
               </div>
 
-              <footer class="id-card-footer" data-ed="rezerv-footer">
-              <div class="id-status-block">
-                <span class="id-label" data-ed="rezerv-status-label">Військовозобов'язаний</span>
-                <div class="id-name-group" data-ed="rezerv-name-group">
-                  <span class="id-name-line" data-ed="rezerv-name-1">Бондарев</span>
-                  <span class="id-name-line" data-ed="rezerv-name-2">Іоанн</span>
-                  <span class="id-name-line" data-ed="rezerv-name-3">Олександрович</span>
-                </div>
-              </div>
-              <button type="button" class="id-fab" id="openSheet" aria-label="Меню документа">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-                </svg>
-              </button>
-              </footer>
-            </div>
-          </article>
+            </div><!-- /flip-inner -->
+          </div><!-- /flip -->
           </div>
         </div>
       </div>

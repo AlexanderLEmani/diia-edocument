@@ -62,6 +62,29 @@
     });
   });
 
+  var cardFlip = document.getElementById('idCardFlip');
+  var cardBack = document.getElementById('idCardBack');
+  var cardFlipped = false;
+
+  function flipCard(toBack) {
+    cardFlipped = toBack;
+    if (cardFlip) cardFlip.classList.toggle('is-flipped', toBack);
+  }
+
+  if (cardFlip) {
+    cardFlip.addEventListener('click', function (e) {
+      if (e.target.closest('#openSheet') || e.target.closest('.id-fab')) return;
+      if (cardFlipped) return;
+      flipCard(true);
+    });
+  }
+
+  if (cardBack) {
+    cardBack.addEventListener('click', function () {
+      flipCard(false);
+    });
+  }
+
   function closeSheet() {
     document.body.classList.remove('sheet-open');
     if (sheetOverlay) sheetOverlay.hidden = true;

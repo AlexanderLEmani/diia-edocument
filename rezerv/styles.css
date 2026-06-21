@@ -180,6 +180,81 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   flex-shrink: 0;
 }
 
+/* ── Card flip ── */
+.id-card-flip {
+  perspective: 900px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  flex-shrink: 0;
+}
+
+.id-card-flip-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.id-card-flip.is-flipped .id-card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.id-card-front,
+.id-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  width: 100%;
+}
+
+.id-card-front {
+  position: relative;
+}
+
+.id-card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #fff;
+  border: 1.65px solid #d0cdc2;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.id-card-back-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.id-qr-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.id-qr-image {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 .id-card-stage {
   flex: 1;
   display: flex;
