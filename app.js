@@ -101,6 +101,7 @@ let isDragging = false;
 let dragOffset = 0;
 let slideStride = 0;
 let suppressCardFlip = false;
+let flipCandidateCard = null;
 
 function layoutSlides() {
   const viewport = carousel.clientWidth;
@@ -196,6 +197,7 @@ function releaseCarouselCapture() {
 
 function resetCarouselDrag() {
   releaseCarouselCapture();
+  flipCandidateCard = null;
   if (isDragging) {
     isDragging = false;
     dragOffset = 0;
@@ -204,9 +206,15 @@ function resetCarouselDrag() {
   }
 }
 
+function isCardActionTarget(target) {
+  return !!target.closest('.menu-trigger, .copy-btn, button, a');
+}
+
 carousel.addEventListener('pointerdown', (e) => {
-  if (e.target.closest('.menu-trigger, .copy-btn')) return;
+  if (isCardActionTarget(e.target)) return;
   if (!overlay.hidden) return;
+  const card = e.target.closest('.doc-card');
+  flipCandidateCard = card && card.classList.contains('is-active') ? card : null;
   carousel.setPointerCapture(e.pointerId);
   carouselCaptureId = e.pointerId;
   onDragStart(e.clientX);
@@ -218,7 +226,12 @@ carousel.addEventListener('pointermove', (e) => {
 });
 
 function onCarouselPointerEnd(e) {
-  suppressCardFlip = Math.abs(dragOffset) > 8;
+  const tapDistance = Math.abs(dragOffset);
+  suppressCardFlip = tapDistance > 8;
+  if (!suppressCardFlip && flipCandidateCard && overlay.hidden) {
+    flipCandidateCard.classList.toggle('is-flipped');
+  }
+  flipCandidateCard = null;
   onDragEnd();
   if (carouselCaptureId != null && e.pointerId === carouselCaptureId) {
     releaseCarouselCapture();
@@ -227,14 +240,9 @@ function onCarouselPointerEnd(e) {
 }
 
 carousel.addEventListener('pointerup', onCarouselPointerEnd);
-carousel.addEventListener('pointercancel', onCarouselPointerEnd);
-
-carouselTrack.addEventListener('click', (e) => {
-  const card = e.target.closest('.doc-card');
-  if (!card) return;
-  if (suppressCardFlip || !overlay.hidden) return;
-  if (e.target.closest('.menu-trigger, .copy-btn, button, a')) return;
-  card.classList.toggle('is-flipped');
+carousel.addEventListener('pointercancel', (e) => {
+  flipCandidateCard = null;
+  onCarouselPointerEnd(e);
 });
 
 window.addEventListener('resize', () => {
