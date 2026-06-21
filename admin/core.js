@@ -186,6 +186,52 @@
       defaultStyles: { fontSize: '11.5px', fontWeight: '500', letterSpacing: '0.02em', lineHeight: '1' },
     }),
 
+    item('edoc-back-qr', 'index-docs', 'єДокумент — QR зворот', {
+      text: false,
+      defaultStyles: { width: '78%', maxWidth: '310px' },
+      styles: ['width', 'height', 'maxWidth', 'translateX', 'translateY'],
+    }),
+    item('tax-back', 'index-docs', 'Податкова — зворот padding', {
+      text: false,
+      defaultStyles: { paddingTop: '34px', paddingBottom: '30px', paddingLeft: '22px', paddingRight: '22px' },
+      styles: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+    }),
+    item('tax-back-timer', 'index-docs', 'Податкова — таймер QR', {
+      defaultText: 'Код діятиме ще 2:53 хв',
+      defaultStyles: { fontSize: '18px', fontWeight: '500', color: '#747474', marginBottom: '18px' },
+      styles: ['fontSize', 'fontWeight', 'letterSpacing', 'lineHeight', 'color', 'marginBottom', 'translateX', 'translateY'],
+    }),
+    item('tax-back-qr', 'index-docs', 'Податкова — QR зворот', {
+      text: false,
+      defaultStyles: { width: '78%', maxWidth: '300px' },
+      styles: ['width', 'height', 'maxWidth', 'translateX', 'translateY'],
+    }),
+    item('tax-back-tabs', 'index-docs', 'Податкова — блок QR/Штрихкод', {
+      text: false,
+      defaultStyles: { gap: '54px', paddingTop: '28px' },
+      styles: ['gap', 'paddingTop', 'marginTop', 'translateX', 'translateY'],
+    }),
+    item('tax-back-tab-qr-icon', 'index-docs', 'Податкова — іконка QR', {
+      text: false,
+      defaultStyles: { width: '72px', height: '72px' },
+      styles: ['width', 'height', 'translateX', 'translateY'],
+    }),
+    item('tax-back-tab-barcode-icon', 'index-docs', 'Податкова — іконка штрихкод', {
+      text: false,
+      defaultStyles: { width: '72px', height: '72px' },
+      styles: ['width', 'height', 'translateX', 'translateY'],
+    }),
+    item('tax-back-tab-qr-label', 'index-docs', 'Податкова — підпис QR', {
+      defaultText: 'QR-код',
+      defaultStyles: { fontSize: '23px', fontWeight: '600', letterSpacing: '-0.04em' },
+      styles: ['fontSize', 'fontWeight', 'letterSpacing', 'lineHeight', 'translateX', 'translateY'],
+    }),
+    item('tax-back-tab-barcode-label', 'index-docs', 'Податкова — підпис Штрихкод', {
+      defaultText: 'Штрихкод',
+      defaultStyles: { fontSize: '23px', fontWeight: '600', letterSpacing: '-0.04em' },
+      styles: ['fontSize', 'fontWeight', 'letterSpacing', 'lineHeight', 'translateX', 'translateY'],
+    }),
+
     item('ghost-passport-title', 'index-docs', 'Закордонний паспорт — заголовок', {
       defaultText: 'Закордонний паспорт',
       defaultStyles: { fontSize: '24px', fontWeight: '700', letterSpacing: '-0.03em', lineHeight: '1.15' },

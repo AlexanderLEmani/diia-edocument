@@ -182,8 +182,8 @@
                       </button>
                     </div>
                   </div>
-                  <div class="doc-card-face doc-card-back doc-card-back--simple" aria-hidden="true">
-                    <img class="doc-card-qr doc-card-qr--simple" src="assets/qr.svg" alt="">
+                  <div class="doc-card-face doc-card-back doc-card-back--simple" data-ed="edoc-back" aria-hidden="true">
+                    <img class="doc-card-qr doc-card-qr--simple" data-ed="edoc-back-qr" src="assets/card-qr.png" alt="">
                   </div>
                 </div>
               </article>
@@ -223,12 +223,12 @@
                       </button>
                     </div>
                   </div>
-                  <div class="doc-card-face doc-card-back doc-card-back--tax" aria-hidden="true">
-                    <p class="doc-card-code-timer">Код діятиме ще 2:53 хв</p>
-                    <img class="doc-card-qr" src="assets/qr.svg" alt="">
-                    <div class="doc-code-tabs" aria-hidden="true">
-                      <div class="doc-code-tab is-active">
-                        <span class="doc-code-tab-icon">
+                  <div class="doc-card-face doc-card-back doc-card-back--tax" data-ed="tax-back" aria-hidden="true">
+                    <p class="doc-card-code-timer" data-ed="tax-back-timer">Код діятиме ще 2:53 хв</p>
+                    <img class="doc-card-qr" data-ed="tax-back-qr" src="assets/card-qr.png" alt="">
+                    <div class="doc-code-tabs" data-ed="tax-back-tabs" aria-hidden="true">
+                      <div class="doc-code-tab is-active" data-ed="tax-back-tab-qr">
+                        <span class="doc-code-tab-icon" data-ed="tax-back-tab-qr-icon">
                           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                             <rect x="4" y="4" width="7" height="7" rx="1" stroke="white" stroke-width="2"/>
                             <rect x="17" y="4" width="7" height="7" rx="1" stroke="white" stroke-width="2"/>
@@ -239,10 +239,10 @@
                             <rect x="22" y="22" width="3" height="3" fill="white"/>
                           </svg>
                         </span>
-                        <span class="doc-code-tab-label">QR-код</span>
+                        <span class="doc-code-tab-label" data-ed="tax-back-tab-qr-label">QR-код</span>
                       </div>
-                      <div class="doc-code-tab">
-                        <span class="doc-code-tab-icon">
+                      <div class="doc-code-tab" data-ed="tax-back-tab-barcode">
+                        <span class="doc-code-tab-icon" data-ed="tax-back-tab-barcode-icon">
                           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                             <rect x="6" y="6" width="3" height="16" rx="1.5" fill="#111"/>
                             <rect x="12" y="6" width="3" height="16" rx="1.5" fill="#111"/>
@@ -250,7 +250,7 @@
                             <rect x="23" y="6" width="2" height="16" rx="1" fill="#111"/>
                           </svg>
                         </span>
-                        <span class="doc-code-tab-label">Штрихкод</span>
+                        <span class="doc-code-tab-label" data-ed="tax-back-tab-barcode-label">Штрихкод</span>
                       </div>
                     </div>
                   </div>
