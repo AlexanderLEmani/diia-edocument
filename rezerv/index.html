@@ -191,15 +191,7 @@
           <section class="vac-card">
             <h2 class="vac-card-title" data-ed="rezerv-vac-card-title">На вас чекають</h2>
             <div class="vac-grid" data-ed="rezerv-vac-grid">
-              <div class="vac-emblem vac-emblem--1"></div>
-              <div class="vac-emblem vac-emblem--2"></div>
-              <div class="vac-emblem vac-emblem--3"></div>
-              <div class="vac-emblem vac-emblem--4"></div>
-              <div class="vac-emblem vac-emblem--5"></div>
-              <div class="vac-emblem vac-emblem--6"></div>
-              <div class="vac-emblem vac-emblem--7"></div>
-              <div class="vac-emblem vac-emblem--8"></div>
-              <div class="vac-emblem vac-emblem--more"><span data-ed="rezerv-vac-more">+206</span></div>
+              <img class="vac-grid-image" data-ed="rezerv-vac-grid-image" src="assets/vacancies-emblems.png" alt="" draggable="false">
             </div>
             <button type="button" class="vac-cta" data-ed="rezerv-vac-cta">Змінити перебіг подій</button>
           </section>
@@ -255,19 +247,44 @@
       <!-- Bottom nav -->
       <nav class="bottom-nav" aria-label="Навігація">
         <button type="button" class="nav-item active" data-tab="id">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="7" y="9" width="10" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+          <span class="nav-icon" data-ed="rezerv-nav-icon-1">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="20" y="15" width="60" height="70" rx="4" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+              <line x1="20" y1="73" x2="80" y2="73" stroke="currentColor" stroke-width="6" stroke-linecap="square"/>
+              <line x1="20" y1="60" x2="80" y2="60" stroke="currentColor" stroke-width="6" stroke-linecap="square"/>
+            </svg>
+          </span>
           <span>Резерв ID</span>
         </button>
         <button type="button" class="nav-item" data-tab="services">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="nav-icon" data-ed="rezerv-nav-icon-2">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="15" y="15" width="30" height="30" rx="6" fill="currentColor"/>
+              <rect x="55" y="15" width="30" height="30" rx="6" fill="currentColor"/>
+              <rect x="15" y="55" width="30" height="30" rx="6" fill="currentColor"/>
+              <rect x="55" y="55" width="30" height="30" rx="6" fill="currentColor"/>
+            </svg>
+          </span>
           <span>Сервіси</span>
         </button>
         <button type="button" class="nav-item" data-tab="vacancies">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M12 8l3 4-3 4-3-4z" fill="currentColor"/></svg>
+          <span class="nav-icon" data-ed="rezerv-nav-icon-3">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="20" y="15" width="60" height="70" rx="4" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+              <rect x="41.5" y="41.5" width="17" height="17" fill="currentColor" transform="rotate(45 50 50)"/>
+            </svg>
+          </span>
           <span>Вакансії</span>
         </button>
         <button type="button" class="nav-item" data-tab="menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span class="nav-icon" data-ed="rezerv-nav-icon-4">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <line x1="15" y1="26" x2="85" y2="26" stroke="currentColor" stroke-width="6" stroke-linecap="square"/>
+              <line x1="15" y1="42" x2="85" y2="42" stroke="currentColor" stroke-width="6" stroke-linecap="square"/>
+              <line x1="15" y1="58" x2="85" y2="58" stroke="currentColor" stroke-width="6" stroke-linecap="square"/>
+              <line x1="15" y1="74" x2="85" y2="74" stroke="currentColor" stroke-width="6" stroke-linecap="square"/>
+            </svg>
+          </span>
           <span>Меню</span>
         </button>
       </nav>

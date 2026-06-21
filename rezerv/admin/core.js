@@ -35,6 +35,7 @@
     { id: 'rezerv-services', label: 'Сервіси', previewPath: '/rezerv/?preview=1#services' },
     { id: 'rezerv-vacancies', label: 'Вакансії', previewPath: '/rezerv/?preview=1#vacancies' },
     { id: 'rezerv-menu', label: 'Меню', previewPath: '/rezerv/?preview=1#menu' },
+    { id: 'rezerv-nav', label: 'Навігація', previewPath: '/rezerv/?preview=1' },
   ];
 
   function item(id, page, label, opts) {
@@ -220,6 +221,18 @@
       defaultText: 'На вас чекають',
       defaultStyles: { fontSize: '20px', fontWeight: '700' },
     }),
+    item('rezerv-vac-grid', 'rezerv-vacancies', 'Сітка — відступи', {
+      text: false,
+      defaultStyles: { marginBottom: '24px' },
+      styles: ['marginTop', 'marginBottom', 'paddingTop', 'paddingBottom', 'translateX', 'translateY'],
+    }),
+    item('rezerv-vac-grid-image', 'rezerv-vacancies', 'Сітка емблем — фото', {
+      text: false,
+      resizable: true,
+      resizeMin: { width: 120, height: 120 },
+      defaultStyles: { width: '100%' },
+      styles: ['width', 'maxWidth', 'height', 'translateX', 'translateY', 'marginTop', 'marginBottom'],
+    }),
     item('rezerv-vac-more', 'rezerv-vacancies', 'Лічильник «+206»', {
       defaultText: '+206',
       defaultStyles: { fontSize: '15px', fontWeight: '600' },
@@ -254,6 +267,39 @@
     item('rezerv-privacy', 'rezerv-menu', 'Посилання конфіденційності', {
       defaultText: 'Повідомлення про обробку персональних даних',
       defaultStyles: { fontSize: '12px', fontWeight: '400' },
+    }),
+
+    item('rezerv-nav-icon-1', 'rezerv-nav', 'Навігація — Резерв ID', {
+      text: false,
+      resizable: true,
+      dragAxis: 'xy',
+      resizeMin: { width: 16, height: 16 },
+      defaultStyles: { width: '24px', height: '24px' },
+      styles: ['width', 'height', 'translateX', 'translateY'],
+    }),
+    item('rezerv-nav-icon-2', 'rezerv-nav', 'Навігація — Сервіси', {
+      text: false,
+      resizable: true,
+      dragAxis: 'xy',
+      resizeMin: { width: 16, height: 16 },
+      defaultStyles: { width: '24px', height: '24px' },
+      styles: ['width', 'height', 'translateX', 'translateY'],
+    }),
+    item('rezerv-nav-icon-3', 'rezerv-nav', 'Навігація — Вакансії', {
+      text: false,
+      resizable: true,
+      dragAxis: 'xy',
+      resizeMin: { width: 16, height: 16 },
+      defaultStyles: { width: '24px', height: '24px' },
+      styles: ['width', 'height', 'translateX', 'translateY'],
+    }),
+    item('rezerv-nav-icon-4', 'rezerv-nav', 'Навігація — Меню', {
+      text: false,
+      resizable: true,
+      dragAxis: 'xy',
+      resizeMin: { width: 16, height: 16 },
+      defaultStyles: { width: '24px', height: '24px' },
+      styles: ['width', 'height', 'translateX', 'translateY'],
     }),
 
     item('rezerv-sheet-1', 'rezerv-id', 'Шит — Переглянути', { defaultText: 'Переглянути документ', defaultStyles: { fontSize: '16px', fontWeight: '500' } }),

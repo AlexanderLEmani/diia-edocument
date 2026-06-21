@@ -1,4 +1,4 @@
-const CACHE = 'rezerv-v38';
+const CACHE = 'rezerv-v39';
 const SW_VERSION = '33';
 
 const ASSETS = [
@@ -19,6 +19,7 @@ const ASSETS = [
   './assets/splash-screen.png',
   './assets/pin-screen.png',
   './assets/qr-card.png',
+  './assets/vacancies-emblems.png',
   './admin/admin.html',
   './admin/admin.css',
   './admin/admin.js',

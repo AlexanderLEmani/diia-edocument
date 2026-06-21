@@ -299,6 +299,18 @@
         "fontWeight": "700"
       }
     },
+    "rezerv-vac-grid": {
+      "text": "",
+      "styles": {
+        "marginBottom": "24px"
+      }
+    },
+    "rezerv-vac-grid-image": {
+      "text": "",
+      "styles": {
+        "width": "100%"
+      }
+    },
     "rezerv-vac-more": {
       "text": "+206",
       "styles": {
@@ -410,6 +422,34 @@
       "styles": {
         "fontSize": "12px",
         "fontWeight": "400"
+      }
+    },
+    "rezerv-nav-icon-1": {
+      "text": "",
+      "styles": {
+        "width": "24px",
+        "height": "24px"
+      }
+    },
+    "rezerv-nav-icon-2": {
+      "text": "",
+      "styles": {
+        "width": "24px",
+        "height": "24px"
+      }
+    },
+    "rezerv-nav-icon-3": {
+      "text": "",
+      "styles": {
+        "width": "24px",
+        "height": "24px"
+      }
+    },
+    "rezerv-nav-icon-4": {
+      "text": "",
+      "styles": {
+        "width": "24px",
+        "height": "24px"
       }
     },
     "rezerv-sheet-1": {
