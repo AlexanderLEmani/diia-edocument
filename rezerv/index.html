@@ -229,7 +229,7 @@
         <div class="sheet-backdrop" id="sheetBackdrop"></div>
         <div class="sheet" role="dialog" aria-label="Меню документа">
           <div class="sheet-handle"></div>
-          <button type="button" class="sheet-item">
+          <button type="button" class="sheet-item" id="viewDocumentBtn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="8" r="1" fill="currentColor"/></svg>
             <span data-ed="rezerv-sheet-1">Переглянути документ</span>
           </button>
@@ -241,6 +241,71 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0113.5-5.7M20 12a8 8 0 01-13.5 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 4h4v4M8 20H4v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span data-ed="rezerv-sheet-3">Оновити документ</span>
           </button>
+        </div>
+      </div>
+
+      <!-- Document viewer sheet -->
+      <div class="doc-sheet-overlay" id="docSheetOverlay" hidden>
+        <div class="doc-sheet-backdrop" id="docSheetBackdrop"></div>
+        <div class="doc-sheet" id="docSheet" role="dialog" aria-label="Перегляд документа">
+          <div class="doc-sheet-drag" id="docSheetDrag">
+            <div class="doc-sheet-handle" id="docSheetHandle"></div>
+          </div>
+          <div class="doc-sheet-scroll">
+            <header class="doc-header">
+              <h2 class="doc-title">Резерв ID</h2>
+              <div class="doc-emblem" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450">
+                  <path d="M 100 100 L 300 100 C 300 240, 270 330, 200 370 C 130 330, 100 240, 100 100 Z" fill="#000"/>
+                  <path d="M 135 135 L 155 135 L 155 270 L 182 270 L 182 155 C 182 135, 185 120, 200 110 C 215 120, 218 135, 218 155 L 218 270 L 245 270 L 245 135 L 265 135 L 265 290 L 218 290 L 200 322 L 182 290 L 135 290 Z" fill="#E4E2D5"/>
+                </svg>
+              </div>
+            </header>
+
+            <div class="doc-ticker">
+              <div class="doc-ticker-track" data-ed="rezerv-doc-ticker">
+                <span class="id-ticker-part">Документ оновлено о 06:56 | 13.06.2026 • </span>
+              </div>
+            </div>
+
+            <section class="doc-block">
+              <div class="doc-person">
+                <div class="doc-photo" data-ed="rezerv-doc-photo" aria-hidden="true"></div>
+                <div class="doc-person-text">
+                  <p class="doc-name" data-ed="rezerv-doc-name">Бондарев Іоанн Олександрович</p>
+                  <p class="doc-status">Військовозобов'язаний</p>
+                  <div class="doc-field">
+                    <span class="doc-label">Дата народження:</span>
+                    <span class="doc-value" data-ed="rezerv-doc-birth">30.01.2001</span>
+                  </div>
+                  <div class="doc-field">
+                    <span class="doc-label">РНОКПП:</span>
+                    <span class="doc-value" data-ed="rezerv-doc-rnokpp">3638805490</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="doc-block">
+              <div class="doc-field"><span class="doc-label">ТЦК та СП:</span><span class="doc-value" data-ed="rezerv-doc-tcc">Шевченківський районний у місті Дніпро ТЦК та СП</span></div>
+              <div class="doc-field"><span class="doc-label">Звання:</span><span class="doc-value" data-ed="rezerv-doc-rank">Солдат</span></div>
+              <div class="doc-field"><span class="doc-label">ВОС:</span><span class="doc-value" data-ed="rezerv-doc-vos">999097</span></div>
+              <div class="doc-field"><span class="doc-label">Категорія обліку:</span><span class="doc-value">Військовозобов'язаний</span></div>
+              <p class="doc-note" data-ed="rezerv-doc-note">Потребує проходження базової загальновійськової підготовки, Солдат резерву</p>
+              <div class="doc-field"><span class="doc-label">Номер в реєстрі Оберіг:</span><span class="doc-value" data-ed="rezerv-doc-registry">030220241429041800006</span></div>
+            </section>
+
+            <section class="doc-block">
+              <div class="doc-field"><span class="doc-label">Телефон:</span><span class="doc-value" data-ed="rezerv-doc-phone">+380 96 663 5523</span></div>
+              <div class="doc-field"><span class="doc-label">Email:</span><span class="doc-value" data-ed="rezerv-doc-email">sayonaraboy965123@gmail.com</span></div>
+              <div class="doc-field doc-field--stack"><span class="doc-label">Адреса проживання:</span><span class="doc-value" data-ed="rezerv-doc-address">Україна, Дніпропетровська область, м Дніпро, ЗАПОРІЗЬКЕ ШОСЕ, б. 38, кв. 226</span></div>
+            </section>
+
+            <section class="doc-block doc-block--status">
+              <p class="doc-status-ok"><span class="doc-status-dot" aria-hidden="true"></span>Дані оновлено вчасно</p>
+              <p class="doc-status-date" data-ed="rezerv-doc-updated">Дата останнього уточнення даних: 20.05.2024</p>
+            </section>
+          </div>
         </div>
       </div>
 

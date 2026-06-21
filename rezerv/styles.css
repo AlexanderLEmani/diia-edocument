@@ -783,6 +783,229 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   flex-shrink: 0;
 }
 
+/* ── Document viewer sheet ── */
+.doc-sheet-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.doc-sheet-overlay[hidden] {
+  display: none !important;
+}
+
+.doc-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.doc-sheet {
+  position: relative;
+  z-index: 1;
+  height: calc(100% - 52px);
+  max-height: calc(100% - 52px);
+  background: #E5E2D3;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform;
+  touch-action: none;
+}
+
+.doc-sheet-overlay.is-open .doc-sheet {
+  transform: translateY(0);
+}
+
+.doc-sheet.is-dragging {
+  transition: none;
+}
+
+.doc-sheet-drag {
+  flex-shrink: 0;
+  padding: 10px 0 6px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.doc-sheet-drag:active {
+  cursor: grabbing;
+}
+
+.doc-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+.doc-sheet-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  touch-action: pan-y;
+}
+
+.doc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.doc-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.doc-emblem {
+  width: 36px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.doc-emblem svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.doc-ticker {
+  margin: 0 -16px 16px;
+  overflow: hidden;
+  height: 25px;
+  background: #7A5C3A;
+}
+
+.doc-ticker-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  white-space: nowrap;
+}
+
+.doc-ticker .id-ticker-part {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.doc-block {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 16px;
+  margin-bottom: 12px;
+}
+
+.doc-person {
+  display: flex;
+  gap: 14px;
+}
+
+.doc-photo {
+  width: 88px;
+  height: 108px;
+  border-radius: 8px;
+  background: #f0f0f0 center / cover no-repeat;
+  flex-shrink: 0;
+}
+
+.doc-photo.has-photo {
+  background-color: #ddd;
+}
+
+.doc-person-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-name {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.doc-status {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #6B6B6B;
+}
+
+.doc-field {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.doc-field:last-child {
+  margin-bottom: 0;
+}
+
+.doc-field--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.doc-label {
+  color: #6B6B6B;
+  margin-right: 4px;
+}
+
+.doc-value {
+  color: #000;
+  font-weight: 500;
+}
+
+.doc-note {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.35;
+  color: #000;
+}
+
+.doc-block--status {
+  margin-bottom: 8px;
+}
+
+.doc-status-ok {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doc-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #34C759;
+  flex-shrink: 0;
+}
+
+.doc-status-date {
+  margin: 0;
+  font-size: 14px;
+  color: #6B6B6B;
+}
+
+body.doc-sheet-open .bottom-nav {
+  z-index: 120;
+}
+
 /* ── Bottom nav ── */
 .bottom-nav {
   position: absolute;

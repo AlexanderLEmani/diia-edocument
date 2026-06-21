@@ -83,7 +83,9 @@
 
   function applyDocUpdate() {
     var meta = getDocUpdateMeta();
-    setField('rezerv-ticker', buildTickerText(meta.date, meta.time), true);
+    var ticker = buildTickerText(meta.date, meta.time);
+    setField('rezerv-ticker', ticker, true);
+    setField('rezerv-doc-ticker', ticker, true);
   }
 
   function setField(id, text, html) {
@@ -96,22 +98,27 @@
   }
 
   function applyPhoto(dataUrl) {
-    var el = document.querySelector('[data-ed="rezerv-photo"]');
-    if (!el) return;
-    if (!dataUrl) {
-      el.classList.remove('has-photo');
-      el.style.removeProperty('background-image');
-      return;
-    }
-    el.classList.add('has-photo');
-    el.style.backgroundImage = 'url("' + dataUrl + '")';
+    var nodes = document.querySelectorAll('[data-ed="rezerv-photo"], [data-ed="rezerv-doc-photo"]');
+    if (!nodes.length) return;
+    nodes.forEach(function (el) {
+      if (!dataUrl) {
+        el.classList.remove('has-photo');
+        el.style.removeProperty('background-image');
+        return;
+      }
+      el.classList.add('has-photo');
+      el.style.backgroundImage = 'url("' + dataUrl + '")';
+    });
   }
 
   function applyProfile() {
     applyDocUpdate();
 
     var profile = loadProfile();
-    if (!profile) return false;
+    if (!profile) {
+      syncDocNameFromCard();
+      return false;
+    }
 
     var last = profile.lastName || '';
     var first = profile.firstName || '';
@@ -123,12 +130,22 @@
 
     if (profile.birthDate) {
       setField('rezerv-birth-value', profile.birthDate);
+      setField('rezerv-doc-birth', profile.birthDate);
     }
 
     if (profile.photoDataUrl) applyPhoto(profile.photoDataUrl);
     else applyPhoto('');
 
+    syncDocNameFromCard();
     return true;
+  }
+
+  function syncDocNameFromCard() {
+    var parts = ['rezerv-name-1', 'rezerv-name-2', 'rezerv-name-3'].map(function (id) {
+      var el = document.querySelector('[data-ed="' + id + '"]');
+      return el ? el.textContent.trim() : '';
+    }).filter(Boolean);
+    if (parts.length) setField('rezerv-doc-name', parts.join(' '));
   }
 
   function patchConfig(config) {
