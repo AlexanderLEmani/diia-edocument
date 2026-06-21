@@ -1,13 +1,14 @@
 (function () {
   'use strict';
 
+  var PIN_CODE = '1245';
+  var PIN_STORAGE_KEY = 'diia-unlocked-' + PIN_CODE;
   var STORAGE_KEY = 'diia-access-token';
   var COOKIE_KEY = 'diia-access-token';
   var TOKEN_PARAM = 't';
   var LEGACY_STORAGE_KEYS = [
     'diia-unlocked',
     'diia-unlocked-0606',
-    'diia-unlocked-1245',
     'diia-license-session'
   ];
   var THEME_DEFAULT = '#000000';
@@ -15,8 +16,16 @@
 
   var gate = document.getElementById('authGate');
   var loadingScreen = document.getElementById('authLoading');
+  var splash = document.getElementById('authSplash');
+  var pinScreen = document.getElementById('authPin');
+  var keypad = document.getElementById('authKeypad');
+  var dotsEl = document.getElementById('authDots');
   var loadingText = loadingScreen && loadingScreen.querySelector('.auth-loading-text');
   var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var entered = '';
+  var splashTimer = null;
+  var keypadBound = false;
+  var accessGranted = false;
 
   function isDebugMode() {
     return new URLSearchParams(window.location.search).get('debug') === '1';
@@ -42,6 +51,13 @@
 
   function setTheme(color) {
     if (themeMeta) themeMeta.setAttribute('content', color);
+  }
+
+  function randomSplashDelay() {
+    var r = Math.random();
+    if (r < 0.45) return 550 + Math.floor(Math.random() * 650);
+    if (r < 0.85) return 1200 + Math.floor(Math.random() * 1400);
+    return 2800 + Math.floor(Math.random() * 1900);
   }
 
   function currentMonthKey() {
@@ -91,19 +107,14 @@
     var expireDate = trimmed.slice(colon + 1).trim();
     if (!userId || !parseExpireDate(expireDate)) return null;
 
-    return {
-      userId: userId,
-      expireDate: expireDate
-    };
+    return { userId: userId, expireDate: expireDate };
   }
 
   function decodeToken(token) {
     if (!token) return null;
-
     var trimmed = token.trim();
     var payload = parsePayload(decodeBase64(trimmed));
     if (payload) return payload;
-
     return parsePayload(decodeHex(trimmed));
   }
 
@@ -128,14 +139,12 @@
   function readCookieToken() {
     var prefix = COOKIE_KEY + '=';
     var parts = document.cookie.split(';');
-
     for (var i = 0; i < parts.length; i++) {
       var part = parts[i].trim();
       if (part.indexOf(prefix) === 0) {
         return decodeURIComponent(part.slice(prefix.length));
       }
     }
-
     return null;
   }
 
@@ -169,55 +178,21 @@
 
   function writeStoredToken(token) {
     var value = token.trim();
-    var saved = false;
-
-    try {
-      localStorage.setItem(STORAGE_KEY, value);
-      saved = true;
-    } catch (err) {
-      /* ignore */
-    }
-
-    try {
-      sessionStorage.setItem(STORAGE_KEY, value);
-      saved = true;
-    } catch (err) {
-      /* ignore */
-    }
-
-    try {
-      writeCookieToken(value);
-      saved = true;
-    } catch (err) {
-      /* ignore */
-    }
-
+    try { localStorage.setItem(STORAGE_KEY, value); } catch (err) { /* ignore */ }
+    try { sessionStorage.setItem(STORAGE_KEY, value); } catch (err) { /* ignore */ }
+    try { writeCookieToken(value); } catch (err) { /* ignore */ }
     saveServiceWorkerToken(value);
-    return saved;
   }
 
   function clearStoredToken() {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (err) {
-      /* ignore */
-    }
-
-    try {
-      sessionStorage.removeItem(STORAGE_KEY);
-    } catch (err) {
-      /* ignore */
-    }
-
+    try { localStorage.removeItem(STORAGE_KEY); } catch (err) { /* ignore */ }
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (err) { /* ignore */ }
     clearCookieToken();
   }
 
   function saveServiceWorkerToken(token) {
     if (!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) return;
-    navigator.serviceWorker.controller.postMessage({
-      type: 'SAVE_TOKEN',
-      token: token
-    });
+    navigator.serviceWorker.controller.postMessage({ type: 'SAVE_TOKEN', token: token });
   }
 
   function readServiceWorkerToken(callback) {
@@ -234,7 +209,6 @@
 
       var channel = new MessageChannel();
       var done = false;
-
       var timer = setTimeout(function () {
         if (done) return;
         done = true;
@@ -279,16 +253,13 @@
       changed = true;
     }
 
-    var hash = url.hash || '';
-    if (hash.indexOf('#' + TOKEN_PARAM + '=') === 0) {
+    if (url.hash.indexOf('#' + TOKEN_PARAM + '=') === 0) {
       url.hash = '';
       changed = true;
     }
 
     if (!changed) return;
-
-    var next = url.pathname + url.search + url.hash;
-    window.history.replaceState(null, '', next);
+    window.history.replaceState(null, '', url.pathname + url.search + url.hash);
   }
 
   function markAuthReady() {
@@ -296,17 +267,26 @@
     window.dispatchEvent(new Event('auth-ready'));
   }
 
+  function hideAllScreens() {
+    if (loadingScreen) loadingScreen.hidden = true;
+    if (splash) splash.hidden = true;
+    if (pinScreen) pinScreen.hidden = true;
+  }
+
   function finishAuth() {
+    clearTimeout(splashTimer);
     document.body.classList.remove('auth-locked');
     setTheme(THEME_DEFAULT);
     if (gate) gate.hidden = true;
-    if (loadingScreen) loadingScreen.hidden = true;
+    hideAllScreens();
   }
 
   function showLoading(reason) {
     document.body.classList.add('auth-locked');
     if (gate) gate.hidden = false;
     if (loadingScreen) loadingScreen.hidden = false;
+    if (splash) splash.hidden = true;
+    if (pinScreen) pinScreen.hidden = true;
     if (loadingText) {
       loadingText.textContent = isDebugMode()
         ? ('Завантаження даних... (' + (reason || 'blocked') + ')')
@@ -315,16 +295,131 @@
     setTheme(THEME_AUTH);
   }
 
-  function grantAccess(token) {
-    writeStoredToken(token);
-    if (shouldStripTokenFromUrl()) stripTokenFromUrl();
+  function showSplash() {
+    document.body.classList.add('auth-locked');
+    if (gate) gate.hidden = false;
+    if (loadingScreen) loadingScreen.hidden = true;
+    if (splash) splash.hidden = false;
+    if (pinScreen) pinScreen.hidden = true;
+    setTheme(THEME_AUTH);
+  }
+
+  function showPin() {
+    if (splash) splash.hidden = true;
+    if (loadingScreen) loadingScreen.hidden = true;
+    if (pinScreen) pinScreen.hidden = false;
+    setTheme(THEME_AUTH);
+    resetPin();
+  }
+
+  function resetPin() {
+    entered = '';
+    updateDots();
+    if (dotsEl) dotsEl.classList.remove('is-error');
+  }
+
+  function updateDots() {
+    if (!dotsEl) return;
+    dotsEl.querySelectorAll('.auth-dot').forEach(function (dot, index) {
+      dot.classList.toggle('is-on', index < entered.length);
+    });
+  }
+
+  function pinError() {
+    if (!dotsEl) return;
+    dotsEl.classList.add('is-error');
+    setTimeout(resetPin, 450);
+  }
+
+  function isPinUnlocked() {
+    try {
+      return sessionStorage.getItem(PIN_STORAGE_KEY) === '1';
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function unlockPin() {
+    try {
+      sessionStorage.setItem(PIN_STORAGE_KEY, '1');
+    } catch (err) {
+      /* ignore */
+    }
     finishAuth();
+  }
+
+  function pushDigit(digit) {
+    if (entered.length >= PIN_CODE.length) return;
+    entered += digit;
+    updateDots();
+    if (entered.length === PIN_CODE.length) {
+      if (entered === PIN_CODE) unlockPin();
+      else pinError();
+    }
+  }
+
+  function popDigit() {
+    if (!entered.length) return;
+    entered = entered.slice(0, -1);
+    updateDots();
+    if (dotsEl) dotsEl.classList.remove('is-error');
+  }
+
+  function handleKey(value) {
+    if (value === 'back') {
+      popDigit();
+      return;
+    }
+    if (value === 'face') return;
+    pushDigit(value);
+  }
+
+  function bindKeypad() {
+    if (!keypad || keypadBound) return;
+    keypadBound = true;
+
+    keypad.querySelectorAll('[data-key]').forEach(function (key) {
+      function pressOn() {
+        key.classList.add('is-pressed');
+      }
+
+      function pressOff() {
+        key.classList.remove('is-pressed');
+      }
+
+      function onPress(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        pressOn();
+        handleKey(key.getAttribute('data-key'));
+      }
+
+      key.addEventListener('pointerdown', onPress, { passive: false });
+      key.addEventListener('pointerup', pressOff);
+      key.addEventListener('pointercancel', pressOff);
+      key.addEventListener('pointerleave', pressOff);
+      key.addEventListener('click', function (event) {
+        event.preventDefault();
+      });
+    });
+  }
+
+  function beginPinFlow() {
+    accessGranted = true;
+    bindKeypad();
+    showSplash();
+
+    splashTimer = setTimeout(function () {
+      if (isPinUnlocked()) finishAuth();
+      else showPin();
+    }, randomSplashDelay());
+
     markAuthReady();
   }
 
-  function denyAccess(reason) {
-    showLoading(reason);
-    markAuthReady();
+  function persistAccessToken(token) {
+    writeStoredToken(token);
+    if (shouldStripTokenFromUrl()) stripTokenFromUrl();
   }
 
   function resolveAccess() {
@@ -332,8 +427,7 @@
 
     var storedToken = readStoredToken();
     if (storedToken && validateToken(storedToken)) {
-      finishAuth();
-      markAuthReady();
+      beginPinFlow();
       return;
     }
 
@@ -342,7 +436,8 @@
     var urlToken = getUrlToken();
     if (urlToken) {
       if (validateToken(urlToken)) {
-        grantAccess(urlToken);
+        persistAccessToken(urlToken);
+        beginPinFlow();
         return;
       }
       if (shouldStripTokenFromUrl()) stripTokenFromUrl();
@@ -350,11 +445,13 @@
 
     readServiceWorkerToken(function (swToken) {
       if (swToken && validateToken(swToken)) {
-        grantAccess(swToken);
+        persistAccessToken(swToken);
+        beginPinFlow();
         return;
       }
 
-      denyAccess('no-token');
+      showLoading('no-token');
+      markAuthReady();
     });
   }
 
