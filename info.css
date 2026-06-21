@@ -184,7 +184,7 @@
   line-height: 1.45;
 }
 
-.copy-btn {
+.info-sheet .copy-btn {
   border: none;
   background: transparent;
   color: #000;
@@ -195,7 +195,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.copy-btn:active {
+.info-sheet .copy-btn:active {
   opacity: 0.5;
 }
 
@@ -243,4 +243,61 @@
   .info-sheet {
     border-radius: 20px 20px 40px 40px;
   }
+}
+
+/* ── In-app info bottom sheet ── */
+.info-sheet-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 140;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: auto;
+}
+
+.info-sheet-overlay[hidden] {
+  display: none !important;
+}
+
+.info-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.info-sheet-overlay .info-sheet {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+  height: calc(100% - 56px);
+  max-height: calc(100% - 56px);
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform;
+  touch-action: none;
+  border-radius: 20px 20px 0 0;
+}
+
+.info-sheet-overlay.is-open .info-sheet {
+  transform: translateY(0);
+}
+
+.info-sheet-overlay .info-sheet.is-dragging {
+  transition: none;
+}
+
+.info-sheet-drag {
+  flex-shrink: 0;
+  padding: 0 0 2px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.info-sheet-drag:active {
+  cursor: grabbing;
+}
+
+.info-sheet-overlay .info-handle {
+  margin-top: 10px;
 }

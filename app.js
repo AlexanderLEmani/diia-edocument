@@ -7,6 +7,10 @@ const overlay = document.querySelector('.menu-overlay');
 const closeBtn = document.querySelector('.menu-close');
 const backdrop = document.querySelector('.menu-backdrop');
 const infoNavLink = document.querySelector('.menu-item--info');
+const infoSheetOverlay = document.getElementById('infoSheetOverlay');
+const infoSheet = document.getElementById('infoSheet');
+const infoSheetBackdrop = document.getElementById('infoSheetBackdrop');
+const infoSheetDrag = document.getElementById('infoSheetDrag');
 const navItems = document.querySelectorAll('.nav-item[data-tab]');
 const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -206,6 +210,16 @@ function resetCarouselDrag() {
   }
 }
 
+function getTranslateY(el) {
+  const tr = window.getComputedStyle(el).transform;
+  if (!tr || tr === 'none') return 0;
+  const m2 = tr.match(/matrix\(([^)]+)\)/);
+  if (m2) return parseFloat(m2[1].split(',')[5]) || 0;
+  const m3 = tr.match(/matrix3d\(([^)]+)\)/);
+  if (m3) return parseFloat(m3[1].split(',')[13]) || 0;
+  return 0;
+}
+
 function isCardActionTarget(target) {
   return !!target.closest('.menu-trigger, .copy-btn, button, a');
 }
@@ -274,18 +288,99 @@ function notifyAdminPage(page) {
   }
 }
 
-function navigateToInfo() {
+function closeInfoSheet() {
+  if (!infoSheetOverlay || infoSheetOverlay.hidden) return;
+  frame.classList.remove('is-info-sheet-open');
+  if (infoSheet) {
+    infoSheet.classList.remove('is-dragging');
+    infoSheetOverlay.classList.remove('is-open');
+    infoSheet.style.transform = 'translateY(100%)';
+  }
+  window.setTimeout(() => {
+    if (infoSheetOverlay) infoSheetOverlay.hidden = true;
+    if (infoSheet) infoSheet.style.transform = '';
+  }, 320);
+}
+
+function openInfoSheet() {
   closeMenu();
   notifyAdminPage('info');
-  window.location.assign(infoPageUrl());
+  if (!infoSheetOverlay || !infoSheet) {
+    window.location.assign(infoPageUrl());
+    return;
+  }
+  resetCarouselDrag();
+  infoSheet.style.transform = 'translateY(100%)';
+  infoSheet.classList.remove('is-dragging');
+  infoSheetOverlay.hidden = false;
+  infoSheetOverlay.classList.remove('is-open');
+  frame.classList.add('is-info-sheet-open');
+  if (window.ProfileCore && typeof window.ProfileCore.applyProfile === 'function') {
+    window.ProfileCore.applyProfile();
+  }
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      infoSheet.style.transform = '';
+      infoSheetOverlay.classList.add('is-open');
+    });
+  });
+}
+
+let infoDragState = null;
+
+function onInfoPointerDown(e) {
+  if (!infoSheet || e.button > 0) return;
+  infoDragState = {
+    pointerId: e.pointerId,
+    startY: e.clientY,
+    startTranslate: getTranslateY(infoSheet),
+  };
+  infoSheet.classList.add('is-dragging');
+  if (infoSheetDrag && infoSheetDrag.setPointerCapture) {
+    infoSheetDrag.setPointerCapture(e.pointerId);
+  }
+}
+
+function onInfoPointerMove(e) {
+  if (!infoDragState || e.pointerId !== infoDragState.pointerId || !infoSheet) return;
+  const dy = e.clientY - infoDragState.startY;
+  const next = Math.max(0, infoDragState.startTranslate + dy);
+  infoSheet.style.transform = `translateY(${next}px)`;
+}
+
+function onInfoPointerUp(e) {
+  if (!infoDragState || e.pointerId !== infoDragState.pointerId || !infoSheet) return;
+  if (infoSheetDrag && infoSheetDrag.releasePointerCapture) {
+    try { infoSheetDrag.releasePointerCapture(e.pointerId); } catch { /* ignore */ }
+  }
+  const offset = getTranslateY(infoSheet);
+  const threshold = Math.min(infoSheet.offsetHeight * 0.22, 140);
+  infoSheet.classList.remove('is-dragging');
+  infoDragState = null;
+  if (offset > threshold) {
+    closeInfoSheet();
+    return;
+  }
+  infoSheet.style.transform = 'translateY(0)';
 }
 
 if (infoNavLink) {
   infoNavLink.href = infoPageUrl();
   infoNavLink.addEventListener('click', (e) => {
     e.preventDefault();
-    navigateToInfo();
+    openInfoSheet();
   });
+}
+
+if (infoSheetBackdrop) {
+  infoSheetBackdrop.addEventListener('click', closeInfoSheet);
+}
+
+if (infoSheetDrag) {
+  infoSheetDrag.addEventListener('pointerdown', onInfoPointerDown);
+  infoSheetDrag.addEventListener('pointermove', onInfoPointerMove);
+  infoSheetDrag.addEventListener('pointerup', onInfoPointerUp);
+  infoSheetDrag.addEventListener('pointercancel', onInfoPointerUp);
 }
 
 frame.addEventListener('click', (e) => {
@@ -299,6 +394,10 @@ overlay.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && infoSheetOverlay && !infoSheetOverlay.hidden) {
+    closeInfoSheet();
+    return;
+  }
   if (e.key === 'Escape' && !overlay.hidden) closeMenu();
 });
 
