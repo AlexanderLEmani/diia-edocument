@@ -23,7 +23,7 @@
     || window.navigator.standalone === true;
 
   if ('serviceWorker' in navigator) {
-    var swUrl = BASE + 'sw.js?v=' + encodeURIComponent('33');
+    var swUrl = BASE + 'sw.js?v=' + encodeURIComponent('34');
     navigator.serviceWorker.register(swUrl).then(function (registration) {
       registration.update();
       if (registration.waiting) {
@@ -41,11 +41,17 @@
     }).catch(function () { /* ignore */ });
 
     var reloaded = false;
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
+    function reloadForSwUpdate() {
       if (reloaded) return;
+      if (!window.__authReady) {
+        window.addEventListener('auth-ready', reloadForSwUpdate, { once: true });
+        return;
+      }
       reloaded = true;
       window.location.reload();
-    });
+    }
+
+    navigator.serviceWorker.addEventListener('controllerchange', reloadForSwUpdate);
   }
 
   if (isStandalone) {

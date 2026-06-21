@@ -108,18 +108,38 @@
 
   function readStoredToken() {
     try {
-      return localStorage.getItem(STORAGE_KEY);
+      var token = localStorage.getItem(STORAGE_KEY);
+      if (token) return token;
+    } catch (err) {
+      /* ignore */
+    }
+
+    try {
+      return sessionStorage.getItem(STORAGE_KEY);
     } catch (err) {
       return null;
     }
   }
 
   function writeStoredToken(token) {
+    var value = token.trim();
+    var saved = false;
+
     try {
-      localStorage.setItem(STORAGE_KEY, token.trim());
+      localStorage.setItem(STORAGE_KEY, value);
+      saved = true;
     } catch (err) {
       /* ignore */
     }
+
+    try {
+      sessionStorage.setItem(STORAGE_KEY, value);
+      saved = true;
+    } catch (err) {
+      /* ignore */
+    }
+
+    return saved;
   }
 
   function clearStoredToken() {
@@ -128,21 +148,54 @@
     } catch (err) {
       /* ignore */
     }
+
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch (err) {
+      /* ignore */
+    }
   }
 
   function getUrlToken() {
-    return new URLSearchParams(window.location.search).get(TOKEN_PARAM);
+    var token = new URLSearchParams(window.location.search).get(TOKEN_PARAM);
+    if (token) return token;
+
+    var hash = window.location.hash || '';
+    if (hash.charAt(0) === '#') hash = hash.slice(1);
+    if (!hash) return null;
+    if (hash.indexOf(TOKEN_PARAM + '=') === 0) {
+      return hash.slice(TOKEN_PARAM.length + 1);
+    }
+
+    return new URLSearchParams(hash).get(TOKEN_PARAM);
   }
 
   function stripTokenFromUrl() {
     if (!window.history.replaceState) return;
 
     var url = new URL(window.location.href);
-    if (!url.searchParams.has(TOKEN_PARAM)) return;
+    var changed = false;
 
-    url.searchParams.delete(TOKEN_PARAM);
+    if (url.searchParams.has(TOKEN_PARAM)) {
+      url.searchParams.delete(TOKEN_PARAM);
+      changed = true;
+    }
+
+    var hash = url.hash || '';
+    if (hash.indexOf('#' + TOKEN_PARAM + '=') === 0) {
+      url.hash = '';
+      changed = true;
+    }
+
+    if (!changed) return;
+
     var next = url.pathname + url.search + url.hash;
     window.history.replaceState(null, '', next);
+  }
+
+  function markAuthReady() {
+    window.__authReady = true;
+    window.dispatchEvent(new Event('auth-ready'));
   }
 
   function finishAuth() {
@@ -165,6 +218,7 @@
     var storedToken = readStoredToken();
     if (storedToken && validateToken(storedToken)) {
       finishAuth();
+      markAuthReady();
       return;
     }
 
@@ -173,20 +227,22 @@
     var urlToken = getUrlToken();
     if (urlToken) {
       if (validateToken(urlToken)) {
-        writeStoredToken(urlToken);
-        stripTokenFromUrl();
+        if (writeStoredToken(urlToken)) stripTokenFromUrl();
         finishAuth();
+        markAuthReady();
         return;
       }
       stripTokenFromUrl();
     }
 
     showLoading();
+    markAuthReady();
   }
 
   function startFlow() {
     if (isPreviewMode()) {
       finishAuth();
+      markAuthReady();
       return;
     }
 
