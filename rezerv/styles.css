@@ -201,6 +201,14 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   transform: rotateY(180deg);
 }
 
+.id-card-flip:not(.is-flipped) .id-card-back {
+  pointer-events: none;
+}
+
+.id-card-flip.is-flipped .id-card-front {
+  pointer-events: none;
+}
+
 .id-card-back-inner {
   display: flex;
   flex-direction: column;

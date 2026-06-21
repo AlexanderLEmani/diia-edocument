@@ -63,7 +63,6 @@
   });
 
   var cardFlip = document.getElementById('idCardFlip');
-  var cardBack = document.getElementById('idCardBack');
   var cardFlipped = false;
 
   function flipCard(toBack) {
@@ -74,14 +73,13 @@
   if (cardFlip) {
     cardFlip.addEventListener('click', function (e) {
       if (e.target.closest('#openSheet') || e.target.closest('.id-fab')) return;
-      if (cardFlipped) return;
-      flipCard(true);
-    });
-  }
 
-  if (cardBack) {
-    cardBack.addEventListener('click', function () {
-      flipCard(false);
+      if (cardFlipped) {
+        flipCard(false);
+        return;
+      }
+
+      flipCard(true);
     });
   }
 
