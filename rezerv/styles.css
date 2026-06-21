@@ -183,6 +183,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 /* ── Card flip ── */
 .id-card-flip {
   perspective: 900px;
+  -webkit-perspective: 900px;
   width: 360px;
   max-width: calc(100vw - 32px);
   flex-shrink: 0;
@@ -191,38 +192,13 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 .id-card-flip-inner {
   position: relative;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
 }
 
 .id-card-flip.is-flipped .id-card-flip-inner {
   transform: rotateY(180deg);
-}
-
-.id-card-front,
-.id-card-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  width: 100%;
-}
-
-.id-card-front {
-  position: relative;
-}
-
-.id-card-back {
-  position: absolute;
-  inset: 0;
-  transform: rotateY(180deg);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: #fff;
-  border: 1.65px solid #d0cdc2;
-  border-radius: 16px;
-  box-sizing: border-box;
 }
 
 .id-card-back-inner {
@@ -282,7 +258,6 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 }
 
 .id-card {
-  position: relative;
   border: 1.65px solid #2a2a2a;
   border-radius: 16px;
   background: #EBE8DA;
@@ -488,6 +463,33 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(245, 130, 32, 0.35);
+}
+
+/* Flip faces — after .id-card so position/background aren't overridden */
+.id-card.id-card-front,
+.id-card.id-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  width: 100%;
+}
+
+.id-card.id-card-front {
+  position: relative;
+  transform: translateZ(1px);
+  cursor: pointer;
+}
+
+.id-card.id-card-back {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  padding: 0;
+  transform: rotateY(180deg) translateZ(1px);
+  background: #fff;
+  border-color: #d0cdc2;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ── Services ── */
