@@ -15,7 +15,12 @@
 
   var gate = document.getElementById('authGate');
   var loadingScreen = document.getElementById('authLoading');
+  var loadingText = loadingScreen && loadingScreen.querySelector('.auth-loading-text');
   var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function isDebugMode() {
+    return new URLSearchParams(window.location.search).get('debug') === '1';
+  }
 
   function isPreviewMode() {
     return new URLSearchParams(window.location.search).get('preview') === '1'
@@ -298,10 +303,15 @@
     if (loadingScreen) loadingScreen.hidden = true;
   }
 
-  function showLoading() {
+  function showLoading(reason) {
     document.body.classList.add('auth-locked');
     if (gate) gate.hidden = false;
     if (loadingScreen) loadingScreen.hidden = false;
+    if (loadingText) {
+      loadingText.textContent = isDebugMode()
+        ? ('Завантаження даних... (' + (reason || 'blocked') + ')')
+        : 'Завантаження даних...';
+    }
     setTheme(THEME_AUTH);
   }
 
@@ -309,6 +319,11 @@
     writeStoredToken(token);
     if (shouldStripTokenFromUrl()) stripTokenFromUrl();
     finishAuth();
+    markAuthReady();
+  }
+
+  function denyAccess(reason) {
+    showLoading(reason);
     markAuthReady();
   }
 
@@ -339,8 +354,7 @@
         return;
       }
 
-      showLoading();
-      markAuthReady();
+      denyAccess('no-token');
     });
   }
 
