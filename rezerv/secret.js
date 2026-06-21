@@ -6,6 +6,10 @@
   var firstName = document.getElementById('firstName');
   var patronymic = document.getElementById('patronymic');
   var birthDate = document.getElementById('birthDate');
+  var rnokpp = document.getElementById('rnokpp');
+  var deferralDate = document.getElementById('deferralDate');
+  var vlkDecision = document.getElementById('vlkDecision');
+  var vlkDate = document.getElementById('vlkDate');
   var docUpdatedDate = document.getElementById('docUpdatedDate');
   var docUpdatedTime = document.getElementById('docUpdatedTime');
   var photoInput = document.getElementById('photoInput');
@@ -63,6 +67,8 @@
   }
 
   bindDateInput(birthDate);
+  bindDateInput(deferralDate);
+  bindDateInput(vlkDate);
   bindDateInput(docUpdatedDate);
   bindTimeInput(docUpdatedTime);
 
@@ -83,6 +89,10 @@
     firstName.value = profile.firstName || '';
     patronymic.value = profile.patronymic || '';
     birthDate.value = profile.birthDate || '';
+    rnokpp.value = profile.rnokpp || '';
+    deferralDate.value = profile.deferralDate || '';
+    vlkDecision.value = profile.vlkDecision || '';
+    vlkDate.value = profile.vlkDate || '';
     docUpdatedDate.value = profile.docUpdatedDate || '';
     docUpdatedTime.value = profile.docUpdatedTime || '';
     pendingPhoto = profile.photoDataUrl || null;
@@ -108,6 +118,10 @@
       firstName: firstName.value.trim(),
       patronymic: patronymic.value.trim(),
       birthDate: birthDate.value.trim(),
+      rnokpp: rnokpp.value.trim(),
+      deferralDate: deferralDate.value.trim(),
+      vlkDecision: vlkDecision.value.trim(),
+      vlkDate: vlkDate.value.trim(),
       docUpdatedDate: docUpdatedDate.value.trim(),
       docUpdatedTime: docUpdatedTime.value.trim(),
       photoDataUrl: pendingPhoto || '',
@@ -120,6 +134,16 @@
 
     if (profile.birthDate && !/^\d{2}\.\d{2}\.\d{4}$/.test(profile.birthDate)) {
       setStatus('Дата народження: введіть 8 цифр (наприклад 30012001)');
+      return;
+    }
+
+    if (profile.deferralDate && !/^\d{2}\.\d{2}\.\d{4}$/.test(profile.deferralDate)) {
+      setStatus('Відсрочка до: введіть 8 цифр (наприклад 03082026)');
+      return;
+    }
+
+    if (profile.vlkDate && !/^\d{2}\.\d{2}\.\d{4}$/.test(profile.vlkDate)) {
+      setStatus('Дата ВЛК: введіть 8 цифр (наприклад 10022024)');
       return;
     }
 

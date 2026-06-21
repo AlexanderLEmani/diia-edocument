@@ -137,6 +137,11 @@
       setField('rezerv-doc-birth', profile.birthDate);
     }
 
+    if (profile.rnokpp) setField('rezerv-doc-rnokpp', profile.rnokpp);
+    if (profile.deferralDate) setField('rezerv-doc-deferral', profile.deferralDate);
+    if (profile.vlkDecision) setField('rezerv-doc-vlk', profile.vlkDecision);
+    if (profile.vlkDate) setField('rezerv-doc-vlk-date', profile.vlkDate);
+
     if (profile.photoDataUrl) applyPhoto(profile.photoDataUrl);
     else applyPhoto('');
 

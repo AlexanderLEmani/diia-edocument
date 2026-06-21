@@ -347,6 +347,30 @@
       defaultText: '3638805490',
       defaultStyles: { fontSize: '16px', fontWeight: '500' },
     }),
+    item('rezerv-doc-deferral-lbl', 'rezerv-doc', 'Підпис «Відсрочка до»', {
+      defaultText: 'Відсрочка до:',
+      defaultStyles: { fontSize: '14px', fontWeight: '400', color: '#6B6B6B' },
+    }),
+    item('rezerv-doc-deferral', 'rezerv-doc', 'Відсрочка до — значення', {
+      defaultText: '03.08.2026',
+      defaultStyles: { fontSize: '16px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-vlk-lbl', 'rezerv-doc', 'Підпис «Постанова ВЛК»', {
+      defaultText: 'Постанова ВЛК:',
+      defaultStyles: { fontSize: '14px', fontWeight: '400', color: '#6B6B6B' },
+    }),
+    item('rezerv-doc-vlk', 'rezerv-doc', 'Постанова ВЛК — значення', {
+      defaultText: 'Придатний',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
+    item('rezerv-doc-vlk-date-lbl', 'rezerv-doc', 'Підпис «Дата ВЛК»', {
+      defaultText: 'Дата ВЛК:',
+      defaultStyles: { fontSize: '14px', fontWeight: '400', color: '#6B6B6B' },
+    }),
+    item('rezerv-doc-vlk-date', 'rezerv-doc', 'Дата ВЛК — значення', {
+      defaultText: '10.02.2024',
+      defaultStyles: { fontSize: '15px', fontWeight: '500' },
+    }),
     item('rezerv-doc-tcc', 'rezerv-doc', 'ТЦК та СП', {
       defaultText: 'Шевченківський районний у місті Дніпро ТЦК та СП',
       defaultStyles: { fontSize: '15px', fontWeight: '500' },

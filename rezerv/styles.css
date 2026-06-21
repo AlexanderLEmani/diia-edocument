@@ -1002,6 +1002,17 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   color: #000;
 }
 
+.doc-block--sm {
+  padding: 12px 16px;
+}
+
+.doc-field--inline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .doc-block--status {
   margin-bottom: 8px;
 }
