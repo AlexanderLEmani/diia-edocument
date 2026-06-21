@@ -50,7 +50,7 @@ html.standalone-mode .pwa-install-banner {
 }
 
 html.standalone-mode .bottom-nav {
-  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
 }
 
 html.standalone-mode .screen {
