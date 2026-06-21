@@ -100,6 +100,7 @@ let startX = 0;
 let isDragging = false;
 let dragOffset = 0;
 let slideStride = 0;
+let suppressCardFlip = false;
 
 function layoutSlides() {
   const viewport = carousel.clientWidth;
@@ -164,6 +165,7 @@ function onDragStart(x) {
 function onDragMove(x) {
   if (!isDragging) return;
   dragOffset = x - startX;
+  if (Math.abs(dragOffset) > 8) suppressCardFlip = true;
   clampDragOffset();
   updateCarousel(false);
 }
@@ -216,14 +218,24 @@ carousel.addEventListener('pointermove', (e) => {
 });
 
 function onCarouselPointerEnd(e) {
+  suppressCardFlip = Math.abs(dragOffset) > 8;
   onDragEnd();
   if (carouselCaptureId != null && e.pointerId === carouselCaptureId) {
     releaseCarouselCapture();
   }
+  window.setTimeout(() => { suppressCardFlip = false; }, 80);
 }
 
 carousel.addEventListener('pointerup', onCarouselPointerEnd);
 carousel.addEventListener('pointercancel', onCarouselPointerEnd);
+
+carouselTrack.addEventListener('click', (e) => {
+  const card = e.target.closest('.doc-card');
+  if (!card) return;
+  if (suppressCardFlip || !overlay.hidden) return;
+  if (e.target.closest('.menu-trigger, .copy-btn, button, a')) return;
+  card.classList.toggle('is-flipped');
+});
 
 window.addEventListener('resize', () => {
   layoutSlides();
