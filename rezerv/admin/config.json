@@ -189,6 +189,28 @@
         "paddingTop": "18px"
       }
     },
+    "rezerv-qr-label": {
+      "text": "QR-код дійсний до 20 червня 2027",
+      "styles": {
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "1.3",
+        "color": "#555"
+      }
+    },
+    "rezerv-qr-image": {
+      "text": "",
+      "styles": {
+        "width": "220px",
+        "maxWidth": "240px"
+      }
+    },
+    "rezerv-qr-wrap": {
+      "text": "",
+      "styles": {
+        "gap": "16px"
+      }
+    },
     "rezerv-notify-text": {
       "text": "Сповіщення",
       "styles": {

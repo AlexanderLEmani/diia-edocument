@@ -177,6 +177,23 @@
       defaultStyles: { paddingTop: '18px' },
       styles: ['paddingTop', 'paddingBottom', 'gap'],
     }),
+    item('rezerv-qr-label', 'rezerv-id', 'QR — підпис', {
+      defaultText: 'QR-код дійсний до 20 червня 2027',
+      defaultStyles: { fontSize: '13px', fontWeight: '500', lineHeight: '1.3', color: '#555' },
+      styles: ['fontSize', 'fontWeight', 'lineHeight', 'color', 'translateX', 'translateY', 'marginTop', 'marginBottom'],
+    }),
+    item('rezerv-qr-image', 'rezerv-id', 'QR — розмір', {
+      text: false,
+      resizable: true,
+      resizeMin: { width: 120, height: 120 },
+      defaultStyles: { width: '220px', maxWidth: '240px' },
+      styles: ['width', 'maxWidth', 'height', 'translateX', 'translateY', 'marginTop', 'marginBottom'],
+    }),
+    item('rezerv-qr-wrap', 'rezerv-id', 'QR — блок — gap', {
+      text: false,
+      defaultStyles: { gap: '16px' },
+      styles: ['gap', 'paddingTop', 'paddingBottom', 'translateX', 'translateY'],
+    }),
     item('rezerv-notify-text', 'rezerv-id', 'Кнопка сповіщень — текст', {
       defaultText: 'Сповіщення',
       defaultStyles: { fontSize: '14px', fontWeight: '500' },

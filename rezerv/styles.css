@@ -231,12 +231,13 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 }
 
 .id-qr-image {
-  width: 100%;
+  width: 220px;
   max-width: 240px;
   height: auto;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
+  object-fit: contain;
 }
 
 .id-card-stage {
