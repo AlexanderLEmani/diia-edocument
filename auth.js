@@ -2,10 +2,10 @@
   'use strict';
 
   var PIN_CODE = '1245';
-  var STORAGE_KEY = 'rezerv-unlocked-' + PIN_CODE;
-  var LEGACY_STORAGE_KEYS = ['rezerv-unlocked', 'rezerv-unlocked-142536'];
-  var THEME_DEFAULT = '#E5E2D3';
-  var THEME_SPLASH = '#262422';
+  var STORAGE_KEY = 'diia-unlocked-' + PIN_CODE;
+  var LEGACY_STORAGE_KEYS = ['diia-unlocked', 'diia-unlocked-0606'];
+  var THEME_DEFAULT = '#000000';
+  var THEME_AUTH = '#A9D2EA';
 
   var gate = document.getElementById('authGate');
   var splash = document.getElementById('authSplash');
@@ -24,6 +24,13 @@
 
   function setTheme(color) {
     if (themeMeta) themeMeta.setAttribute('content', color);
+  }
+
+  function randomSplashDelay() {
+    var r = Math.random();
+    if (r < 0.45) return 550 + Math.floor(Math.random() * 650);
+    if (r < 0.85) return 1200 + Math.floor(Math.random() * 1400);
+    return 2800 + Math.floor(Math.random() * 1900);
   }
 
   function isUnlocked() {
@@ -60,13 +67,13 @@
     if (gate) gate.hidden = false;
     if (splash) splash.hidden = false;
     if (pinScreen) pinScreen.hidden = true;
-    setTheme(THEME_SPLASH);
+    setTheme(THEME_AUTH);
   }
 
   function showPin() {
     if (splash) splash.hidden = true;
     if (pinScreen) pinScreen.hidden = false;
-    setTheme(THEME_DEFAULT);
+    setTheme(THEME_AUTH);
     resetPin();
   }
 
@@ -78,8 +85,7 @@
 
   function updateDots() {
     if (!dotsEl) return;
-    var dots = dotsEl.querySelectorAll('.auth-dot');
-    dots.forEach(function (dot, index) {
+    dotsEl.querySelectorAll('.auth-dot').forEach(function (dot, index) {
       dot.classList.toggle('is-on', index < entered.length);
     });
   }
@@ -87,18 +93,7 @@
   function pinError() {
     if (!dotsEl) return;
     dotsEl.classList.add('is-error');
-    setTimeout(function () {
-      resetPin();
-    }, 450);
-  }
-
-  function handleKey(value) {
-    if (value === 'back') {
-      popDigit();
-      return;
-    }
-    if (value === 'face') return;
-    pushDigit(value);
+    setTimeout(resetPin, 450);
   }
 
   function pushDigit(digit) {
@@ -118,10 +113,18 @@
     if (dotsEl) dotsEl.classList.remove('is-error');
   }
 
+  function handleKey(value) {
+    if (value === 'back') {
+      popDigit();
+      return;
+    }
+    if (value === 'face') return;
+    pushDigit(value);
+  }
+
   function bindKeypad() {
     if (!keypad || keypadBound) return;
     keypadBound = true;
-
     keypad.querySelectorAll('[data-key]').forEach(function (key) {
       function pressOn() {
         key.classList.add('is-pressed');
@@ -157,11 +160,10 @@
     bindKeypad();
     showSplash();
 
-    var delay = 1000 + Math.floor(Math.random() * 2001);
     splashTimer = setTimeout(function () {
       if (isUnlocked()) finishAuth();
       else showPin();
-    }, delay);
+    }, randomSplashDelay());
   }
 
   if (document.readyState === 'loading') {
