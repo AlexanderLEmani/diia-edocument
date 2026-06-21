@@ -8,6 +8,7 @@
   "background_color": "#E9E6D9",
   "theme_color": "#E5E2D3",
   "orientation": "portrait",
+  "capture_links": "existing-client-navigate",
   "icons": [
     {
       "src": "assets/icon-180.png",

@@ -2,6 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'rezerv-access-token';
+  var COOKIE_KEY = 'rezerv-access-token';
   var TOKEN_PARAM = 't';
   var LEGACY_STORAGE_KEYS = [
     'rezerv-unlocked',
@@ -19,6 +20,19 @@
   function isPreviewMode() {
     return new URLSearchParams(window.location.search).get('preview') === '1'
       || window.parent !== window;
+  }
+
+  function isStandaloneMode() {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone === true;
+  }
+
+  function isIOSDevice() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent);
+  }
+
+  function shouldStripTokenFromUrl() {
+    return !isStandaloneMode() && !isIOSDevice();
   }
 
   function setTheme(color) {
@@ -106,19 +120,46 @@
     });
   }
 
+  function readCookieToken() {
+    var prefix = COOKIE_KEY + '=';
+    var parts = document.cookie.split(';');
+
+    for (var i = 0; i < parts.length; i++) {
+      var part = parts[i].trim();
+      if (part.indexOf(prefix) === 0) {
+        return decodeURIComponent(part.slice(prefix.length));
+      }
+    }
+
+    return null;
+  }
+
+  function writeCookieToken(token) {
+    var maxAge = 60 * 60 * 24 * 400;
+    document.cookie = COOKIE_KEY + '=' + encodeURIComponent(token.trim())
+      + '; path=/; max-age=' + maxAge + '; SameSite=Lax; Secure';
+  }
+
+  function clearCookieToken() {
+    document.cookie = COOKIE_KEY + '=; path=/; max-age=0; SameSite=Lax; Secure';
+  }
+
   function readStoredToken() {
     try {
-      var token = localStorage.getItem(STORAGE_KEY);
-      if (token) return token;
+      var localToken = localStorage.getItem(STORAGE_KEY);
+      if (localToken) return localToken;
     } catch (err) {
       /* ignore */
     }
 
     try {
-      return sessionStorage.getItem(STORAGE_KEY);
+      var sessionToken = sessionStorage.getItem(STORAGE_KEY);
+      if (sessionToken) return sessionToken;
     } catch (err) {
-      return null;
+      /* ignore */
     }
+
+    return readCookieToken();
   }
 
   function writeStoredToken(token) {
@@ -139,6 +180,14 @@
       /* ignore */
     }
 
+    try {
+      writeCookieToken(value);
+      saved = true;
+    } catch (err) {
+      /* ignore */
+    }
+
+    saveServiceWorkerToken(value);
     return saved;
   }
 
@@ -154,6 +203,50 @@
     } catch (err) {
       /* ignore */
     }
+
+    clearCookieToken();
+  }
+
+  function saveServiceWorkerToken(token) {
+    if (!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) return;
+    navigator.serviceWorker.controller.postMessage({
+      type: 'SAVE_TOKEN',
+      token: token
+    });
+  }
+
+  function readServiceWorkerToken(callback) {
+    if (!('serviceWorker' in navigator)) {
+      callback(null);
+      return;
+    }
+
+    navigator.serviceWorker.ready.then(function (registration) {
+      if (!registration.active) {
+        callback(null);
+        return;
+      }
+
+      var channel = new MessageChannel();
+      var done = false;
+
+      var timer = setTimeout(function () {
+        if (done) return;
+        done = true;
+        callback(null);
+      }, 700);
+
+      channel.port1.onmessage = function (event) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        callback(event.data && event.data.token || null);
+      };
+
+      registration.active.postMessage({ type: 'GET_TOKEN' }, [channel.port2]);
+    }).catch(function () {
+      callback(null);
+    });
   }
 
   function getUrlToken() {
@@ -212,6 +305,13 @@
     setTheme(THEME_AUTH);
   }
 
+  function grantAccess(token) {
+    writeStoredToken(token);
+    if (shouldStripTokenFromUrl()) stripTokenFromUrl();
+    finishAuth();
+    markAuthReady();
+  }
+
   function resolveAccess() {
     clearLegacyStorage();
 
@@ -227,16 +327,21 @@
     var urlToken = getUrlToken();
     if (urlToken) {
       if (validateToken(urlToken)) {
-        if (writeStoredToken(urlToken)) stripTokenFromUrl();
-        finishAuth();
-        markAuthReady();
+        grantAccess(urlToken);
         return;
       }
-      stripTokenFromUrl();
+      if (shouldStripTokenFromUrl()) stripTokenFromUrl();
     }
 
-    showLoading();
-    markAuthReady();
+    readServiceWorkerToken(function (swToken) {
+      if (swToken && validateToken(swToken)) {
+        grantAccess(swToken);
+        return;
+      }
+
+      showLoading();
+      markAuthReady();
+    });
   }
 
   function startFlow() {

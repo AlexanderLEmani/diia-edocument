@@ -1,5 +1,7 @@
-const CACHE = 'rezerv-v46';
-const SW_VERSION = '34';
+const CACHE = 'rezerv-v47';
+const SW_VERSION = '35';
+const AUTH_CACHE = 'rezerv-auth-token-v1';
+const AUTH_CACHE_KEY = '/__rezerv-auth-token';
 
 const ASSETS = [
   './',
@@ -112,6 +114,37 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('message', (event) => {
+  const data = event.data || {};
+
+  if (data.type === 'SAVE_TOKEN' && data.token) {
+    event.waitUntil(
+      caches.open(AUTH_CACHE).then((cache) =>
+        cache.put(AUTH_CACHE_KEY, new Response(String(data.token)))
+      )
+    );
+    return;
+  }
+
+  if (data.type === 'GET_TOKEN') {
+    const port = event.ports && event.ports[0];
+    if (!port) return;
+
+    caches.open(AUTH_CACHE).then((cache) => cache.match(AUTH_CACHE_KEY))
+      .then((response) => {
+        if (!response) {
+          port.postMessage({ token: null });
+          return null;
+        }
+        return response.text();
+      })
+      .then((token) => {
+        if (token === null) return;
+        port.postMessage({ token: token || null });
+      })
+      .catch(() => port.postMessage({ token: null }));
+    return;
+  }
+
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
