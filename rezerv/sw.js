@@ -1,15 +1,18 @@
-const CACHE = 'rezerv-v47';
-const SW_VERSION = '35';
+const CACHE = 'rezerv-v48';
+const SW_VERSION = '36';
 const AUTH_CACHE = 'rezerv-auth-token-v1';
 const AUTH_CACHE_KEY = '/__rezerv-auth-token';
 
 const ASSETS = [
   './',
   './index.html',
+  './secret.html',
   './styles.css',
+  './secret.css',
   './auth.css',
   './auth.js',
   './app.js',
+  './secret.js',
   './ticker.js',
   './pwa.js',
   './pwa.css',

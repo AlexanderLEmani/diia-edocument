@@ -23,7 +23,7 @@
     || window.navigator.standalone === true;
 
   if ('serviceWorker' in navigator) {
-    var swUrl = BASE + 'sw.js?v=' + encodeURIComponent('35');
+    var swUrl = BASE + 'sw.js?v=' + encodeURIComponent('36');
     navigator.serviceWorker.register(swUrl).then(function (registration) {
       registration.update();
       if (registration.waiting) {
