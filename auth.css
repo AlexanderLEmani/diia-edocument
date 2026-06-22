@@ -125,9 +125,10 @@ body.auth-locked .screen {
 }
 
 .auth-brand-icon--trident {
-  background: none;
-  border: 0;
-  padding: 0;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
+  border: 3px solid #000;
 }
 
 .auth-pin-layer {
