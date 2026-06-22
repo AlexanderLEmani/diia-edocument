@@ -3,7 +3,7 @@
   "short_name": "Резерв+",
   "description": "Резерв ID",
   "start_url": "/rezerv/?t=dXNlcjQxMjoyMDI2LTA3",
-  "id": "/rezerv/?t=dXNlcjQxMjoyMDI2LTA3",
+  "id": "/rezerv/",
   "scope": "/rezerv/",
   "display": "standalone",
   "background_color": "#E9E6D9",

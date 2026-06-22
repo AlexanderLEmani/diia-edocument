@@ -1,4 +1,4 @@
-var CACHE = 'diia-v1';
+var CACHE = 'diia-v2';
 var AUTH_CACHE = 'diia-auth-token-v1';
 var AUTH_CACHE_KEY = '/__diia-auth-token';
 

@@ -3,7 +3,7 @@
   "short_name": "Дія",
   "description": "єДокумент",
   "start_url": "/?t=dXNlcjQxMjoyMDI2LTA3",
-  "id": "/?t=dXNlcjQxMjoyMDI2LTA3",
+  "id": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
@@ -21,13 +21,13 @@
       "src": "/assets/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/assets/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
