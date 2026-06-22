@@ -31,6 +31,7 @@
   ];
 
   var PAGES = [
+    { id: 'auth-splash', label: 'Привітствие', previewPath: '/?preview=1&auth=splash' },
     { id: 'index-docs', label: 'Документи', previewPath: '/?preview=1' },
     { id: 'index-feed', label: 'Стрічка', previewPath: '/?preview=1#feed' },
     { id: 'info', label: 'Повна інформація', previewPath: '/info?preview=1' },
@@ -46,6 +47,8 @@
       text: opts.text !== false,
       html: !!opts.html,
       multiline: !!opts.multiline,
+      image: !!opts.image,
+      defaultImage: opts.defaultImage || '',
       styles: opts.styles || STYLE_PROPS.map(function (p) { return p.key; }),
       defaults: {
         text: opts.defaultText != null ? opts.defaultText : '',
@@ -55,6 +58,13 @@
   }
 
   var SCHEMA = [
+    item('auth-trident', 'auth-splash', 'Привітствие — герб (зображення)', {
+      text: false,
+      image: true,
+      defaultImage: 'assets/auth-trident.png',
+      styles: ['width', 'height'],
+      defaultStyles: { width: '67px', height: '67px' },
+    }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
       defaultText: 'єДокумент',
       defaultStyles: { fontSize: '24px', fontWeight: '600', letterSpacing: '0.01em', lineHeight: '1.12', paddingTop: '30px', paddingBottom: '24px' },
@@ -599,6 +609,7 @@
       if (!result.elements[id]) result.elements[id] = { text: '', styles: {} };
       var src = override.elements[id];
       if (src.text != null) result.elements[id].text = src.text;
+      if (src.imageDataUrl != null) result.elements[id].imageDataUrl = src.imageDataUrl;
       if (src.styles) {
         result.elements[id].styles = Object.assign({}, result.elements[id].styles, src.styles);
       }
@@ -692,6 +703,13 @@
     if (!nodes.length) return false;
 
     nodes.forEach(function (el) {
+      if (schemaItem.image) {
+        var img = el.tagName === 'IMG' ? el : el.querySelector('img');
+        if (img) {
+          if (data.imageDataUrl) img.src = data.imageDataUrl;
+          else if (schemaItem.defaultImage) img.src = schemaItem.defaultImage;
+        }
+      }
       if (schemaItem.text !== false && data.text != null) {
         if (schemaItem.html) el.innerHTML = data.text;
         else el.textContent = data.text;
@@ -708,6 +726,38 @@
       if (map[id] && applyItem(id, config.elements[id], map[id])) applied++;
     });
     return applied;
+  }
+
+  function readImageDataUrl(file, maxSize) {
+    maxSize = maxSize || 512;
+    return new Promise(function (resolve, reject) {
+      if (!file || !file.type || file.type.indexOf('image/') !== 0) {
+        reject(new Error('Not an image'));
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function () {
+        var img = new Image();
+        img.onload = function () {
+          var w = img.width;
+          var h = img.height;
+          var scale = Math.min(1, maxSize / Math.max(w, h));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.round(w * scale);
+          canvas.height = Math.round(h * scale);
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          var mime = file.type === 'image/png' || file.type === 'image/webp'
+            ? file.type
+            : 'image/jpeg';
+          resolve(canvas.toDataURL(mime, mime === 'image/jpeg' ? 0.92 : undefined));
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   function exportConfigJson(config) {
@@ -743,6 +793,7 @@
     loadConfig: loadConfig,
     loadConfigSync: loadConfigSync,
     applyConfig: applyConfig,
+    readImageDataUrl: readImageDataUrl,
     exportConfigJson: exportConfigJson,
     downloadConfig: downloadConfig,
   };

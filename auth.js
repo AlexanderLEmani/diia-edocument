@@ -457,6 +457,11 @@
 
   function startFlow() {
     if (isPreviewMode()) {
+      if (new URLSearchParams(window.location.search).get('auth') === 'splash') {
+        showSplash();
+        markAuthReady();
+        return;
+      }
       finishAuth();
       markAuthReady();
       return;

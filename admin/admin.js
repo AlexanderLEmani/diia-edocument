@@ -365,9 +365,74 @@
       });
 
       body.appendChild(stylesGrid);
+
+      if (schemaItem.image) {
+        body.appendChild(renderImageField(schemaItem, data, idPrefix));
+      }
+
       details.appendChild(body);
       container.appendChild(details);
     });
+  }
+
+  function renderImageField(schemaItem, data, idPrefix) {
+    var wrap = document.createElement('div');
+    wrap.className = 'admin-field admin-image-field';
+
+    var label = document.createElement('label');
+    label.textContent = 'Зображення';
+    wrap.appendChild(label);
+
+    var preview = document.createElement('div');
+    preview.className = 'admin-image-preview';
+    var previewImg = document.createElement('img');
+    previewImg.alt = '';
+    previewImg.src = data.imageDataUrl || schemaItem.defaultImage || '';
+    preview.appendChild(previewImg);
+    wrap.appendChild(preview);
+
+    var actions = document.createElement('div');
+    actions.className = 'admin-image-actions';
+
+    var fileLabel = document.createElement('label');
+    fileLabel.className = 'admin-btn admin-btn--ghost admin-file-label';
+    fileLabel.textContent = 'Завантажити';
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.id = idPrefix + 'image-' + schemaItem.id;
+    fileInput.accept = 'image/png,image/jpeg,image/webp,image/svg+xml';
+    fileInput.hidden = true;
+    fileLabel.appendChild(fileInput);
+
+    var clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'admin-btn admin-btn--ghost';
+    clearBtn.textContent = 'Скинути';
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      AdminCore.readImageDataUrl(file, 512).then(function (dataUrl) {
+        config.elements[schemaItem.id].imageDataUrl = dataUrl;
+        previewImg.src = dataUrl;
+        onConfigChange();
+      }).catch(function () {
+        showToast('Не вдалося прочитати зображення');
+      });
+      fileInput.value = '';
+    });
+
+    clearBtn.addEventListener('click', function () {
+      delete config.elements[schemaItem.id].imageDataUrl;
+      previewImg.src = schemaItem.defaultImage || '';
+      onConfigChange();
+    });
+
+    actions.appendChild(fileLabel);
+    actions.appendChild(clearBtn);
+    wrap.appendChild(actions);
+
+    return wrap;
   }
 
   function syncLinkedFields(fieldKey, value, source) {
