@@ -59,6 +59,12 @@
   }
 
   var SCHEMA = [
+    item('auth-icon-trident', 'auth-splash', 'Герб — ширина і висота', {
+      text: false,
+      styles: ['width', 'height'],
+      styleUnits: { width: 'px', height: 'px' },
+      defaultStyles: { width: '67px', height: '67px' },
+    }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
       defaultText: 'єДокумент',
       defaultStyles: { fontSize: '24px', fontWeight: '600', letterSpacing: '0.01em', lineHeight: '1.12', paddingTop: '30px', paddingBottom: '24px' },
@@ -594,9 +600,18 @@
 
   function migrateAuthSplash(config) {
     if (!config || !config.elements) return config;
-    ['auth-trident', 'auth-icon-diia', 'auth-icon-trident', 'auth-brand-row'].forEach(function (id) {
+    ['auth-trident', 'auth-icon-diia', 'auth-brand-row'].forEach(function (id) {
       delete config.elements[id];
     });
+    var trident = config.elements['auth-icon-trident'];
+    if (trident && trident.styles) {
+      if (trident.styles.width && String(trident.styles.width).indexOf('%') !== -1) {
+        trident.styles.width = '67px';
+      }
+      if (trident.styles.height && String(trident.styles.height).indexOf('%') !== -1) {
+        trident.styles.height = '67px';
+      }
+    }
     return config;
   }
 
@@ -675,7 +690,7 @@
     return key.replace(/[A-Z]/g, function (m) { return '-' + m.toLowerCase(); });
   }
 
-  function applyStyles(el, styles) {
+  function applyStyles(el, styles, schemaItem) {
     if (!el || !styles) return;
     var tx = styles.translateX;
     var ty = styles.translateY;
@@ -684,6 +699,12 @@
       if (key === 'translateX' || key === 'translateY') return;
       var val = styles[key];
       if (val == null || val === '') return;
+      if (schemaItem && schemaItem.styleUnits && schemaItem.styleUnits[key]) {
+        var unit = schemaItem.styleUnits[key];
+        var parsed = parseFloat(val);
+        el.style.setProperty(cssProp(key), String(val).indexOf(unit) !== -1 ? val : parsed + unit);
+        return;
+      }
       if (typeof val === 'string' && (val.indexOf('%') !== -1 || val.indexOf('/') !== -1)) {
         el.style.setProperty(cssProp(key), val);
         return;
@@ -727,7 +748,7 @@
         if (schemaItem.html) el.innerHTML = data.text;
         else el.textContent = data.text;
       }
-      applyStyles(el, data.styles);
+      applyStyles(el, data.styles, schemaItem);
     });
     return true;
   }
