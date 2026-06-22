@@ -27,6 +27,26 @@
   var keypadBound = false;
   var accessGranted = false;
 
+  function lockAuthTridentIcon() {
+    var img = document.getElementById('authTridentImg')
+      || document.querySelector('.auth-brand-icon--trident img');
+    if (!img || !window.AUTH_TRIDENT_DATA_URI) return;
+    img.src = window.AUTH_TRIDENT_DATA_URI;
+    img.style.removeProperty('width');
+    img.style.removeProperty('height');
+    img.style.removeProperty('background');
+    img.style.removeProperty('background-color');
+    var box = img.closest('.auth-brand-icon--trident');
+    if (box) {
+      box.style.removeProperty('width');
+      box.style.removeProperty('height');
+      box.style.removeProperty('background');
+      box.style.removeProperty('background-color');
+    }
+  }
+
+  window.lockAuthTridentIcon = lockAuthTridentIcon;
+
   function isDebugMode() {
     return new URLSearchParams(window.location.search).get('debug') === '1';
   }
@@ -296,6 +316,7 @@
   }
 
   function showSplash() {
+    lockAuthTridentIcon();
     document.body.classList.add('auth-locked');
     if (gate) gate.hidden = false;
     if (loadingScreen) loadingScreen.hidden = true;
@@ -474,8 +495,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startFlow);
+    document.addEventListener('DOMContentLoaded', function () {
+      lockAuthTridentIcon();
+      startFlow();
+    });
   } else {
+    lockAuthTridentIcon();
     startFlow();
   }
 })();

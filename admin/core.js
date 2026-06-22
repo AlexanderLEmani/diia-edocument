@@ -59,12 +59,6 @@
   }
 
   var SCHEMA = [
-    item('auth-trident', 'auth-splash', 'Привітствие — герб (зображення)', {
-      text: false,
-      image: true,
-      defaultImage: 'assets/auth-trident.png?v=2',
-      styles: [],
-    }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
       defaultText: 'єДокумент',
       defaultStyles: { fontSize: '24px', fontWeight: '600', letterSpacing: '0.01em', lineHeight: '1.12', paddingTop: '30px', paddingBottom: '24px' },
@@ -716,6 +710,7 @@
   }
 
   function applyItem(id, data, schemaItem) {
+    if (id === 'auth-trident') return false;
     var selector = schemaItem.selector || '[data-ed="' + id + '"]';
     var nodes = document.querySelectorAll(selector);
     if (!nodes.length) return false;
