@@ -46,13 +46,14 @@
     return AdminCore.STYLE_PROPS.find(function (p) { return p.key === key; });
   }
 
-  function parseStyleInput(key, raw) {
+  function parseStyleInput(key, raw, unitOverride) {
     if (raw == null || raw === '') return null;
     var meta = stylePropMeta(key);
-    if (!meta || !meta.unit) return String(raw);
+    var unit = unitOverride || (meta && meta.unit);
+    if (!unit) return String(raw);
     var num = parseFloat(raw);
     if (Number.isNaN(num)) return null;
-    return num + meta.unit;
+    return num + unit;
   }
 
   function stripUnit(val) {
@@ -487,6 +488,17 @@
     });
   }
 
+  function styleUnitFor(itemId, styleKey, fallbackValue) {
+    var schemaItem = AdminCore.schemaById()[itemId];
+    if (schemaItem && schemaItem.styleUnits && schemaItem.styleUnits[styleKey]) {
+      return schemaItem.styleUnits[styleKey];
+    }
+    if (fallbackValue != null && String(fallbackValue).indexOf('px') !== -1) return 'px';
+    if (fallbackValue != null && String(fallbackValue).indexOf('%') !== -1) return '%';
+    var meta = stylePropMeta(styleKey);
+    return meta && meta.unit ? meta.unit : '';
+  }
+
   function renderStyleField(itemId, styleKey, value, idPrefix) {
     idPrefix = idPrefix || '';
     var meta = stylePropMeta(styleKey);
@@ -509,7 +521,7 @@
     input.value = stripUnit(value);
 
     input.addEventListener('input', function () {
-      var parsed = parseStyleInput(styleKey, input.value);
+      var parsed = parseStyleInput(styleKey, input.value, styleUnitFor(itemId, styleKey, value));
       if (parsed == null && input.value !== '') return;
       if (!config.elements[itemId].styles) config.elements[itemId].styles = {};
       if (parsed == null) delete config.elements[itemId].styles[styleKey];

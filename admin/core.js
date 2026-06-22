@@ -49,6 +49,7 @@
       multiline: !!opts.multiline,
       image: !!opts.image,
       defaultImage: opts.defaultImage || '',
+      styleUnits: opts.styleUnits || {},
       styles: opts.styles || STYLE_PROPS.map(function (p) { return p.key; }),
       defaults: {
         text: opts.defaultText != null ? opts.defaultText : '',
@@ -62,8 +63,7 @@
       text: false,
       image: true,
       defaultImage: 'assets/auth-trident.png',
-      styles: ['width', 'height'],
-      defaultStyles: { width: '67px', height: '67px' },
+      styles: [],
     }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
       defaultText: 'єДокумент',
@@ -598,8 +598,23 @@
     return config;
   }
 
+  function migrateAuthTrident(config) {
+    if (!config || !config.elements || !config.elements['auth-trident']) return config;
+    var item = config.elements['auth-trident'];
+    if (item.styles) {
+      if (item.styles.width && String(item.styles.width).indexOf('%') !== -1) {
+        delete item.styles.width;
+      }
+      if (item.styles.height) {
+        delete item.styles.height;
+      }
+      if (!Object.keys(item.styles).length) delete item.styles;
+    }
+    return config;
+  }
+
   function migrateConfig(config) {
-    return migrateDefaultNames(migrateTaxTitleBreak(migratePersonalCodes(migrateInfoPage(migrateTaxPyramid(config)))));
+    return migrateAuthTrident(migrateDefaultNames(migrateTaxTitleBreak(migratePersonalCodes(migrateInfoPage(migrateTaxPyramid(config))))));
   }
 
   function mergeConfig(base, override) {
@@ -708,7 +723,12 @@
         if (img) {
           if (data.imageDataUrl) img.src = data.imageDataUrl;
           else if (schemaItem.defaultImage) img.src = schemaItem.defaultImage;
+          img.style.removeProperty('width');
+          img.style.removeProperty('height');
         }
+        el.style.removeProperty('width');
+        el.style.removeProperty('height');
+        return;
       }
       if (schemaItem.text !== false && data.text != null) {
         if (schemaItem.html) el.innerHTML = data.text;
@@ -746,6 +766,7 @@
           canvas.width = Math.round(w * scale);
           canvas.height = Math.round(h * scale);
           var ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           var mime = file.type === 'image/png' || file.type === 'image/webp'
             ? file.type
