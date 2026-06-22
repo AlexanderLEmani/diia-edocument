@@ -201,6 +201,7 @@
   }
 
   function pushPreview() {
+    AdminCore.migrateAuthSplash(config);
     postToFrame(previewFrame.contentWindow, false);
     if (fullscreenOpen) postToFrame(fullscreenFrame.contentWindow, true);
   }

@@ -610,6 +610,29 @@
     return config;
   }
 
+  function authIconSizePx(val) {
+    if (val == null || val === '') return null;
+    var s = String(val).trim();
+    if (s.indexOf('%') !== -1) return null;
+    var n = parseFloat(s);
+    return isNaN(n) ? null : n;
+  }
+
+  function fixAuthIconStyles(id, el) {
+    if (!el) return;
+    if (!el.styles) el.styles = {};
+    var w = authIconSizePx(el.styles.width);
+    var h = authIconSizePx(el.styles.height);
+    if (w == null || h == null || w < 40 || w > 100 || h < 40 || h > 100) {
+      el.styles.width = '67px';
+      el.styles.height = '67px';
+    } else {
+      el.styles.width = w + 'px';
+      el.styles.height = h + 'px';
+    }
+    if (id === 'auth-icon-trident') delete el.styles.borderRadius;
+  }
+
   function migrateAuthSplash(config) {
     if (!config || !config.elements) return config;
 
@@ -617,17 +640,8 @@
       delete config.elements['auth-trident'];
     }
 
-    ['auth-icon-diia', 'auth-icon-trident'].forEach(function (id) {
-      var el = config.elements[id];
-      if (!el || !el.styles) return;
-      if (el.styles.width && String(el.styles.width).indexOf('%') !== -1) {
-        el.styles.width = '67px';
-        el.styles.height = '67px';
-      }
-      if (id === 'auth-icon-trident' && el.styles.borderRadius) {
-        delete el.styles.borderRadius;
-      }
-    });
+    fixAuthIconStyles('auth-icon-diia', config.elements['auth-icon-diia']);
+    fixAuthIconStyles('auth-icon-trident', config.elements['auth-icon-trident']);
 
     return config;
   }
@@ -765,10 +779,11 @@
   }
 
   function applyConfig(config) {
+    var cfg = migrateAuthSplash(JSON.parse(JSON.stringify(config || { elements: {} })));
     var map = schemaById();
     var applied = 0;
-    Object.keys(config.elements || {}).forEach(function (id) {
-      if (map[id] && applyItem(id, config.elements[id], map[id])) applied++;
+    Object.keys(cfg.elements || {}).forEach(function (id) {
+      if (map[id] && applyItem(id, cfg.elements[id], map[id])) applied++;
     });
     return applied;
   }
@@ -832,6 +847,7 @@
     migrateTaxPyramid: migrateTaxPyramid,
     migrateInfoPage: migrateInfoPage,
     migrateConfig: migrateConfig,
+    migrateAuthSplash: migrateAuthSplash,
     loadFromStorage: loadFromStorage,
     saveToStorage: saveToStorage,
     clearStorage: clearStorage,
