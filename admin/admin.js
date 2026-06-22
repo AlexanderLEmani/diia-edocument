@@ -114,11 +114,19 @@
     return 'index-docs';
   }
 
+  function pageIdFromPreviewPath(path) {
+    var url = new URL(path, 'http://x');
+    if (url.searchParams.get('auth') === 'splash') return 'auth-splash';
+    if (url.pathname.indexOf('/info') !== -1) return 'info';
+    if (url.hash === '#feed') return 'index-feed';
+    return 'index-docs';
+  }
+
   function syncPageFromFrame(frame) {
     if (!frame || !frame.contentWindow) return;
     try {
       var loc = frame.contentWindow.location;
-      var pageId = pageIdFromLocation(loc.pathname, loc.hash);
+      var pageId = pageIdFromPreviewPath(loc.pathname + loc.search + loc.hash);
       if (pageId && pageId !== currentPage) {
         setCurrentPage(pageId, { loadFrame: false });
       }

@@ -460,6 +460,9 @@
       if (new URLSearchParams(window.location.search).get('auth') === 'splash') {
         showSplash();
         markAuthReady();
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'admin-set-page', page: 'auth-splash' }, '*');
+        }
         return;
       }
       finishAuth();

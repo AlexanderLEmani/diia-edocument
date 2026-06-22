@@ -39,14 +39,19 @@
       window.parent.postMessage({ type: 'admin-preview-ready' }, '*');
     }
 
+    function maybeShowAuthSplash() {
+      if (params.get('auth') !== 'splash') return;
+      window.parent.postMessage({ type: 'admin-set-page', page: 'auth-splash' }, '*');
+    }
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function () {
         signalReady();
-        boot();
+        boot().then(maybeShowAuthSplash);
       });
     } else {
       signalReady();
-      boot();
+      boot().then(maybeShowAuthSplash);
     }
   } else if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { boot(); });
