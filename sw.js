@@ -1,4 +1,4 @@
-var CACHE = 'diia-v4';
+var CACHE = 'diia-v5';
 var AUTH_CACHE = 'diia-auth-token-v1';
 var AUTH_CACHE_KEY = '/__diia-auth-token';
 
@@ -20,7 +20,6 @@ var ASSETS = [
   '/manifest.webmanifest',
   '/apple-touch-icon.png',
   '/apple-touch-icon-precomposed.png',
-  '/assets/auth-trident.png',
   '/assets/card-qr.png',
   '/assets/info-qr.png',
   '/assets/info-photo.png',

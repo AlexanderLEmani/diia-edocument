@@ -59,24 +59,6 @@
   }
 
   var SCHEMA = [
-    item('auth-icon-diia', 'auth-splash', 'Ярлик «Дія» — розмір', {
-      text: false,
-      styles: ['width', 'height', 'fontSize', 'borderRadius'],
-      styleUnits: { width: 'px', height: 'px' },
-      defaultStyles: { width: '67px', height: '67px', fontSize: '26px', borderRadius: '18px' },
-    }),
-    item('auth-icon-trident', 'auth-splash', 'Ярлик герб — розмір', {
-      text: false,
-      styles: ['width', 'height'],
-      styleUnits: { width: 'px', height: 'px' },
-      defaultStyles: { width: '67px', height: '67px' },
-    }),
-    item('auth-brand-row', 'auth-splash', 'Відстань між ярликами', {
-      text: false,
-      selector: '.auth-brand-row',
-      styles: ['gap'],
-      defaultStyles: { gap: '12px' },
-    }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
       defaultText: 'єДокумент',
       defaultStyles: { fontSize: '24px', fontWeight: '600', letterSpacing: '0.01em', lineHeight: '1.12', paddingTop: '30px', paddingBottom: '24px' },
@@ -610,39 +592,11 @@
     return config;
   }
 
-  function authIconSizePx(val) {
-    if (val == null || val === '') return null;
-    var s = String(val).trim();
-    if (s.indexOf('%') !== -1) return null;
-    var n = parseFloat(s);
-    return isNaN(n) ? null : n;
-  }
-
-  function fixAuthIconStyles(id, el) {
-    if (!el) return;
-    if (!el.styles) el.styles = {};
-    var w = authIconSizePx(el.styles.width);
-    var h = authIconSizePx(el.styles.height);
-    if (w == null || h == null || w < 40 || w > 100 || h < 40 || h > 100) {
-      el.styles.width = '67px';
-      el.styles.height = '67px';
-    } else {
-      el.styles.width = w + 'px';
-      el.styles.height = h + 'px';
-    }
-    if (id === 'auth-icon-trident') delete el.styles.borderRadius;
-  }
-
   function migrateAuthSplash(config) {
     if (!config || !config.elements) return config;
-
-    if (config.elements['auth-trident']) {
-      delete config.elements['auth-trident'];
-    }
-
-    fixAuthIconStyles('auth-icon-diia', config.elements['auth-icon-diia']);
-    fixAuthIconStyles('auth-icon-trident', config.elements['auth-icon-trident']);
-
+    ['auth-trident', 'auth-icon-diia', 'auth-icon-trident', 'auth-brand-row'].forEach(function (id) {
+      delete config.elements[id];
+    });
     return config;
   }
 
@@ -779,11 +733,10 @@
   }
 
   function applyConfig(config) {
-    var cfg = migrateAuthSplash(JSON.parse(JSON.stringify(config || { elements: {} })));
     var map = schemaById();
     var applied = 0;
-    Object.keys(cfg.elements || {}).forEach(function (id) {
-      if (map[id] && applyItem(id, cfg.elements[id], map[id])) applied++;
+    Object.keys(config.elements || {}).forEach(function (id) {
+      if (map[id] && applyItem(id, config.elements[id], map[id])) applied++;
     });
     return applied;
   }

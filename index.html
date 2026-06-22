@@ -32,10 +32,12 @@
 
     <div class="auth-screen auth-splash" id="authSplash" hidden>
       <h1 class="auth-hello">Привіт <span aria-hidden="true">👋</span></h1>
-      <div class="auth-brand-row" aria-hidden="true" data-ed="auth-brand-row">
-        <div class="auth-brand-icon auth-brand-icon--diia" data-ed="auth-icon-diia">Дія</div>
-        <div class="auth-brand-icon auth-brand-icon--trident" data-ed="auth-icon-trident">
-          <img id="authTridentImg" src="assets/auth-trident.png" width="67" height="67" alt="">
+      <div class="auth-brand-row" aria-hidden="true">
+        <div class="auth-brand-icon auth-brand-icon--diia">Дія</div>
+        <div class="auth-brand-icon auth-brand-icon--trident">
+          <svg viewBox="0 0 64 64" width="48" height="48" fill="none" aria-hidden="true">
+            <path d="M32 8c4 4 6 9 6 16v14h6V18h7v30H38l-6 8-6-8H13V18h7v20h6V24c0-7 2-12 6-16Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -546,7 +548,7 @@
     </div>
   </div>
 
-  <script src="auth.js?v=9"></script>
+  <script src="auth.js?v=10"></script>
   <script src="pwa.js"></script>
   <script src="admin/core.js"></script>
   <script src="admin/profile.js"></script>

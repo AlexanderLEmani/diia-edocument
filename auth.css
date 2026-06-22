@@ -108,18 +108,16 @@ body.auth-locked .screen {
 }
 
 .auth-brand-icon {
-  flex: 0 0 auto;
+  width: 67px;
+  height: 67px;
+  border-radius: 18px;
   display: grid;
   place-items: center;
   font-weight: 700;
   line-height: 1;
-  box-sizing: border-box;
 }
 
 .auth-brand-icon--diia {
-  width: 67px;
-  height: 67px;
-  border-radius: 18px;
   background: #000;
   color: #fff;
   font-size: 26px;
@@ -127,20 +125,9 @@ body.auth-locked .screen {
 }
 
 .auth-brand-icon--trident {
-  width: 67px;
-  height: 67px;
-  border: none;
-  border-radius: 0;
-  background: none;
-  padding: 0;
-  overflow: visible;
-}
-
-.auth-brand-icon--trident img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
+  border: 3px solid #000;
 }
 
 .auth-pin-layer {
