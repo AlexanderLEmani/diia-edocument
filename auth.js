@@ -36,13 +36,6 @@
     img.style.removeProperty('height');
     img.style.removeProperty('background');
     img.style.removeProperty('background-color');
-    var box = img.closest('.auth-brand-icon--trident');
-    if (box) {
-      box.style.removeProperty('width');
-      box.style.removeProperty('height');
-      box.style.removeProperty('background');
-      box.style.removeProperty('background-color');
-    }
   }
 
   window.lockAuthTridentIcon = lockAuthTridentIcon;

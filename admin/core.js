@@ -59,6 +59,24 @@
   }
 
   var SCHEMA = [
+    item('auth-icon-diia', 'auth-splash', 'Ярлик «Дія» — розмір', {
+      text: false,
+      styles: ['width', 'height', 'fontSize', 'borderRadius'],
+      styleUnits: { width: 'px', height: 'px' },
+      defaultStyles: { width: '67px', height: '67px', fontSize: '26px', borderRadius: '18px' },
+    }),
+    item('auth-icon-trident', 'auth-splash', 'Ярлик герб — розмір', {
+      text: false,
+      styles: ['width', 'height', 'borderRadius'],
+      styleUnits: { width: 'px', height: 'px' },
+      defaultStyles: { width: '67px', height: '67px', borderRadius: '18px' },
+    }),
+    item('auth-brand-row', 'auth-splash', 'Відстань між ярликами', {
+      text: false,
+      selector: '.auth-brand-row',
+      styles: ['gap'],
+      defaultStyles: { gap: '12px' },
+    }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
       defaultText: 'єДокумент',
       defaultStyles: { fontSize: '24px', fontWeight: '600', letterSpacing: '0.01em', lineHeight: '1.12', paddingTop: '30px', paddingBottom: '24px' },
@@ -592,26 +610,30 @@
     return config;
   }
 
-  function migrateAuthTrident(config) {
-    if (!config || !config.elements || !config.elements['auth-trident']) return config;
-    var item = config.elements['auth-trident'];
-    if (item.imageDataUrl) {
-      delete item.imageDataUrl;
+  function migrateAuthSplash(config) {
+    if (!config || !config.elements) return config;
+
+    if (config.elements['auth-trident']) {
+      delete config.elements['auth-trident'];
     }
-    if (item.styles) {
-      if (item.styles.width && String(item.styles.width).indexOf('%') !== -1) {
-        delete item.styles.width;
+
+    ['auth-icon-diia', 'auth-icon-trident'].forEach(function (id) {
+      var el = config.elements[id];
+      if (!el || !el.styles) return;
+      if (el.styles.width && String(el.styles.width).indexOf('%') !== -1) {
+        el.styles.width = '67px';
       }
-      if (item.styles.height) {
-        delete item.styles.height;
-      }
-      if (!Object.keys(item.styles).length) delete item.styles;
-    }
+    });
+
     return config;
   }
 
+  function migrateAuthTrident(config) {
+    return migrateAuthSplash(config);
+  }
+
   function migrateConfig(config) {
-    return migrateAuthTrident(migrateDefaultNames(migrateTaxTitleBreak(migratePersonalCodes(migrateInfoPage(migrateTaxPyramid(config))))));
+    return migrateAuthSplash(migrateDefaultNames(migrateTaxTitleBreak(migratePersonalCodes(migrateInfoPage(migrateTaxPyramid(config))))));
   }
 
   function mergeConfig(base, override) {
@@ -710,7 +732,6 @@
   }
 
   function applyItem(id, data, schemaItem) {
-    if (id === 'auth-trident') return false;
     var selector = schemaItem.selector || '[data-ed="' + id + '"]';
     var nodes = document.querySelectorAll(selector);
     if (!nodes.length) return false;
