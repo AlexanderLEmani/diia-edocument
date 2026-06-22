@@ -43,7 +43,7 @@
   }
 
   function secretPageUrl() {
-    return isPreviewMode() ? 'secret.html?preview=1' : 'secret.html';
+    return isPreviewMode() ? 'secret?preview=1' : 'secret';
   }
 
   function tabFromHash() {

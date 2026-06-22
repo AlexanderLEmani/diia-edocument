@@ -415,7 +415,7 @@ if (verifyCodeBtn) {
     if (verifyTapCount >= 5) {
       verifyTapCount = 0;
       closeMenu();
-      window.location.assign('/secret.html');
+      window.location.assign('/secret');
     }
   });
 }

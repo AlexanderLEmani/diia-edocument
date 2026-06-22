@@ -4,13 +4,13 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/rezerv/(auth.js|sw.js|pwa.js|index.html)",
+      "source": "/rezerv/(auth.js|sw.js|pwa.js|index.html|secret)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
     },
     {
-      "source": "/(auth.js|sw.js|pwa.js|index.html|manifest.webmanifest|apple-touch-icon.png|apple-touch-icon-precomposed.png)",
+      "source": "/(auth.js|sw.js|pwa.js|index.html|info|secret|manifest.webmanifest|apple-touch-icon.png|apple-touch-icon-precomposed.png)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]

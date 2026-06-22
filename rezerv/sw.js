@@ -1,12 +1,12 @@
-const CACHE = 'rezerv-v48';
-const SW_VERSION = '36';
+const CACHE = 'rezerv-v50';
+const SW_VERSION = '38';
 const AUTH_CACHE = 'rezerv-auth-token-v1';
 const AUTH_CACHE_KEY = '/__rezerv-auth-token';
 
 const ASSETS = [
   './',
   './index.html',
-  './secret.html',
+  '/rezerv/secret',
   './styles.css',
   './secret.css',
   './auth.css',
@@ -45,6 +45,11 @@ const NETWORK_FIRST = [
   '/app.js',
   '/pwa.js',
 ];
+
+function htmlAliasPath(pathname) {
+  if (pathname === '/rezerv/secret' || pathname === '/rezerv/secret.html') return '/rezerv/secret';
+  return null;
+}
 
 function isAdminRequest(url) {
   return url.pathname.indexOf('/admin/') !== -1;
@@ -89,6 +94,15 @@ function cacheFirst(request) {
   });
 }
 
+function serveHtmlAlias(pathname) {
+  const aliased = htmlAliasPath(pathname);
+  if (!aliased) return null;
+  return caches.match(aliased).then((cached) => {
+    if (cached) return cached;
+    return fetch(aliased, { credentials: 'same-origin' });
+  });
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
@@ -107,6 +121,12 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
+
+  const aliasedHtml = serveHtmlAlias(url.pathname);
+  if (aliasedHtml) {
+    event.respondWith(aliasedHtml);
+    return;
+  }
 
   if (isNetworkFirst(url)) {
     event.respondWith(networkFirst(event.request));

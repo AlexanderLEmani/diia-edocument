@@ -1,12 +1,12 @@
-var CACHE = 'diia-v5';
+var CACHE = 'diia-v7';
 var AUTH_CACHE = 'diia-auth-token-v1';
 var AUTH_CACHE_KEY = '/__diia-auth-token';
 
 var ASSETS = [
   '/',
   '/index.html',
-  '/info.html',
-  '/secret.html',
+  '/info',
+  '/secret',
   '/styles.css',
   '/auth.css',
   '/info.css',
@@ -40,12 +40,19 @@ var ASSETS = [
 
 var NETWORK_FIRST = [
   '/index.html',
-  '/info.html',
+  '/info',
   '/auth.js',
   '/sw.js',
   '/app.js',
   '/pwa.js',
 ];
+
+function htmlAliasPath(pathname) {
+  if (pathname === '/secret' || pathname === '/secret.html') return '/secret';
+  if (pathname === '/info' || pathname === '/info.html') return '/info';
+  if (pathname === '/rezerv/secret' || pathname === '/rezerv/secret.html') return '/rezerv/secret';
+  return null;
+}
 
 function isAdminRequest(url) {
   return url.pathname.indexOf('/admin/') !== -1;
@@ -90,6 +97,15 @@ function cacheFirst(request) {
   });
 }
 
+function serveHtmlAlias(pathname) {
+  var aliased = htmlAliasPath(pathname);
+  if (!aliased) return null;
+  return caches.match(aliased).then(function (cached) {
+    if (cached) return cached;
+    return fetch(aliased, { credentials: 'same-origin' });
+  });
+}
+
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE).then(function (cache) {
@@ -119,6 +135,12 @@ self.addEventListener('fetch', function (event) {
 
   var url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
+
+  var aliasedHtml = serveHtmlAlias(url.pathname);
+  if (aliasedHtml) {
+    event.respondWith(aliasedHtml);
+    return;
+  }
 
   if (isNetworkFirst(url)) {
     event.respondWith(networkFirst(event.request));
