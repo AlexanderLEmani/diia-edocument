@@ -67,9 +67,9 @@
     }),
     item('auth-icon-trident', 'auth-splash', 'Ярлик герб — розмір', {
       text: false,
-      styles: ['width', 'height', 'borderRadius'],
+      styles: ['width', 'height'],
       styleUnits: { width: 'px', height: 'px' },
-      defaultStyles: { width: '67px', height: '67px', borderRadius: '18px' },
+      defaultStyles: { width: '67px', height: '67px' },
     }),
     item('auth-brand-row', 'auth-splash', 'Відстань між ярликами', {
       text: false,
@@ -622,6 +622,10 @@
       if (!el || !el.styles) return;
       if (el.styles.width && String(el.styles.width).indexOf('%') !== -1) {
         el.styles.width = '67px';
+        el.styles.height = '67px';
+      }
+      if (id === 'auth-icon-trident' && el.styles.borderRadius) {
+        delete el.styles.borderRadius;
       }
     });
 

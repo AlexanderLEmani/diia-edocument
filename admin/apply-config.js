@@ -7,19 +7,14 @@
 
   function boot(config) {
     var data = config || null;
-    var done = function () {
-      if (typeof window.lockAuthTridentIcon === 'function') window.lockAuthTridentIcon();
-    };
     if (data) {
       if (window.ProfileCore) ProfileCore.applyAll(data);
       else AdminCore.applyConfig(data);
-      done();
       return Promise.resolve();
     }
     return AdminCore.loadConfig().then(function (loaded) {
       if (window.ProfileCore) ProfileCore.applyAll(loaded);
       else AdminCore.applyConfig(loaded);
-      done();
     });
   }
 
@@ -34,7 +29,6 @@
       if (event.data.dragMode != null) PreviewDrag.setDragMode(event.data.dragMode);
       PreviewDrag.bindElements();
     }
-    if (typeof window.lockAuthTridentIcon === 'function') window.lockAuthTridentIcon();
   }
 
   if (isPreview) {
