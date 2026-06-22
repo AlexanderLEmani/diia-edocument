@@ -128,6 +128,7 @@ body.auth-locked .screen {
   background: rgba(255, 255, 255, 0.3);
   border: 3px solid #000;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .auth-brand-icon--trident img {
@@ -135,6 +136,7 @@ body.auth-locked .screen {
   width: 48px;
   height: 48px;
   object-fit: contain;
+  background: transparent;
 }
 
 .auth-pin-layer {

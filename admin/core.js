@@ -62,7 +62,7 @@
     item('auth-trident', 'auth-splash', 'Привітствие — герб (зображення)', {
       text: false,
       image: true,
-      defaultImage: 'assets/auth-trident.png',
+      defaultImage: 'assets/auth-trident.png?v=2',
       styles: [],
     }),
     item('edoc-title', 'index-docs', 'єДокумент — заголовок', {
@@ -601,6 +601,9 @@
   function migrateAuthTrident(config) {
     if (!config || !config.elements || !config.elements['auth-trident']) return config;
     var item = config.elements['auth-trident'];
+    if (item.imageDataUrl) {
+      delete item.imageDataUrl;
+    }
     if (item.styles) {
       if (item.styles.width && String(item.styles.width).indexOf('%') !== -1) {
         delete item.styles.width;
@@ -725,6 +728,8 @@
           else if (schemaItem.defaultImage) img.src = schemaItem.defaultImage;
           img.style.removeProperty('width');
           img.style.removeProperty('height');
+          img.style.removeProperty('background');
+          img.style.removeProperty('background-color');
         }
         el.style.removeProperty('width');
         el.style.removeProperty('height');
