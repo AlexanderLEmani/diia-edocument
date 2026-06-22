@@ -169,7 +169,7 @@
     if (!frame || !frame.contentWindow) return;
     try {
       var loc = frame.contentWindow.location;
-      var pageId = pageIdFromLocation(loc.pathname, loc.hash);
+      var pageId = pageIdFromPreviewPath(loc.pathname + loc.search + loc.hash);
       if (pageId && pageId !== currentPage) {
         setCurrentPage(pageId, { loadFrame: false });
       }

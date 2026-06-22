@@ -51,6 +51,7 @@
       document.body.classList.add('doc-sheet-open');
       requestAnimationFrame(function () {
         overlay.classList.add('is-open');
+        window.parent.postMessage({ type: 'admin-set-page', page: 'rezerv-doc' }, '*');
       });
     }
 

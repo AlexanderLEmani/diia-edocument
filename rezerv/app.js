@@ -21,6 +21,27 @@
       || window.parent !== window;
   }
 
+  function notifyAdminPage() {
+    if (!isPreviewMode() || window.parent === window) return;
+    var params = new URLSearchParams(window.location.search);
+    var page = 'rezerv-id';
+    if (params.get('docsheet') === '1') {
+      page = 'rezerv-doc';
+    } else if (docSheetOverlay && !docSheetOverlay.hidden) {
+      page = 'rezerv-doc';
+    } else {
+      var tab = frame ? frame.dataset.tab : 'id';
+      var pageMap = {
+        id: 'rezerv-id',
+        services: 'rezerv-services',
+        vacancies: 'rezerv-vacancies',
+        menu: 'rezerv-menu'
+      };
+      page = pageMap[tab] || 'rezerv-id';
+    }
+    window.parent.postMessage({ type: 'admin-set-page', page: page }, '*');
+  }
+
   function secretPageUrl() {
     return isPreviewMode() ? 'secret.html?preview=1' : 'secret.html';
   }
@@ -48,15 +69,7 @@
       }
     }
 
-    if (isPreviewMode() && window.parent !== window) {
-      var pageMap = {
-        id: 'rezerv-id',
-        services: 'rezerv-services',
-        vacancies: 'rezerv-vacancies',
-        menu: 'rezerv-menu'
-      };
-      window.parent.postMessage({ type: 'admin-set-page', page: pageMap[tab] }, '*');
-    }
+    notifyAdminPage();
   }
 
   window.switchTab = switchTab;
@@ -179,6 +192,7 @@
         if (window.RezervTicker && typeof window.RezervTicker.init === 'function') {
           window.RezervTicker.init();
         }
+        notifyAdminPage();
       });
     });
   }
