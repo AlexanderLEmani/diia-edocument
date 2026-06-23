@@ -857,6 +857,11 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   touch-action: pan-y;
 }
 
+.doc-sheet-spacer {
+  height: 90px;
+  flex-shrink: 0;
+}
+
 .doc-header {
   display: flex;
   align-items: flex-start;
