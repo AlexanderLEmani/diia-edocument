@@ -1007,6 +1007,19 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   font-weight: 500;
 }
 
+.doc-value--right {
+  text-align: right;
+}
+
+.doc-block--defer .doc-field--inline {
+  align-items: flex-start;
+}
+
+.doc-block--defer .doc-value {
+  font-size: 17px;
+  font-weight: 600;
+}
+
 .doc-note {
   margin: 10px 0;
   font-size: 14px;
