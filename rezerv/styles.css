@@ -857,11 +857,6 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   touch-action: pan-y;
 }
 
-.doc-sheet-spacer {
-  height: 180px;
-  flex-shrink: 0;
-}
-
 .doc-header {
   display: flex;
   align-items: flex-start;
@@ -1050,6 +1045,15 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   align-items: baseline;
   justify-content: space-between;
   gap: 8px;
+}
+
+.doc-field--inline .doc-value {
+  text-align: right;
+}
+
+.doc-block .doc-field + .doc-field,
+.doc-block--split .doc-field + .doc-field {
+  margin-top: 10px;
 }
 
 .doc-block--status {
