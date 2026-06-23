@@ -808,8 +808,8 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 .doc-sheet {
   position: relative;
   z-index: 1;
-  height: calc(100% - 52px);
-  max-height: calc(100% - 52px);
+  height: calc(100% - 52px - 72px);
+  max-height: calc(100% - 52px - 72px);
   background: #E5E2D3;
   border-radius: 16px 16px 0 0;
   display: flex;
@@ -818,7 +818,6 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   transform: translateY(100%);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   will-change: transform;
-  touch-action: none;
 }
 
 .doc-sheet-overlay.is-open .doc-sheet {
@@ -850,9 +849,11 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 
 .doc-sheet-scroll {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0 16px calc(96px + env(safe-area-inset-bottom, 0px));
+  overscroll-behavior: contain;
+  padding: 0 16px calc(24px + env(safe-area-inset-bottom, 0px));
   touch-action: pan-y;
 }
 
@@ -1072,12 +1073,20 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   height: 18px;
   flex-shrink: 0;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #34C759;
 }
 
-.doc-status-check svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+.doc-status-check::after {
+  content: '';
+  width: 7px;
+  height: 4px;
+  margin-top: -1px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
 }
 
 .doc-status-date {
