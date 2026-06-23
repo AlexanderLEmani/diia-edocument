@@ -134,9 +134,14 @@
     }
 
     ProfileCore.saveProfile(profile);
+    var homeUrl = appHomeUrl();
+    if (homeUrl === '/') {
+      setStatus('Збережено. Відкрийте застосунок за посиланням з доступом.');
+      return;
+    }
     setStatus('Збережено. Повертаємось…');
     setTimeout(function () {
-      window.location.href = '/';
+      window.location.href = homeUrl;
     }, 600);
   });
 
@@ -150,5 +155,27 @@
     setStatus('Профіль скинуто');
   });
 
+  function appHomeUrl() {
+    try {
+      var token = localStorage.getItem('diia-access-token') || sessionStorage.getItem('diia-access-token');
+      if (token) return '/?t=' + encodeURIComponent(token.trim());
+    } catch (err) {
+      /* ignore */
+    }
+    return '/';
+  }
+
+  function bindBackLink() {
+    var back = document.querySelector('.secret-back');
+    if (!back) return;
+    back.addEventListener('click', function (e) {
+      var url = appHomeUrl();
+      if (url === '/') return;
+      e.preventDefault();
+      window.location.href = url;
+    });
+  }
+
+  bindBackLink();
   loadForm();
 })();

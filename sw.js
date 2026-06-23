@@ -1,12 +1,12 @@
-var CACHE = 'diia-v7';
+var CACHE = 'diia-v9';
 var AUTH_CACHE = 'diia-auth-token-v1';
 var AUTH_CACHE_KEY = '/__diia-auth-token';
 
 var ASSETS = [
   '/',
   '/index.html',
-  '/info',
-  '/secret',
+  '/info.html',
+  '/secret.html',
   '/styles.css',
   '/auth.css',
   '/info.css',
@@ -40,7 +40,8 @@ var ASSETS = [
 
 var NETWORK_FIRST = [
   '/index.html',
-  '/info',
+  '/info.html',
+  '/secret.html',
   '/auth.js',
   '/sw.js',
   '/app.js',
@@ -48,9 +49,9 @@ var NETWORK_FIRST = [
 ];
 
 function htmlAliasPath(pathname) {
-  if (pathname === '/secret' || pathname === '/secret.html') return '/secret';
-  if (pathname === '/info' || pathname === '/info.html') return '/info';
-  if (pathname === '/rezerv/secret' || pathname === '/rezerv/secret.html') return '/rezerv/secret';
+  if (pathname === '/secret' || pathname === '/secret.html') return '/secret.html';
+  if (pathname === '/info' || pathname === '/info.html') return '/info.html';
+  if (pathname === '/rezerv/secret' || pathname === '/rezerv/secret.html') return '/rezerv/secret.html';
   return null;
 }
 
