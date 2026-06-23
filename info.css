@@ -137,9 +137,12 @@
   gap: 0;
 }
 
-.info-split-col--end {
-  align-items: flex-end;
-  text-align: right;
+.info-split-col--end,
+.info-split-col--values {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: auto;
+  min-width: 28px;
 }
 
 .info-rnokpp-right {
