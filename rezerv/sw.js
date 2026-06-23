@@ -1,5 +1,5 @@
-const CACHE = 'rezerv-v50';
-const SW_VERSION = '38';
+const CACHE = 'rezerv-v51';
+const SW_VERSION = '39';
 const AUTH_CACHE = 'rezerv-auth-token-v1';
 const AUTH_CACHE_KEY = '/__rezerv-auth-token';
 
@@ -44,6 +44,7 @@ const NETWORK_FIRST = [
   '/sw.js',
   '/app.js',
   '/pwa.js',
+  '/styles.css',
 ];
 
 function htmlAliasPath(pathname) {

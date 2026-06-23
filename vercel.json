@@ -4,7 +4,7 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/rezerv/(auth.js|sw.js|pwa.js|index.html|secret)",
+      "source": "/rezerv/(auth.js|sw.js|pwa.js|index.html|secret|styles.css)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]

@@ -808,8 +808,8 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 .doc-sheet {
   position: relative;
   z-index: 1;
-  height: calc(100% - 52px - 72px);
-  max-height: calc(100% - 52px - 72px);
+  height: calc(100% - 52px);
+  max-height: calc(100% - 52px);
   background: #E5E2D3;
   border-radius: 16px 16px 0 0;
   display: flex;
@@ -855,6 +855,11 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   overscroll-behavior: contain;
   padding: 0 16px calc(24px + env(safe-area-inset-bottom, 0px));
   touch-action: pan-y;
+}
+
+.doc-sheet-spacer {
+  height: 180px;
+  flex-shrink: 0;
 }
 
 .doc-header {
@@ -1068,25 +1073,18 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   flex-shrink: 0;
 }
 
-.doc-status-check {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.doc-status-icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
   border-radius: 50%;
   background: #34C759;
-}
-
-.doc-status-check::after {
-  content: '';
-  width: 7px;
-  height: 4px;
-  margin-top: -1px;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(-45deg);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .doc-status-date {
