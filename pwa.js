@@ -19,7 +19,7 @@
     || window.navigator.standalone === true;
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js?v=10').catch(function () { /* ignore */ });
+    navigator.serviceWorker.register('/sw.js?v=11').catch(function () { /* ignore */ });
   }
 
   if (isStandalone) {
