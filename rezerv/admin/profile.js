@@ -10,7 +10,7 @@
       var data = JSON.parse(raw);
       if (!data || (
         !data.lastName && !data.firstName && !data.patronymic &&
-        !data.birthDate && !data.photoDataUrl &&
+        !data.birthDate && !data.photoDataUrl && !data.qrDataUrl &&
         !data.docUpdatedDate && !data.docUpdatedTime
       )) {
         return null;
@@ -111,6 +111,17 @@
     });
   }
 
+  var DEFAULT_QR_SRC = 'assets/qr-card.png';
+
+  function applyQr(dataUrl) {
+    var nodes = document.querySelectorAll('[data-ed="rezerv-qr-image"]');
+    if (!nodes.length) return;
+    nodes.forEach(function (el) {
+      if (el.tagName !== 'IMG') return;
+      el.src = dataUrl || DEFAULT_QR_SRC;
+    });
+  }
+
   function applyProfile() {
     applyDocUpdate();
 
@@ -144,6 +155,9 @@
 
     if (profile.photoDataUrl) applyPhoto(profile.photoDataUrl);
     else applyPhoto('');
+
+    if (profile.qrDataUrl) applyQr(profile.qrDataUrl);
+    else applyQr('');
 
     syncDocNameFromCard();
     return true;

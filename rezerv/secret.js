@@ -14,10 +14,13 @@
   var docUpdatedTime = document.getElementById('docUpdatedTime');
   var photoInput = document.getElementById('photoInput');
   var photoPreview = document.getElementById('photoPreview');
+  var qrInput = document.getElementById('qrInput');
+  var qrPreview = document.getElementById('qrPreview');
   var statusMsg = document.getElementById('statusMsg');
   var btnClear = document.getElementById('btnClear');
 
   var pendingPhoto = null;
+  var pendingQr = null;
 
   function setStatus(text) {
     statusMsg.textContent = text || '';
@@ -82,6 +85,16 @@
     photoPreview.style.backgroundImage = 'url("' + dataUrl + '")';
   }
 
+  function showQr(dataUrl) {
+    if (!dataUrl) {
+      qrPreview.classList.add('is-empty');
+      qrPreview.style.backgroundImage = '';
+      return;
+    }
+    qrPreview.classList.remove('is-empty');
+    qrPreview.style.backgroundImage = 'url("' + dataUrl + '")';
+  }
+
   function loadForm() {
     var profile = ProfileCore.loadProfile();
     if (!profile) return;
@@ -96,7 +109,9 @@
     docUpdatedDate.value = profile.docUpdatedDate || '';
     docUpdatedTime.value = profile.docUpdatedTime || '';
     pendingPhoto = profile.photoDataUrl || null;
+    pendingQr = profile.qrDataUrl || null;
     showPhoto(pendingPhoto);
+    showQr(pendingQr);
   }
 
   photoInput.addEventListener('change', function () {
@@ -108,6 +123,18 @@
       setStatus('');
     }).catch(function () {
       setStatus('Не вдалося обробити фото');
+    });
+  });
+
+  qrInput.addEventListener('change', function () {
+    var file = qrInput.files && qrInput.files[0];
+    if (!file) return;
+    ProfileCore.resizeImage(file, 900, 0.92).then(function (dataUrl) {
+      pendingQr = dataUrl;
+      showQr(dataUrl);
+      setStatus('');
+    }).catch(function () {
+      setStatus('Не вдалося обробити QR');
     });
   });
 
@@ -125,6 +152,7 @@
       docUpdatedDate: docUpdatedDate.value.trim(),
       docUpdatedTime: docUpdatedTime.value.trim(),
       photoDataUrl: pendingPhoto || '',
+      qrDataUrl: pendingQr || '',
     };
 
     if (!profile.lastName || !profile.firstName || !profile.patronymic) {
@@ -169,8 +197,11 @@
     ProfileCore.clearProfile();
     form.reset();
     pendingPhoto = null;
+    pendingQr = null;
     showPhoto(null);
+    showQr(null);
     photoInput.value = '';
+    qrInput.value = '';
     setStatus('Профіль скинуто');
   });
 
