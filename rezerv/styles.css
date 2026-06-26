@@ -11,7 +11,7 @@ body {
   height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background: #E5E2D3;
+  background: #E1DECB;
   color: #000;
 }
 
@@ -131,7 +131,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   display: flex;
   justify-content: center;
   min-height: 100dvh;
-  background: #E5E2D3;
+  background: #E1DECB;
 }
 
 .frame {
@@ -141,7 +141,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   height: 100dvh;
   max-height: 100dvh;
   overflow: hidden;
-  background: #E5E2D3;
+  background: #E1DECB;
 }
 
 .tab-panel {
@@ -267,9 +267,9 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 }
 
 .id-card {
-  border: 1.65px solid #2a2a2a;
+  border: 1.4px solid #2a2a2a;
   border-radius: 16px;
-  background: #EBE8DA;
+  background: #D5D3BD;
   padding: 20px 18px 18px;
   width: 360px;
   height: 520px;
@@ -381,10 +381,31 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   transform-origin: top right;
 }
 
-.id-card-emblem-img svg {
+.id-card-emblem-img svg:not([hidden]),
+.id-card-emblem-custom:not([hidden]) {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.id-card-emblem-custom {
+  object-fit: contain;
+}
+
+.id-card-emblem-custom[hidden],
+.id-card-emblem-default[hidden] {
+  display: none;
+}
+
+.id-card-emblem-img.has-custom-emblem .id-card-emblem-default {
+  display: none;
+}
+
+.id-card-emblem-img svg {
+  flex-shrink: 0;
+  line-height: 0;
+  pointer-events: auto;
+  transform-origin: top right;
 }
 
 .id-card-bottom {
@@ -398,7 +419,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   height: 25px;
   position: relative;
   flex-shrink: 0;
-  background: #7A5C3A;
+  background: #704712;
 }
 
 .id-ticker-track {
@@ -472,6 +493,13 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(245, 130, 32, 0.35);
+}
+
+.id-fab-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
 /* Flip faces — after .id-card so position/background aren't overridden */
@@ -810,7 +838,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   z-index: 1;
   height: calc(100% - 52px);
   max-height: calc(100% - 52px);
-  background: #E5E2D3;
+  background: #E1DECB;
   border-radius: 16px 16px 0 0;
   display: flex;
   flex-direction: column;
@@ -892,7 +920,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
   margin: 0 -16px 16px;
   overflow: hidden;
   height: 25px;
-  background: #7A5C3A;
+  background: #704712;
 }
 
 .doc-ticker-track {
@@ -924,7 +952,7 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 .doc-block-divider {
   height: 1px;
   margin: 14px -16px 16px;
-  background: #E5E2D3;
+  background: #B8B09A;
 }
 
 .doc-names {
@@ -1103,7 +1131,10 @@ html.drag-mode [data-ed="rezerv-photo"].has-resize-handles {
 }
 
 body.doc-sheet-open .bottom-nav {
-  z-index: 120;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 body.doc-sheet-open .notify-btn {
@@ -1122,9 +1153,10 @@ body.doc-sheet-open .notify-btn {
   justify-content: space-around;
   align-items: flex-end;
   padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
-  background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  background: #E1DECB;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
   z-index: 50;
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .nav-item {
@@ -1158,17 +1190,21 @@ body.doc-sheet-open .notify-btn {
   display: block;
 }
 
+/* По умолчанию — inactive: off видна, on скрыта */
+.nav-icon .icon-off { display: block; }
+.nav-icon .icon-on  { display: none; }
+
+/* Active: off скрыта, on видна */
+.nav-item.active .nav-icon .icon-off { display: none; }
+.nav-item.active .nav-icon .icon-on  { display: block; }
+
 .nav-item .nav-icon {
-  color: #8A8A8A;
+  color: #000;
 }
 
 .nav-item.active {
   color: #000;
   font-weight: 600;
-}
-
-.nav-item.active .nav-icon {
-  color: #000;
 }
 
 /* ── Admin link ── */
@@ -1196,4 +1232,115 @@ html.preview-mode .admin-link {
 
 html.standalone-mode .admin-link {
   display: none;
+}
+
+/* ── Yellow "updating" ticker ── */
+body.doc-updating .id-ticker-wrap,
+body.doc-updating .doc-ticker {
+  background: #E8C100;
+  transition: background 0.4s ease;
+}
+
+.id-ticker-wrap,
+.doc-ticker {
+  transition: background 0.4s ease;
+}
+
+body.doc-updating .id-ticker-part,
+body.doc-updating .doc-ticker .id-ticker-part {
+  color: #1a1200;
+}
+
+/* ── Update confirmation modal ── */
+.update-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.45);
+  touch-action: manipulation;
+}
+
+.update-modal-overlay[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+body.update-modal-open {
+  overflow: hidden;
+}
+
+.update-modal {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 340px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+  animation: modalPop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.update-modal-icon {
+  margin-bottom: 4px;
+}
+
+.update-modal-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.update-modal-confirm {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 50px;
+  background: #fb880b;
+  color: #fff;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.update-modal-confirm:active {
+  background: #e07a09;
+}
+
+.update-modal-cancel {
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+  padding: 6px 16px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 2;
 }

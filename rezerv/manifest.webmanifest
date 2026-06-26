@@ -6,8 +6,8 @@
   "id": "/rezerv/",
   "scope": "/rezerv/",
   "display": "standalone",
-  "background_color": "#E9E6D9",
-  "theme_color": "#E5E2D3",
+  "background_color": "#E1DECB",
+  "theme_color": "#E1DECB",
   "orientation": "portrait",
   "capture_links": "existing-client-navigate",
   "icons": [

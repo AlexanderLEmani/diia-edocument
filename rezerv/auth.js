@@ -11,7 +11,7 @@
     'rezerv-unlocked-142536',
     'rezerv-license-session'
   ];
-  var THEME_DEFAULT = '#E5E2D3';
+  var THEME_DEFAULT = '#E1DECB';
   var THEME_SPLASH = '#262422';
 
   var gate = document.getElementById('authGate');
@@ -33,6 +33,11 @@
   function isPreviewMode() {
     return new URLSearchParams(window.location.search).get('preview') === '1'
       || window.parent !== window;
+  }
+
+  function isLocalDev() {
+    var host = window.location.hostname;
+    return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
   }
 
   function isStandaloneMode() {
@@ -417,6 +422,11 @@
   }
 
   function resolveAccess() {
+    if (window.__OPEN_ACCESS__ || isLocalDev()) {
+      beginPinFlow();
+      return;
+    }
+
     clearLegacyStorage();
 
     var storedToken = readStoredToken();

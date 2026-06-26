@@ -1,5 +1,6 @@
 {
-  "version": 1,
+  "version": 4,
+  "updatedAt": "2026-06-26T07:37:21.818Z",
   "elements": {
     "rezerv-card": {
       "text": "",
@@ -27,11 +28,12 @@
     "rezerv-emblem": {
       "text": "",
       "styles": {
-        "width": "70px",
-        "height": "50px",
-        "translateX": "25px",
-        "translateY": "-18px"
-      }
+        "width": "50px",
+        "height": "30px",
+        "translateY": "-8px",
+        "translateX": "20px"
+      },
+      "imageDataUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiID8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA1MCA2NCI+PHBhdGggZD0iTTQuMTI0MzEgNi4wODEzN0wzMi45MTI5IDYuMTI3OTFDMzcuMjk5MiA2LjExOTM2IDQyLjQ2MzQgNi4yNDM2IDQ2Ljc3ODIgNi4wNjQ1MUw0Ni44MTg2IDIxLjY5NDZDNDYuODI2IDM0LjEwMTIgNDYuNTI5MyA0MC45MzUzIDM3LjQyMDQgNTAuNzYwOEMzMy45OTA1IDU0LjIzNzEgMjkuNDk3OCA1Ni45NzY1IDI0Ljk4NzkgNTguNzkxQzIwLjg3IDU3Ljk1NDYgMTUuMDQ3MyA1My40NzA5IDExLjk5MDQgNTAuNTc1M0MwLjA0MjU2MDYgMzkuMjU4IDIuNTkzMTcgMjEuMjEyMiAyLjkzNjA2IDYuNDA0MjNDMi45Mzg3NSA2LjI4NzcyIDMuOTY4NiA2LjExNDM5IDQuMTI0MzEgNi4wODEzN1pNMjEuNTI1MyAzNy4wNjEzQzIwLjc3NjcgMzcuMDU4NyAxNi4zNjc1IDM3LjU0NzYgMTYuMjgxOCAzNi42OTQ1QzE1LjY4NDcgMzAuNzUwNCAxNy4xNzYxIDI0LjMwOTEgMTQuNTczOCAxOC42NTMzQzEzLjk5MjcgMTcuMzkwNCAxMS41OTY2IDE1LjQxIDEwLjUwMzcgMTQuMjcwMkwxMC41MTYyIDMyLjA1OTdDMTAuNTMzNCAzNS42Njc4IDEwLjY3NTMgMzkuOTQ5NiAxMC40NzYxIDQzLjUwOTNDMTMuOTU4MiA0My4zNTYgMTcuNzM4NyA0My40NTEgMjEuMjIwMiA0My41MzA4QzIxLjk4OTcgNDUuOTE4IDIzLjQ1NTYgNDguMzg2OSAyNC42ODEyIDUwLjU5MzVDMzAuNzMyNyA0MS42MTgxIDI3LjA2NzMgNDMuNDEzNiAzOS4wMDQ1IDQzLjUzNjRDMzkuMzEwNSA0MC4yNTUzIDM5LjE5MiAzNC45MDM5IDM5LjE4NzggMzEuNDI5QzM5LjE4MTUgMjYuMDg1NCAzOS4zNTk5IDE5Ljg0NzkgMzkuMDEzNCAxNC41ODM4QzM4LjA4ODggMTUuMjIgMzYuOTE1NCAxNS45MTY2IDM2LjMxNDIgMTYuODQxNkMzMi4wNjY1IDIxLjc1NDkgMzMuNzE4NyAyOS45MTQyIDMzLjYzMzUgMzYuMDQxNkMzMy42MzI0IDM2LjEyIDMzLjY3MTUgMzYuMzg4NiAzMy42ODYxIDM2LjQ4MTFDMzMuNTc2MSAzNi43ODU2IDMzLjQ0MSAzNi44OTk5IDMzLjIyMTkgMzcuMTMxM0MzMS45NzM5IDM3LjQwMzYgMjkuNjYyMyAzNy4yOTkxIDI4LjMwMTkgMzcuMjgxOUMyNy45MTQgMzAuODQzNiAyOC40MTQyIDI0LjQ1NzcgMjguMjE4NiAxOC4wMjUxQzI4LjEwNjMgMTQuMzMgMjYuNjA1MyAxMS45MjIgMjQuNjIwMSA4Ljk0NDk1QzIzLjU4MzEgMTAuNjM5NyAyMi4xMzA0IDEzLjAxNjkgMjEuNjgxMyAxNC45Mzg0QzIwLjE3MDkgMjEuNDAwNiAyMS4zNDg2IDMwLjI4OTMgMjEuNTI1MyAzNy4wNjEzWiIvPjwvc3ZnPg=="
     },
     "rezerv-emblem-wrap": {
       "text": "",
@@ -70,13 +72,13 @@
       }
     },
     "rezerv-birth-value": {
-      "text": "30.01.2001",
+      "text": "14.07.1997",
       "styles": {
-        "fontSize": "17px",
-        "fontWeight": "600",
+        "fontSize": "15px",
         "lineHeight": "1.25",
         "translateY": "-45px",
-        "translateX": "-6px"
+        "translateX": "-6px",
+        "fontWeight": "500"
       }
     },
     "rezerv-deferral-label": {
@@ -93,8 +95,8 @@
     "rezerv-deferral-value": {
       "text": "завершення мобілізації",
       "styles": {
-        "fontSize": "17px",
-        "fontWeight": "600",
+        "fontSize": "15px",
+        "fontWeight": "500",
         "lineHeight": "1.25",
         "translateY": "-41px",
         "translateX": "-6px"
@@ -106,9 +108,7 @@
         "fontSize": "12px",
         "fontWeight": "700",
         "letterSpacing": "0.01em",
-        "lineHeight": "1",
-        "translateX": "1px",
-        "translateY": "46px"
+        "lineHeight": "1"
       }
     },
     "rezerv-ticker-wrap": {
@@ -129,7 +129,7 @@
       }
     },
     "rezerv-name-1": {
-      "text": "Бондарев",
+      "text": "Коваленко",
       "styles": {
         "fontSize": "22px",
         "fontWeight": "500",
@@ -139,7 +139,7 @@
       }
     },
     "rezerv-name-2": {
-      "text": "Іоанн",
+      "text": "Дмитро",
       "styles": {
         "fontSize": "22px",
         "fontWeight": "500",
@@ -148,7 +148,7 @@
       }
     },
     "rezerv-name-3": {
-      "text": "Олександрович",
+      "text": "Сергійович",
       "styles": {
         "fontSize": "22px",
         "fontWeight": "500",
@@ -189,21 +189,28 @@
         "paddingTop": "18px"
       }
     },
+    "rezerv-fab-plus": {
+      "text": "",
+      "styles": {
+        "fabIconSize": "26px",
+        "fabIconStroke": "3.5px"
+      }
+    },
     "rezerv-qr-label": {
       "text": "QR-код дійсний до 20 червня 2027",
       "styles": {
         "fontSize": "14px",
+        "fontWeight": "600",
         "lineHeight": "1.3",
         "color": "#555",
-        "fontWeight": "600",
         "translateY": "40px"
       }
     },
     "rezerv-qr-image": {
       "text": "",
       "styles": {
-        "maxWidth": "450px",
         "width": "300px",
+        "maxWidth": "450px",
         "height": "400px"
       }
     },
@@ -428,28 +435,36 @@
       "text": "",
       "styles": {
         "width": "24px",
-        "height": "24px"
+        "height": "24px",
+        "navIconTone": "#000000",
+        "navIconStroke": "0.85"
       }
     },
     "rezerv-nav-icon-2": {
       "text": "",
       "styles": {
         "width": "24px",
-        "height": "24px"
+        "height": "24px",
+        "navIconTone": "#000000",
+        "navIconStroke": "0.85"
       }
     },
     "rezerv-nav-icon-3": {
       "text": "",
       "styles": {
         "width": "24px",
-        "height": "24px"
+        "height": "24px",
+        "navIconTone": "#000000",
+        "navIconStroke": "0.85"
       }
     },
     "rezerv-nav-icon-4": {
       "text": "",
       "styles": {
         "width": "24px",
-        "height": "24px"
+        "height": "24px",
+        "navIconTone": "#000000",
+        "navIconStroke": "0.85"
       }
     },
     "rezerv-sheet-1": {
@@ -474,101 +489,184 @@
       }
     },
     "rezerv-doc-name1": {
-      "text": "Бондарев",
-      "styles": { "fontSize": "22px", "fontWeight": "500", "lineHeight": "1.18", "letterSpacing": "-0.01em" }
+      "text": "Коваленко",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "500",
+        "lineHeight": "1.18",
+        "letterSpacing": "-0.01em"
+      }
     },
     "rezerv-doc-name2": {
-      "text": "Іоанн",
-      "styles": { "fontSize": "22px", "fontWeight": "500", "lineHeight": "1.18", "letterSpacing": "-0.01em" }
+      "text": "Дмитро",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "500",
+        "lineHeight": "1.18",
+        "letterSpacing": "-0.01em"
+      }
     },
     "rezerv-doc-name3": {
-      "text": "Олександрович",
-      "styles": { "fontSize": "22px", "fontWeight": "500", "lineHeight": "1.18", "letterSpacing": "-0.01em" }
+      "text": "Сергійович",
+      "styles": {
+        "fontSize": "22px",
+        "fontWeight": "500",
+        "lineHeight": "1.18",
+        "letterSpacing": "-0.01em"
+      }
     },
     "rezerv-doc-status": {
       "text": "Військовозобов'язаний",
-      "styles": { "fontSize": "15px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     },
     "rezerv-doc-photo": {
       "text": "",
-      "styles": { "width": "130px" }
+      "styles": {
+        "width": "130px"
+      }
     },
     "rezerv-doc-birth-lbl": {
       "text": "Дата народження:",
-      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     },
     "rezerv-doc-birth": {
       "text": "30.01.2001",
-      "styles": { "fontSize": "16px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-rnokpp-lbl": {
       "text": "РНОКПП:",
-      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     },
     "rezerv-doc-rnokpp": {
-      "text": "3638805490",
-      "styles": { "fontSize": "16px", "fontWeight": "500" }
+      "text": "2847391056",
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-deferral-lbl": {
       "text": "Відсрочка до:",
-      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     },
     "rezerv-doc-deferral": {
       "text": "03.08.2026",
-      "styles": { "fontSize": "16px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-vlk-lbl": {
       "text": "Постанова ВЛК:",
-      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     },
     "rezerv-doc-vlk": {
       "text": "Придатний",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-vlk-date-lbl": {
       "text": "Дата ВЛК:",
-      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     },
     "rezerv-doc-vlk-date": {
       "text": "10.02.2024",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-tcc": {
       "text": "Шевченківський районний у місті Дніпро ТЦК та СП",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-rank": {
       "text": "Солдат",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-vos": {
       "text": "999097",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-note": {
       "text": "Потребує проходження базової загальновійськової підготовки, Солдат резерву",
-      "styles": { "fontSize": "14px", "fontWeight": "400" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400"
+      }
     },
     "rezerv-doc-registry": {
-      "text": "030220241429041800006",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "text": "030220241429051900012",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-phone": {
-      "text": "+380 96 663 5523",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "text": "+380 67 412 8831",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-email": {
-      "text": "sayonaraboy965123@gmail.com",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "text": "kovalenko.d.s@ukr.net",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-address": {
-      "text": "Україна, Дніпропетровська область, м Дніпро, ЗАПОРІЗЬКЕ ШОСЕ, б. 38, кв. 226",
-      "styles": { "fontSize": "15px", "fontWeight": "500" }
+      "text": "Україна, Дніпропетровська область, м Дніпро, вул. Набережна Перемоги, б. 26, кв. 87",
+      "styles": {
+        "fontSize": "15px",
+        "fontWeight": "500"
+      }
     },
     "rezerv-doc-updated": {
       "text": "Дата останнього уточнення даних: 20.05.2024",
-      "styles": { "fontSize": "14px", "fontWeight": "400", "color": "#6B6B6B" }
+      "styles": {
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "#6B6B6B"
+      }
     }
-  },
-  "updatedAt": "2026-06-21T10:37:48.317Z"
+  }
 }

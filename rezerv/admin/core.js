@@ -28,6 +28,10 @@
     { key: 'height', label: 'Висота', unit: 'px', step: 1 },
     { key: 'color', label: 'Колір', unit: '', step: 1 },
     { key: 'borderRadius', label: 'Border radius', unit: 'px', step: 1 },
+    { key: 'fabIconSize', label: 'Розмір іконки «+»', unit: 'px', step: 1 },
+    { key: 'fabIconStroke', label: 'Товщина «+»', unit: 'px', step: 0.5 },
+    { key: 'navIconTone', label: 'Тон іконки', unit: '', step: 1 },
+    { key: 'navIconStroke', label: 'Товщина ліній', unit: '', step: 0.1 },
   ];
 
   var PAGES = [
@@ -35,7 +39,7 @@
     { id: 'rezerv-services', label: 'Сервіси', previewPath: '/rezerv/?preview=1#services' },
     { id: 'rezerv-vacancies', label: 'Вакансії', previewPath: '/rezerv/?preview=1#vacancies' },
     { id: 'rezerv-menu', label: 'Меню', previewPath: '/rezerv/?preview=1#menu' },
-    { id: 'rezerv-nav', label: 'Навігація', previewPath: '/rezerv/?preview=1' },
+    { id: 'rezerv-nav', label: 'Навігація', previewPath: '/rezerv/?preview=1&adminPage=nav' },
     { id: 'rezerv-doc', label: 'Документ', previewPath: '/rezerv/?preview=1&docsheet=1' },
   ];
 
@@ -50,6 +54,8 @@
       html: !!opts.html,
       multiline: !!opts.multiline,
       resizable: !!opts.resizable,
+      image: !!opts.image,
+      defaultImage: opts.defaultImage || '',
       resizeMin: opts.resizeMin || null,
       dragAxis: opts.dragAxis || 'xy',
       styleUnits: opts.styleUnits || {},
@@ -81,11 +87,13 @@
       defaultText: 'Резерв ID',
       defaultStyles: { fontSize: '22px', fontWeight: '700', letterSpacing: '-0.01em', lineHeight: '1.12' },
     }),
-    item('rezerv-emblem', 'rezerv-id', 'Герб (SVG)', {
+    item('rezerv-emblem', 'rezerv-id', 'Герб — PNG/SVG', {
       text: false,
+      image: true,
+      defaultImage: 'assets/emblem.svg',
       resizable: true,
       resizeMin: { width: 20, height: 24 },
-      defaultStyles: { width: '36px', height: '44px' },
+      defaultStyles: { width: '70px', height: '50px', translateX: '25px', translateY: '-18px' },
       styles: ['width', 'height', 'translateX', 'translateY', 'marginTop', 'marginBottom'],
     }),
     item('rezerv-emblem-wrap', 'rezerv-id', 'Герб — обгортка', {
@@ -178,6 +186,11 @@
       text: false,
       defaultStyles: { paddingTop: '18px' },
       styles: ['paddingTop', 'paddingBottom', 'gap'],
+    }),
+    item('rezerv-fab-plus', 'rezerv-id', 'Кнопка «+» — розмір і товщина', {
+      text: false,
+      defaultStyles: { fabIconSize: '26', fabIconStroke: '3.5' },
+      styles: ['fabIconSize', 'fabIconStroke', 'translateX', 'translateY'],
     }),
     item('rezerv-qr-label', 'rezerv-id', 'QR — підпис', {
       defaultText: 'QR-код дійсний до 20 червня 2027',
@@ -275,32 +288,32 @@
       resizable: true,
       dragAxis: 'xy',
       resizeMin: { width: 16, height: 16 },
-      defaultStyles: { width: '24px', height: '24px' },
-      styles: ['width', 'height', 'translateX', 'translateY'],
+      defaultStyles: { width: '24px', height: '24px', navIconTone: '#000000', navIconStroke: '0.85' },
+      styles: ['width', 'height', 'navIconTone', 'navIconStroke', 'translateX', 'translateY'],
     }),
     item('rezerv-nav-icon-2', 'rezerv-nav', 'Навігація — Сервіси', {
       text: false,
       resizable: true,
       dragAxis: 'xy',
       resizeMin: { width: 16, height: 16 },
-      defaultStyles: { width: '24px', height: '24px' },
-      styles: ['width', 'height', 'translateX', 'translateY'],
+      defaultStyles: { width: '24px', height: '24px', navIconTone: '#000000', navIconStroke: '0.85' },
+      styles: ['width', 'height', 'navIconTone', 'navIconStroke', 'translateX', 'translateY'],
     }),
     item('rezerv-nav-icon-3', 'rezerv-nav', 'Навігація — Вакансії', {
       text: false,
       resizable: true,
       dragAxis: 'xy',
       resizeMin: { width: 16, height: 16 },
-      defaultStyles: { width: '24px', height: '24px' },
-      styles: ['width', 'height', 'translateX', 'translateY'],
+      defaultStyles: { width: '24px', height: '24px', navIconTone: '#000000', navIconStroke: '0.85' },
+      styles: ['width', 'height', 'navIconTone', 'navIconStroke', 'translateX', 'translateY'],
     }),
     item('rezerv-nav-icon-4', 'rezerv-nav', 'Навігація — Меню', {
       text: false,
       resizable: true,
       dragAxis: 'xy',
       resizeMin: { width: 16, height: 16 },
-      defaultStyles: { width: '24px', height: '24px' },
-      styles: ['width', 'height', 'translateX', 'translateY'],
+      defaultStyles: { width: '24px', height: '24px', navIconTone: '#000000', navIconStroke: '0.85' },
+      styles: ['width', 'height', 'navIconTone', 'navIconStroke', 'translateX', 'translateY'],
     }),
 
     item('rezerv-sheet-1', 'rezerv-id', 'Шит — Переглянути', { defaultText: 'Переглянути документ', defaultStyles: { fontSize: '16px', fontWeight: '500' } }),
@@ -436,12 +449,35 @@
       if (src.styles) {
         result.elements[id].styles = Object.assign({}, result.elements[id].styles, src.styles);
       }
+      if (Object.prototype.hasOwnProperty.call(src, 'imageDataUrl')) {
+        if (src.imageDataUrl) result.elements[id].imageDataUrl = src.imageDataUrl;
+        else delete result.elements[id].imageDataUrl;
+      }
     });
     if (override.updatedAt) result.updatedAt = override.updatedAt;
+    if (override.version != null) result.version = override.version;
     return result;
   }
 
   function migrateConfig(config) {
+    if (!config || !config.elements) return config;
+    ['rezerv-ticker', 'rezerv-doc-ticker'].forEach(function (id) {
+      var item = config.elements[id];
+      if (!item || !item.styles) return;
+      delete item.styles.translateX;
+      delete item.styles.translateY;
+    });
+    ['rezerv-nav-icon-1', 'rezerv-nav-icon-2', 'rezerv-nav-icon-3', 'rezerv-nav-icon-4'].forEach(function (id) {
+      var item = config.elements[id];
+      if (!item) return;
+      if (!item.styles) item.styles = {};
+      if (!item.styles.navIconTone || item.styles.navIconTone === '#8A8A8A') {
+        item.styles.navIconTone = '#000000';
+      }
+      if (!item.styles.navIconStroke || item.styles.navIconStroke === '1') {
+        item.styles.navIconStroke = '0.85';
+      }
+    });
     return config;
   }
 
@@ -474,6 +510,14 @@
     return fetchFileConfig().then(function (fileConfig) {
       var merged = fileConfig ? mergeConfig(defaults, fileConfig) : defaults;
       var stored = loadFromStorage();
+      if (stored) {
+        var fileVersion = (fileConfig && fileConfig.version) ? Number(fileConfig.version) : 0;
+        var storedVersion = stored.version ? Number(stored.version) : 0;
+        if (storedVersion < fileVersion) {
+          clearStorage();
+          stored = null;
+        }
+      }
       if (stored) merged = mergeConfig(merged, stored);
       return migrateConfig(merged);
     });
@@ -488,9 +532,20 @@
     var tx = styles.translateX;
     var ty = styles.translateY;
     var isPhoto = el.classList.contains('id-photo') || el.getAttribute('data-ed') === 'rezerv-photo';
+    var isTickerTrack = el.classList.contains('id-ticker-track') ||
+      el.classList.contains('doc-ticker-track') ||
+      el.getAttribute('data-ed') === 'rezerv-ticker' ||
+      el.getAttribute('data-ed') === 'rezerv-doc-ticker';
+
+    if (isTickerTrack) {
+      tx = null;
+      ty = null;
+    }
 
     Object.keys(styles).forEach(function (key) {
       if (key === 'translateX' || key === 'translateY') return;
+      if (key === 'fabIconSize' || key === 'fabIconStroke') return;
+      if (key === 'navIconTone' || key === 'navIconStroke') return;
       var val = styles[key];
       if (val == null || val === '') return;
       if (typeof val === 'string' && (val.indexOf('%') !== -1 || val.indexOf('/') !== -1)) {
@@ -532,17 +587,114 @@
     else el.style.removeProperty('transform');
   }
 
+  function applyFabPlusIcon(el, styles) {
+    if (!el) return;
+    styles = styles || {};
+
+    var size = parseFloat(styles.fabIconSize);
+    if (!size || size <= 0) size = 24;
+
+    var stroke = parseFloat(styles.fabIconStroke);
+    if (!stroke || stroke <= 0) stroke = 4.5;
+
+    var viewBox = 24;
+    var inset = 4;
+    var armLen = viewBox - inset * 2;
+    var half = stroke / 2;
+    var center = viewBox / 2;
+
+    el.setAttribute('width', String(size));
+    el.setAttribute('height', String(size));
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+
+    var vertical = el.querySelector('.id-fab-plus-v');
+    var horizontal = el.querySelector('.id-fab-plus-h');
+
+    if (vertical) {
+      vertical.setAttribute('x', String(center - half));
+      vertical.setAttribute('y', String(inset));
+      vertical.setAttribute('width', String(stroke));
+      vertical.setAttribute('height', String(armLen));
+    }
+
+    if (horizontal) {
+      horizontal.setAttribute('x', String(inset));
+      horizontal.setAttribute('y', String(center - half));
+      horizontal.setAttribute('width', String(armLen));
+      horizontal.setAttribute('height', String(stroke));
+    }
+  }
+
+  function applyNavIcon(el, styles) {
+    if (!el) return;
+    styles = styles || {};
+
+    var tone = styles.navIconTone || styles.color || '#000000';
+    el.style.setProperty('color', tone, 'important');
+
+    var scale = parseFloat(styles.navIconStroke);
+    if (!scale || scale <= 0) scale = 0.85;
+
+    el.querySelectorAll('svg').forEach(function (svg) {
+      svg.querySelectorAll('[stroke-width]').forEach(function (node) {
+        var base = node.getAttribute('data-base-stroke');
+        if (!base) {
+          base = node.getAttribute('stroke-width') || '0';
+          node.setAttribute('data-base-stroke', base);
+        }
+        var num = parseFloat(base);
+        if (num > 0) {
+          var next = Math.round(num * scale * 10) / 10;
+          node.setAttribute('stroke-width', String(next));
+        }
+      });
+    });
+  }
+
+  function applyEmblemImage(el, data, schemaItem) {
+    var customImg = el.querySelector('.id-card-emblem-custom');
+    var defaultSvg = el.querySelector('.id-card-emblem-default');
+
+    if (!customImg) {
+      customImg = document.createElement('img');
+      customImg.className = 'id-card-emblem-custom';
+      customImg.alt = '';
+      el.insertBefore(customImg, el.firstChild);
+    }
+
+    if (data.imageDataUrl) {
+      customImg.src = data.imageDataUrl;
+      customImg.hidden = false;
+      el.classList.add('has-custom-emblem');
+      if (defaultSvg) defaultSvg.hidden = true;
+      return;
+    }
+
+    customImg.hidden = true;
+    customImg.removeAttribute('src');
+    el.classList.remove('has-custom-emblem');
+    if (defaultSvg) defaultSvg.hidden = false;
+  }
+
   function applyItem(id, data, schemaItem) {
     var selector = schemaItem.selector || '[data-ed="' + id + '"]';
     var nodes = document.querySelectorAll(selector);
     if (!nodes.length) return false;
 
     nodes.forEach(function (el) {
+      if (schemaItem.image) {
+        applyEmblemImage(el, data, schemaItem);
+        applyStyles(el, data.styles);
+        return;
+      }
       if (schemaItem.text !== false && data.text != null) {
         if (schemaItem.html) el.innerHTML = data.text;
         else el.textContent = data.text;
       }
       applyStyles(el, data.styles);
+      if (id === 'rezerv-fab-plus') applyFabPlusIcon(el, data.styles);
+      if (id.indexOf('rezerv-nav-icon-') === 0) applyNavIcon(el, data.styles);
     });
     return true;
   }
@@ -554,6 +706,48 @@
       if (map[id] && applyItem(id, config.elements[id], map[id])) applied++;
     });
     return applied;
+  }
+
+  function readImageDataUrl(file, maxSize) {
+    maxSize = maxSize || 512;
+    return new Promise(function (resolve, reject) {
+      if (!file || !file.type || file.type.indexOf('image/') !== 0) {
+        reject(new Error('Not an image'));
+        return;
+      }
+
+      if (file.type === 'image/svg+xml') {
+        var svgReader = new FileReader();
+        svgReader.onload = function () { resolve(svgReader.result); };
+        svgReader.onerror = reject;
+        svgReader.readAsDataURL(file);
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function () {
+        var img = new Image();
+        img.onload = function () {
+          var w = img.width;
+          var h = img.height;
+          var scale = Math.min(1, maxSize / Math.max(w, h));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.round(w * scale);
+          canvas.height = Math.round(h * scale);
+          var ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          var mime = file.type === 'image/png' || file.type === 'image/webp'
+            ? file.type
+            : 'image/jpeg';
+          resolve(canvas.toDataURL(mime, mime === 'image/jpeg' ? 0.92 : undefined));
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   function exportConfigJson(config) {
@@ -586,6 +780,7 @@
     fetchFileConfig: fetchFileConfig,
     loadConfig: loadConfig,
     applyConfig: applyConfig,
+    readImageDataUrl: readImageDataUrl,
     exportConfigJson: exportConfigJson,
     downloadConfig: downloadConfig,
   };

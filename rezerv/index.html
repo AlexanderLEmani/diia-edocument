@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <meta name="theme-color" content="#E5E2D3">
+  <meta name="theme-color" content="#E1DECB">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=38">
+  <link rel="stylesheet" href="styles.css?v=45">
   <link rel="stylesheet" href="pwa.css">
   <link rel="stylesheet" href="auth.css">
 </head>
@@ -99,7 +99,8 @@
                   <h1 class="id-card-title" id="idCardTitle" data-ed="rezerv-title">Резерв ID</h1>
                   <div class="id-card-emblem" data-ed="rezerv-emblem-wrap" aria-hidden="true">
                     <div class="id-card-emblem-img" data-ed="rezerv-emblem">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" aria-hidden="true">
+                      <img class="id-card-emblem-custom" alt="" hidden>
+                      <svg class="id-card-emblem-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" aria-hidden="true">
                         <path d="M 100 100 L 300 100 C 300 240, 270 330, 200 370 C 130 330, 100 240, 100 100 Z" fill="#000000"/>
                         <path d="M 135 135 L 155 135 L 155 270 L 182 270 L 182 155 C 182 135, 185 120, 200 110 C 215 120, 218 135, 218 155 L 218 270 L 245 270 L 245 135 L 265 135 L 265 290 L 218 290 L 200 322 L 182 290 L 135 290 Z" fill="#E4E2D5"/>
                       </svg>
@@ -140,8 +141,9 @@
                       </div>
                     </div>
                     <button type="button" class="id-fab" id="openSheet" aria-label="Меню документа">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                      <svg class="id-fab-icon" data-ed="rezerv-fab-plus" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect class="id-fab-plus-v" x="9.75" y="4" width="4.5" height="16" fill="currentColor"/>
+                        <rect class="id-fab-plus-h" x="4" y="9.75" width="16" height="4.5" fill="currentColor"/>
                       </svg>
                     </button>
                   </footer>
@@ -243,7 +245,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 4h8l2 4v12a2 2 0 01-2 2H8a2 2 0 01-2-2V4z" stroke="currentColor" stroke-width="1.6"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             <span data-ed="rezerv-sheet-2">Завантажити PDF</span>
           </button>
-          <button type="button" class="sheet-item">
+          <button type="button" class="sheet-item" id="refreshDocumentBtn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0113.5-5.7M20 12a8 8 0 01-13.5 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 4h4v4M8 20H4v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span data-ed="rezerv-sheet-3">Оновити документ</span>
           </button>
@@ -335,50 +337,100 @@
 
       <!-- Bottom nav -->
       <nav class="bottom-nav" aria-label="Навігація">
+
+        <!-- Резерв ID -->
         <button type="button" class="nav-item active" data-tab="id">
           <span class="nav-icon" data-ed="rezerv-nav-icon-1">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <rect x="20" y="15" width="60" height="70" rx="4" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
-              <line x1="20" y1="73" x2="80" y2="73" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
-              <line x1="20" y1="60" x2="80" y2="60" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
+            <!-- inactive: outline -->
+            <svg class="icon-off" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="20" y="15" width="60" height="70" rx="5" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
+              <line x1="30" y1="60" x2="70" y2="60" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+              <line x1="30" y1="73" x2="70" y2="73" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            </svg>
+            <!-- active: filled rect + white lines -->
+            <svg class="icon-on" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="20" y="15" width="60" height="70" rx="5" fill="currentColor"/>
+              <line x1="30" y1="60" x2="70" y2="60" stroke="white" stroke-width="9" stroke-linecap="round"/>
+              <line x1="30" y1="73" x2="70" y2="73" stroke="white" stroke-width="9" stroke-linecap="round"/>
             </svg>
           </span>
           <span>Резерв ID</span>
         </button>
+
+        <!-- Сервіси -->
         <button type="button" class="nav-item" data-tab="services">
           <span class="nav-icon" data-ed="rezerv-nav-icon-2">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <rect x="15" y="15" width="30" height="30" rx="6" fill="currentColor"/>
-              <rect x="55" y="15" width="30" height="30" rx="6" fill="currentColor"/>
-              <rect x="15" y="55" width="30" height="30" rx="6" fill="currentColor"/>
-              <rect x="55" y="55" width="30" height="30" rx="6" fill="currentColor"/>
+            <!-- inactive: outline squares -->
+            <svg class="icon-off" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="14" y="14" width="31" height="31" rx="5" fill="none" stroke="currentColor" stroke-width="9"/>
+              <rect x="55" y="14" width="31" height="31" rx="5" fill="none" stroke="currentColor" stroke-width="9"/>
+              <rect x="14" y="55" width="31" height="31" rx="5" fill="none" stroke="currentColor" stroke-width="9"/>
+              <rect x="55" y="55" width="31" height="31" rx="5" fill="none" stroke="currentColor" stroke-width="9"/>
+            </svg>
+            <!-- active: filled squares -->
+            <svg class="icon-on" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="14" y="14" width="31" height="31" rx="5" fill="currentColor"/>
+              <rect x="55" y="14" width="31" height="31" rx="5" fill="currentColor"/>
+              <rect x="14" y="55" width="31" height="31" rx="5" fill="currentColor"/>
+              <rect x="55" y="55" width="31" height="31" rx="5" fill="currentColor"/>
             </svg>
           </span>
           <span>Сервіси</span>
         </button>
+
+        <!-- Вакансії -->
         <button type="button" class="nav-item" data-tab="vacancies">
           <span class="nav-icon" data-ed="rezerv-nav-icon-3">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <rect x="20" y="15" width="60" height="70" rx="4" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
-              <rect x="41.5" y="41.5" width="17" height="17" fill="currentColor" transform="rotate(45 50 50)"/>
+            <!-- inactive: outline card + outline diamond -->
+            <svg class="icon-off" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="20" y="15" width="60" height="70" rx="5" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
+              <polygon points="50,33 62,50 50,67 38,50" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>
+            </svg>
+            <!-- active: filled card + white diamond -->
+            <svg class="icon-on" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="20" y="15" width="60" height="70" rx="5" fill="currentColor"/>
+              <polygon points="50,33 62,50 50,67 38,50" fill="white"/>
             </svg>
           </span>
           <span>Вакансії</span>
         </button>
+
+        <!-- Меню -->
         <button type="button" class="nav-item" data-tab="menu">
           <span class="nav-icon" data-ed="rezerv-nav-icon-4">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <line x1="15" y1="26" x2="85" y2="26" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
-              <line x1="15" y1="42" x2="85" y2="42" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
-              <line x1="15" y1="58" x2="85" y2="58" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
-              <line x1="15" y1="74" x2="85" y2="74" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
+            <!-- inactive + active: same icon, only text weight changes -->
+            <svg class="icon-off" viewBox="0 0 100 100" aria-hidden="true">
+              <line x1="15" y1="30" x2="85" y2="30" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <line x1="15" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <line x1="15" y1="70" x2="85" y2="70" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+            <svg class="icon-on" viewBox="0 0 100 100" aria-hidden="true">
+              <line x1="15" y1="30" x2="85" y2="30" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
+              <line x1="15" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
+              <line x1="15" y1="70" x2="85" y2="70" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
             </svg>
           </span>
           <span>Меню</span>
         </button>
+
       </nav>
 
       <a href="admin/admin.html" class="admin-link" title="Адмінка">⚙</a>
+    </div>
+  </div>
+
+  <!-- Update confirmation modal (outside frame to avoid stacking/touch issues) -->
+  <div class="update-modal-overlay" id="updateModalOverlay" hidden>
+    <div class="update-modal" id="updateModal" role="dialog" aria-label="Оновлення документа">
+      <div class="update-modal-icon" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="30" stroke="#1a1a1a" stroke-width="2.5"/>
+          <text x="32" y="44" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-style="italic" fill="#1a1a1a">i</text>
+        </svg>
+      </div>
+      <p class="update-modal-text">Поки генеруватиметься нова версія документу, деякі послуги можуть бути недоступні</p>
+      <button type="button" class="update-modal-confirm" id="updateModalConfirm">Оновити</button>
+      <button type="button" class="update-modal-cancel" id="updateModalCancel">Скасувати</button>
     </div>
   </div>
 
@@ -390,6 +442,6 @@
   <script src="admin/apply-config.js"></script>
   <script src="admin/capture-preview.js"></script>
   <script src="admin/preview-drag.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=45"></script>
 </body>
 </html>

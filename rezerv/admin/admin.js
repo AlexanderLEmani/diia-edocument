@@ -37,6 +37,8 @@
   var screenshotDiff = null;
   var undoStack = [];
   var applyingUndo = false;
+  var pendingPageLoad = null;
+  var pendingPageTimer = null;
 
   function showToast(msg) {
     toast.textContent = msg;
@@ -149,7 +151,27 @@
     return AdminCore.PAGES.find(function (p) { return p.id === pageId; });
   }
 
+  function clearPendingPageLoad() {
+    pendingPageLoad = null;
+    if (pendingPageTimer) {
+      clearTimeout(pendingPageTimer);
+      pendingPageTimer = null;
+    }
+  }
+
+  function setPendingPageLoad(pageId) {
+    clearPendingPageLoad();
+    pendingPageLoad = pageId;
+    pendingPageTimer = setTimeout(clearPendingPageLoad, 8000);
+  }
+
+  function shouldAcceptFramePage(pageId) {
+    if (!pendingPageLoad) return true;
+    return pageId === pendingPageLoad;
+  }
+
   function pageIdFromLocation(pathname, hash) {
+    if (hash === '#nav') return 'rezerv-nav';
     if (hash === '#services') return 'rezerv-services';
     if (hash === '#vacancies') return 'rezerv-vacancies';
     if (hash === '#menu') return 'rezerv-menu';
@@ -159,6 +181,8 @@
   function pageIdFromPreviewPath(path) {
     var url = new URL(path, 'http://x');
     if (url.searchParams.get('docsheet') === '1') return 'rezerv-doc';
+    if (url.searchParams.get('adminPage') === 'nav') return 'rezerv-nav';
+    if (url.hash === '#nav') return 'rezerv-nav';
     if (url.hash === '#services') return 'rezerv-services';
     if (url.hash === '#vacancies') return 'rezerv-vacancies';
     if (url.hash === '#menu') return 'rezerv-menu';
@@ -170,7 +194,10 @@
     try {
       var loc = frame.contentWindow.location;
       var pageId = pageIdFromPreviewPath(loc.pathname + loc.search + loc.hash);
-      if (pageId && pageId !== currentPage) {
+      if (!pageId) return;
+      if (!shouldAcceptFramePage(pageId)) return;
+      if (pageId === pendingPageLoad) clearPendingPageLoad();
+      if (pageId !== currentPage) {
         setCurrentPage(pageId, { loadFrame: false });
       }
     } catch (e) { /* ignore */ }
@@ -209,7 +236,12 @@
     renderAllItems();
     renderFullscreenPageNav();
 
-    if (options.loadFrame === false) return;
+    if (options.loadFrame === false) {
+      if (pendingPageLoad === pageId) clearPendingPageLoad();
+      return;
+    }
+
+    setPendingPageLoad(pageId);
 
     if (options.frameTarget === 'fullscreen' || fullscreenOpen) {
       fullscreenReady = false;
@@ -391,6 +423,66 @@
     syncLinkedFields(id + '-translateY', yVal);
   }
 
+  function renderImageField(schemaItem, data, idPrefix) {
+    var wrap = document.createElement('div');
+    wrap.className = 'admin-field admin-image-field';
+
+    var label = document.createElement('label');
+    label.textContent = 'Зображення (PNG / SVG)';
+    wrap.appendChild(label);
+
+    var preview = document.createElement('div');
+    preview.className = 'admin-image-preview';
+    var previewImg = document.createElement('img');
+    previewImg.alt = '';
+    previewImg.src = data.imageDataUrl || schemaItem.defaultImage || '';
+    preview.appendChild(previewImg);
+    wrap.appendChild(preview);
+
+    var actions = document.createElement('div');
+    actions.className = 'admin-image-actions';
+
+    var fileLabel = document.createElement('label');
+    fileLabel.className = 'admin-btn admin-btn--ghost admin-file-label';
+    fileLabel.textContent = 'Завантажити';
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.id = idPrefix + 'image-' + schemaItem.id;
+    fileInput.accept = 'image/png,image/jpeg,image/webp,image/svg+xml,.svg';
+    fileInput.hidden = true;
+    fileLabel.appendChild(fileInput);
+
+    var clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'admin-btn admin-btn--ghost';
+    clearBtn.textContent = 'Скинути';
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      AdminCore.readImageDataUrl(file, 512).then(function (dataUrl) {
+        config.elements[schemaItem.id].imageDataUrl = dataUrl;
+        previewImg.src = dataUrl;
+        onConfigChange();
+      }).catch(function () {
+        showToast('Не вдалося прочитати зображення');
+      });
+      fileInput.value = '';
+    });
+
+    clearBtn.addEventListener('click', function () {
+      delete config.elements[schemaItem.id].imageDataUrl;
+      previewImg.src = schemaItem.defaultImage || '';
+      onConfigChange();
+    });
+
+    actions.appendChild(fileLabel);
+    actions.appendChild(clearBtn);
+    wrap.appendChild(actions);
+
+    return wrap;
+  }
+
   function renderItems(target, idPrefix) {
     idPrefix = idPrefix || '';
     var container = target || itemsList;
@@ -456,6 +548,11 @@
       });
 
       body.appendChild(stylesGrid);
+
+      if (schemaItem.image) {
+        body.appendChild(renderImageField(schemaItem, data, idPrefix));
+      }
+
       details.appendChild(body);
       container.appendChild(details);
     });
@@ -608,7 +705,9 @@
       if (!event.data) return;
 
       if (event.data.type === 'admin-set-page') {
+        if (!shouldAcceptFramePage(event.data.page)) return;
         setCurrentPage(event.data.page, { loadFrame: false });
+        if (event.data.page === pendingPageLoad) clearPendingPageLoad();
         return;
       }
 

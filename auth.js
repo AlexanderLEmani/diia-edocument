@@ -36,6 +36,11 @@
       || window.parent !== window;
   }
 
+  function isLocalDev() {
+    var host = window.location.hostname;
+    return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+  }
+
   function isStandaloneMode() {
     return window.matchMedia('(display-mode: standalone)').matches
       || window.navigator.standalone === true;
@@ -423,6 +428,11 @@
   }
 
   function resolveAccess() {
+    if (window.__OPEN_ACCESS__ || isLocalDev()) {
+      beginPinFlow();
+      return;
+    }
+
     clearLegacyStorage();
 
     var storedToken = readStoredToken();

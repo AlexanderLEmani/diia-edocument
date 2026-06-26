@@ -12,6 +12,16 @@
   var vlkDate = document.getElementById('vlkDate');
   var docUpdatedDate = document.getElementById('docUpdatedDate');
   var docUpdatedTime = document.getElementById('docUpdatedTime');
+  var statusLabelInput = document.getElementById('statusLabel');
+  var tccInput = document.getElementById('tcc');
+  var rankInput = document.getElementById('rank');
+  var vosInput = document.getElementById('vos');
+  var noteInput = document.getElementById('note');
+  var registryInput = document.getElementById('registry');
+  var phoneInput = document.getElementById('phone');
+  var emailInput = document.getElementById('email');
+  var addressInput = document.getElementById('address');
+  var dataUpdatedInput = document.getElementById('dataUpdated');
   var photoInput = document.getElementById('photoInput');
   var photoPreview = document.getElementById('photoPreview');
   var qrInput = document.getElementById('qrInput');
@@ -73,6 +83,7 @@
   bindDateInput(deferralDate);
   bindDateInput(vlkDate);
   bindDateInput(docUpdatedDate);
+  bindDateInput(dataUpdatedInput);
   bindTimeInput(docUpdatedTime);
 
   function showPhoto(dataUrl) {
@@ -108,6 +119,16 @@
     vlkDate.value = profile.vlkDate || '';
     docUpdatedDate.value = profile.docUpdatedDate || '';
     docUpdatedTime.value = profile.docUpdatedTime || '';
+    if (statusLabelInput) statusLabelInput.value = profile.statusLabel || '';
+    if (tccInput) tccInput.value = profile.tcc || '';
+    if (rankInput) rankInput.value = profile.rank || '';
+    if (vosInput) vosInput.value = profile.vos || '';
+    if (noteInput) noteInput.value = profile.note || '';
+    if (registryInput) registryInput.value = profile.registry || '';
+    if (phoneInput) phoneInput.value = profile.phone || '';
+    if (emailInput) emailInput.value = profile.email || '';
+    if (addressInput) addressInput.value = profile.address || '';
+    if (dataUpdatedInput) dataUpdatedInput.value = profile.dataUpdated || '';
     pendingPhoto = profile.photoDataUrl || null;
     pendingQr = profile.qrDataUrl || null;
     showPhoto(pendingPhoto);
@@ -151,6 +172,16 @@
       vlkDate: vlkDate.value.trim(),
       docUpdatedDate: docUpdatedDate.value.trim(),
       docUpdatedTime: docUpdatedTime.value.trim(),
+      statusLabel: statusLabelInput ? statusLabelInput.value.trim() : '',
+      tcc: tccInput ? tccInput.value.trim() : '',
+      rank: rankInput ? rankInput.value.trim() : '',
+      vos: vosInput ? vosInput.value.trim() : '',
+      note: noteInput ? noteInput.value.trim() : '',
+      registry: registryInput ? registryInput.value.trim() : '',
+      phone: phoneInput ? phoneInput.value.trim() : '',
+      email: emailInput ? emailInput.value.trim() : '',
+      address: addressInput ? addressInput.value.trim() : '',
+      dataUpdated: dataUpdatedInput ? dataUpdatedInput.value.trim() : '',
       photoDataUrl: pendingPhoto || '',
       qrDataUrl: pendingQr || '',
     };
@@ -202,6 +233,16 @@
     showQr(null);
     photoInput.value = '';
     qrInput.value = '';
+    if (statusLabelInput) statusLabelInput.value = '';
+    if (tccInput) tccInput.value = '';
+    if (rankInput) rankInput.value = '';
+    if (vosInput) vosInput.value = '';
+    if (noteInput) noteInput.value = '';
+    if (registryInput) registryInput.value = '';
+    if (phoneInput) phoneInput.value = '';
+    if (emailInput) emailInput.value = '';
+    if (addressInput) addressInput.value = '';
+    if (dataUpdatedInput) dataUpdatedInput.value = '';
     setStatus('Профіль скинуто');
   });
 

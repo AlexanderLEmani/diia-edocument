@@ -3,6 +3,9 @@
 
   var STORAGE_KEY = 'rezerv-profile';
 
+  // Computed once per session: offset the default ticker time by ~2-3 hours back
+  var _defaultTickerOffset = (120 + Math.floor(Math.random() * 90) + Math.floor(Math.random() * 30)) * 60 * 1000;
+
   function loadProfile() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -61,14 +64,20 @@
 
   function getDocUpdateMeta() {
     var profile = loadProfile();
-    var now = new Date();
-    var date = (profile && isValidDateStr(profile.docUpdatedDate))
-      ? profile.docUpdatedDate.trim()
-      : formatDateDDMMYYYY(now);
-    var time = (profile && isValidTimeStr(profile.docUpdatedTime))
-      ? profile.docUpdatedTime.trim()
-      : formatTimeHHMM(now);
-    return { date: date, time: time };
+    if (profile && isValidDateStr(profile.docUpdatedDate) && isValidTimeStr(profile.docUpdatedTime)) {
+      return { date: profile.docUpdatedDate.trim(), time: profile.docUpdatedTime.trim() };
+    }
+    // No saved time — show time ~2-3h ago so it doesn't look like "just now"
+    var past = new Date(Date.now() - _defaultTickerOffset);
+    return { date: formatDateDDMMYYYY(past), time: formatTimeHHMM(past) };
+  }
+
+  function setDocUpdateTime(dateObj) {
+    var profile = loadProfile() || {};
+    var d = dateObj instanceof Date ? dateObj : new Date();
+    profile.docUpdatedDate = formatDateDDMMYYYY(d);
+    profile.docUpdatedTime = formatTimeHHMM(d);
+    saveProfile(profile);
   }
 
   function buildTickerText(date, time) {
@@ -86,6 +95,13 @@
     var ticker = buildTickerText(meta.date, meta.time);
     setField('rezerv-ticker', ticker, true);
     setField('rezerv-doc-ticker', ticker, true);
+    resetTickerTransforms();
+  }
+
+  function resetTickerTransforms() {
+    document.querySelectorAll('[data-ed="rezerv-ticker"], [data-ed="rezerv-doc-ticker"]').forEach(function (el) {
+      el.style.removeProperty('transform');
+    });
   }
 
   function setField(id, text, html) {
@@ -153,6 +169,25 @@
     if (profile.vlkDecision) setField('rezerv-doc-vlk', profile.vlkDecision);
     if (profile.vlkDate) setField('rezerv-doc-vlk-date', profile.vlkDate);
 
+    if (profile.statusLabel) {
+      setField('rezerv-status-label', profile.statusLabel);
+      setField('rezerv-doc-status', profile.statusLabel);
+    }
+    if (profile.tcc) setField('rezerv-doc-tcc', profile.tcc);
+    if (profile.rank) setField('rezerv-doc-rank', profile.rank);
+    if (profile.vos) setField('rezerv-doc-vos', profile.vos);
+    if (profile.note) setField('rezerv-doc-note', profile.note);
+    if (profile.registry) setField('rezerv-doc-registry', profile.registry);
+    if (profile.phone) setField('rezerv-doc-phone', profile.phone);
+    if (profile.email) setField('rezerv-doc-email', profile.email);
+    if (profile.address) setField('rezerv-doc-address', profile.address);
+    if (profile.dataUpdated) {
+      var dataUpdatedStr = /^\d{2}\.\d{2}\.\d{4}$/.test(profile.dataUpdated)
+        ? profile.dataUpdated
+        : profile.dataUpdated;
+      setField('rezerv-doc-updated', 'Дата останнього уточнення даних: ' + dataUpdatedStr);
+    }
+
     if (profile.photoDataUrl) applyPhoto(profile.photoDataUrl);
     else applyPhoto('');
 
@@ -184,6 +219,7 @@
 
     var meta = getDocUpdateMeta();
     setText('rezerv-ticker', buildTickerText(meta.date, meta.time));
+    setText('rezerv-doc-ticker', buildTickerText(meta.date, meta.time));
 
     var profile = loadProfile();
     if (!profile) return config;
@@ -241,6 +277,7 @@
     clearProfile: clearProfile,
     titleCase: titleCase,
     getDocUpdateMeta: getDocUpdateMeta,
+    setDocUpdateTime: setDocUpdateTime,
     applyDocUpdate: applyDocUpdate,
     applyProfile: applyProfile,
     patchConfig: patchConfig,

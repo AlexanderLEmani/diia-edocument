@@ -8,13 +8,18 @@
   var sheetOverlay = document.getElementById('sheetOverlay');
   var sheetBackdrop = document.getElementById('sheetBackdrop');
   var viewDocumentBtn = document.getElementById('viewDocumentBtn');
+  var refreshDocumentBtn = document.getElementById('refreshDocumentBtn');
   var docSheetOverlay = document.getElementById('docSheetOverlay');
   var docSheet = document.getElementById('docSheet');
   var docSheetBackdrop = document.getElementById('docSheetBackdrop');
   var docSheetDrag = document.getElementById('docSheetDrag');
+  var updateModalOverlay = document.getElementById('updateModalOverlay');
+  var updateModalConfirm = document.getElementById('updateModalConfirm');
+  var updateModalCancel = document.getElementById('updateModalCancel');
   var secretFinesLink = document.getElementById('secretFinesLink');
   var secretTaps = 0;
   var secretTapTimer = null;
+  var updateTimer = null;
 
   function isPreviewMode() {
     return new URLSearchParams(window.location.search).get('preview') === '1'
@@ -24,11 +29,14 @@
   function notifyAdminPage() {
     if (!isPreviewMode() || window.parent === window) return;
     var params = new URLSearchParams(window.location.search);
+    var hash = (window.location.hash || '').replace('#', '');
     var page = 'rezerv-id';
     if (params.get('docsheet') === '1') {
       page = 'rezerv-doc';
     } else if (docSheetOverlay && !docSheetOverlay.hidden) {
       page = 'rezerv-doc';
+    } else if (params.get('adminPage') === 'nav' || hash === 'nav') {
+      page = 'rezerv-nav';
     } else {
       var tab = frame ? frame.dataset.tab : 'id';
       var pageMap = {
@@ -48,6 +56,7 @@
 
   function tabFromHash() {
     var hash = (window.location.hash || '').replace('#', '');
+    if (hash === 'nav') return 'id';
     if (hash === 'services' || hash === 'vacancies' || hash === 'menu') return hash;
     return 'id';
   }
@@ -235,7 +244,95 @@
     docSheet.style.transform = 'translateY(0)';
   }
 
-  closeSheet();
+  // ── Update modal ──────────────────────────────────────────────
+
+  function openUpdateModal() {
+    if (!updateModalOverlay) return;
+    updateModalOverlay.hidden = false;
+    document.body.classList.add('update-modal-open');
+    requestAnimationFrame(function () {
+      closeSheet();
+    });
+  }
+
+  function closeUpdateModal() {
+    if (updateModalOverlay) updateModalOverlay.hidden = true;
+    document.body.classList.remove('update-modal-open');
+  }
+
+  function setTickerContent(text) {
+    var tracks = document.querySelectorAll('[data-ed="rezerv-ticker"], [data-ed="rezerv-doc-ticker"]');
+    tracks.forEach(function (track) {
+      track.classList.remove('is-ready');
+      track.style.removeProperty('transform');
+      track.innerHTML = '<span class="id-ticker-part">' + text + '</span>';
+    });
+    if (window.RezervTicker && typeof window.RezervTicker.init === 'function') {
+      window.RezervTicker.init();
+    }
+  }
+
+  function finishDocumentUpdate() {
+    updateTimer = null;
+    document.body.classList.remove('doc-updating');
+    var now = new Date();
+    if (window.ProfileCore && typeof window.ProfileCore.setDocUpdateTime === 'function') {
+      window.ProfileCore.setDocUpdateTime(now);
+    }
+    if (window.ProfileCore && typeof window.ProfileCore.applyDocUpdate === 'function') {
+      window.ProfileCore.applyDocUpdate();
+    }
+    if (window.RezervTicker && typeof window.RezervTicker.init === 'function') {
+      window.RezervTicker.init();
+    }
+  }
+
+  function startDocumentUpdate() {
+    closeUpdateModal();
+    document.body.classList.add('doc-updating');
+    setTickerContent('Оновимо за годину  •  Дякуємо за терпіння!  •  ');
+    var delayMs = (180 + Math.floor(Math.random() * 120)) * 1000; // 3–5 min
+    if (updateTimer) clearTimeout(updateTimer);
+    updateTimer = setTimeout(finishDocumentUpdate, delayMs);
+  }
+
+  // ── Wire update modal ──────────────────────────────────────────
+
+  function resetOverlayState() {
+    closeSheet();
+    closeUpdateModal();
+    if (docSheetOverlay && !docSheetOverlay.hidden) closeDocSheet();
+    document.body.classList.remove('doc-updating');
+    document.body.classList.remove('update-modal-open');
+  }
+
+  resetOverlayState();
+
+  function onAppClick(e) {
+    if (e.target.closest('#refreshDocumentBtn')) {
+      e.preventDefault();
+      e.stopPropagation();
+      openUpdateModal();
+      return;
+    }
+    if (e.target.closest('#updateModalConfirm')) {
+      e.preventDefault();
+      e.stopPropagation();
+      startDocumentUpdate();
+      return;
+    }
+    if (e.target.closest('#updateModalCancel')) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeUpdateModal();
+      return;
+    }
+    if (updateModalOverlay && e.target === updateModalOverlay) {
+      closeUpdateModal();
+    }
+  }
+
+  document.addEventListener('click', onAppClick, true);
 
   if (openSheetBtn) {
     openSheetBtn.addEventListener('click', openSheet);
@@ -245,6 +342,27 @@
   }
   if (viewDocumentBtn) {
     viewDocumentBtn.addEventListener('click', openDocSheet);
+  }
+  if (refreshDocumentBtn) {
+    refreshDocumentBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openUpdateModal();
+    });
+  }
+  if (updateModalConfirm) {
+    updateModalConfirm.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      startDocumentUpdate();
+    });
+  }
+  if (updateModalCancel) {
+    updateModalCancel.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeUpdateModal();
+    });
   }
   if (docSheetBackdrop) {
     docSheetBackdrop.addEventListener('click', closeDocSheet);
@@ -258,6 +376,10 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
+    if (updateModalOverlay && !updateModalOverlay.hidden) {
+      closeUpdateModal();
+      return;
+    }
     if (docSheetOverlay && !docSheetOverlay.hidden) {
       closeDocSheet();
       return;
@@ -266,8 +388,14 @@
   });
 
   window.addEventListener('pageshow', function () {
-    if (docSheetOverlay && docSheetOverlay.hidden) document.body.classList.remove('doc-sheet-open');
+    if (docSheetOverlay && docSheetOverlay.hidden) {
+      document.body.classList.remove('doc-sheet-open');
+    } else if (docSheetOverlay && !docSheetOverlay.hidden && !isPreviewMode()) {
+      closeDocSheet();
+    }
     if (sheetOverlay && sheetOverlay.hidden) document.body.classList.remove('sheet-open');
+    else if (sheetOverlay && !sheetOverlay.hidden) closeSheet();
+    if (updateModalOverlay && !updateModalOverlay.hidden) closeUpdateModal();
   });
 
   function bindSecretTap(el) {

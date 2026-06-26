@@ -758,3 +758,32 @@ body {
     border-bottom: 1px solid #2a2f3a;
   }
 }
+
+.admin-image-field .admin-image-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  margin: 8px 0;
+  padding: 12px;
+  border: 1px dashed #3c4454;
+  border-radius: 10px;
+  background:
+    linear-gradient(45deg, #1a1d26 25%, transparent 25%, transparent 75%, #1a1d26 75%, #1a1d26),
+    linear-gradient(45deg, #1a1d26 25%, transparent 25%, transparent 75%, #1a1d26 75%, #1a1d26);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+  background-color: #E1DECB;
+}
+
+.admin-image-field .admin-image-preview img {
+  max-width: 120px;
+  max-height: 120px;
+  object-fit: contain;
+}
+
+.admin-image-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

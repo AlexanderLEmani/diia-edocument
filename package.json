@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npx serve . -p 3000",
     "build": "node scripts/build-static.js",
+    "build:docker": "DIIA_ONLY=1 OPEN_ACCESS=1 node scripts/build-static.js",
     "generate-rezerv-icons": "swift scripts/generate-rezerv-icons.swift .",
     "generate-config": "node scripts/generate-config.js",
     "generate-keys": "node scripts/generate-tokens.js",

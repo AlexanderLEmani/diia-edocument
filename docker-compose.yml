@@ -1,0 +1,12 @@
+services:
+  diia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DIIA_ONLY: "1"
+        OPEN_ACCESS: "1"
+    container_name: diia-edocument
+    ports:
+      - "8080:80"
+    restart: unless-stopped

@@ -83,7 +83,7 @@ body.auth-locked .screen {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #E5E2D3;
+  background: #E1DECB;
 }
 
 .auth-pin-layer {
