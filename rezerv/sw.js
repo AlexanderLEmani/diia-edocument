@@ -1,5 +1,5 @@
-const CACHE = 'rezerv-v57';
-const SW_VERSION = '45';
+const CACHE = 'rezerv-v58';
+const SW_VERSION = '46';
 const AUTH_CACHE = 'rezerv-auth-token-v1';
 const AUTH_CACHE_KEY = '/__rezerv-auth-token';
 

@@ -53,6 +53,17 @@ html.standalone-mode .bottom-nav {
   padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
 }
 
+html.standalone-mode .bottom-nav::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: env(safe-area-inset-bottom, 0px);
+  background: #fff;
+  pointer-events: none;
+}
+
 html.standalone-mode .screen {
   height: var(--app-height, 100dvh);
   min-height: var(--app-height, 100dvh);

@@ -1153,8 +1153,8 @@ body.doc-sheet-open .notify-btn {
   justify-content: space-around;
   align-items: flex-end;
   padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
-  background: #E1DECB;
-  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   z-index: 50;
   transition: opacity 0.22s ease, transform 0.22s ease;
 }
